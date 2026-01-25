@@ -1,0 +1,1 @@
+# Amazon Kendra Sample Project

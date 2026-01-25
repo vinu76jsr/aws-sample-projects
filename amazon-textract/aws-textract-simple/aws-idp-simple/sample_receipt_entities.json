@@ -1,0 +1,212 @@
+{
+  "type": "entity_extraction",
+  "file": "sample_receipt.png",
+  "entities_by_type": {
+    "ORGANIZATION": [
+      {
+        "text": "East Repair Inc.",
+        "score": 0.9952154755592346
+      },
+      {
+        "text": "East Repair Inc.",
+        "score": 0.9951995611190796
+      }
+    ],
+    "LOCATION": [
+      {
+        "text": "1912 Harvest Lane\nNew York, NY 12210",
+        "score": 0.9517764449119568
+      },
+      {
+        "text": "2 Court Square\n3787 Pineview Drive\nP.O.",
+        "score": 0.9686257243156433
+      },
+      {
+        "text": "2312/2019",
+        "score": 0.5215145945549011
+      },
+      {
+        "text": "New York, NY 12210\nCambridge, MA 12210",
+        "score": 0.9319021701812744
+      }
+    ],
+    "OTHER": [
+      {
+        "text": "#\nUS-001",
+        "score": 0.6606765985488892
+      }
+    ],
+    "PERSON": [
+      {
+        "text": "John Smith",
+        "score": 0.9939591288566589
+      },
+      {
+        "text": "John Smith",
+        "score": 0.9891873002052307
+      },
+      {
+        "text": "JohnSmith",
+        "score": 0.9868913292884827
+      }
+    ],
+    "DATE": [
+      {
+        "text": "11/02/2019",
+        "score": 0.9974938631057739
+      },
+      {
+        "text": "26/02/2019",
+        "score": 0.9968345761299133
+      }
+    ],
+    "QUANTITY": [
+      {
+        "text": "1\nFront",
+        "score": 0.7400199174880981
+      },
+      {
+        "text": "100.00",
+        "score": 0.8722902536392212
+      },
+      {
+        "text": "100.00",
+        "score": 0.8416299223899841
+      },
+      {
+        "text": "2",
+        "score": 0.8356345891952515
+      },
+      {
+        "text": "15.00",
+        "score": 0.7599894404411316
+      },
+      {
+        "text": "30.00",
+        "score": 0.5524947643280029
+      },
+      {
+        "text": "3",
+        "score": 0.7160366773605347
+      },
+      {
+        "text": "3hrs",
+        "score": 0.6408194899559021
+      },
+      {
+        "text": "5.00",
+        "score": 0.7891356945037842
+      },
+      {
+        "text": "15.00",
+        "score": 0.8556918501853943
+      },
+      {
+        "text": "145.00",
+        "score": 0.9169102907180786
+      },
+      {
+        "text": "6.25%",
+        "score": 0.9751638770103455
+      },
+      {
+        "text": "9.06",
+        "score": 0.811770498752594
+      },
+      {
+        "text": "$154.06",
+        "score": 0.9926682114601135
+      },
+      {
+        "text": "15 days",
+        "score": 0.9371128678321838
+      }
+    ]
+  },
+  "key_phrases": [
+    {
+      "text": "INVOICE\nLOGO\nEast Repair Inc.",
+      "score": 0.9311869144439697
+    },
+    {
+      "text": "1912 Harvest Lane\nNew York",
+      "score": 0.9091590642929077
+    },
+    {
+      "text": "NY 12210\nBILL",
+      "score": 0.7738668322563171
+    },
+    {
+      "text": "#\nUS-001\nJohn Smith\nJohn Smith\nINVOICE",
+      "score": 0.8247908353805542
+    },
+    {
+      "text": "DATE\n11/02/2019\n2 Court Square\n3787 Pineview Drive\nP.O.",
+      "score": 0.7741448283195496
+    },
+    {
+      "text": "#\n2312/2019",
+      "score": 0.9568103551864624
+    },
+    {
+      "text": "New York",
+      "score": 0.7734482288360596
+    },
+    {
+      "text": "NY 12210\nCambridge",
+      "score": 0.9892400503158569
+    },
+    {
+      "text": "MA 12210\nDUE DATE\n26/02/2019\nQTY\nDESCRIPTION\nUNIT PRICE\nAMOUNT\n1\nFront and rear brake cables\n100.00\n100.00\n2\nNew set",
+      "score": 0.7120354175567627
+    },
+    {
+      "text": "pedal arms",
+      "score": 0.7803983688354492
+    },
+    {
+      "text": "30.00\n3\nLabor 3hrs",
+      "score": 0.6420302987098694
+    },
+    {
+      "text": "15.00\nSubtotal\n145.00\nSales Tax",
+      "score": 0.7154963612556458
+    },
+    {
+      "text": "6.25%",
+      "score": 0.5901190042495728
+    },
+    {
+      "text": "9.06\nTOTAL",
+      "score": 0.4883359372615814
+    },
+    {
+      "text": "$154.06\nJohnSmith\nTERMS & CONDITIONS\nPayment",
+      "score": 0.8035336136817932
+    },
+    {
+      "text": "15 days",
+      "score": 0.9930548667907715
+    },
+    {
+      "text": "checks",
+      "score": 0.996061384677887
+    },
+    {
+      "text": "East Repair Inc.",
+      "score": 0.986739456653595
+    }
+  ],
+  "statistics": {
+    "total_entities": 27,
+    "entity_types": [
+      "ORGANIZATION",
+      "LOCATION",
+      "OTHER",
+      "PERSON",
+      "DATE",
+      "QUANTITY"
+    ],
+    "total_key_phrases": 18
+  }
+}

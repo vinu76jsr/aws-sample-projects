@@ -1,0 +1,886 @@
+{
+  "type": "ocr_extraction",
+  "file": "sample_receipt.png",
+  "lines": [
+    {
+      "text": "INVOICE",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.23397094011306763,
+        "Height": 0.05268387123942375,
+        "Left": 0.07316205650568008,
+        "Top": 0.04499654471874237
+      }
+    },
+    {
+      "text": "LOGO",
+      "confidence": 99.85112762451172,
+      "bbox": {
+        "Width": 0.08969422429800034,
+        "Height": 0.020727230235934258,
+        "Left": 0.8263305425643921,
+        "Top": 0.0775444358587265
+      }
+    },
+    {
+      "text": "East Repair Inc.",
+      "confidence": 99.95389556884766,
+      "bbox": {
+        "Width": 0.12536604702472687,
+        "Height": 0.01235472783446312,
+        "Left": 0.07373937219381332,
+        "Top": 0.12279549986124039
+      }
+    },
+    {
+      "text": "1912 Harvest Lane",
+      "confidence": 99.97369384765625,
+      "bbox": {
+        "Width": 0.1410989910364151,
+        "Height": 0.010318931192159653,
+        "Left": 0.0744948461651802,
+        "Top": 0.14329467713832855
+      }
+    },
+    {
+      "text": "New York, NY 12210",
+      "confidence": 99.9280014038086,
+      "bbox": {
+        "Width": 0.157093808054924,
+        "Height": 0.011687691323459148,
+        "Left": 0.07364223897457123,
+        "Top": 0.1602490395307541
+      }
+    },
+    {
+      "text": "BILL TO",
+      "confidence": 99.68959045410156,
+      "bbox": {
+        "Width": 0.058714330196380615,
+        "Height": 0.014522265642881393,
+        "Left": 0.07343563437461853,
+        "Top": 0.1971612423658371
+      }
+    },
+    {
+      "text": "SHIP TO",
+      "confidence": 99.76771545410156,
+      "bbox": {
+        "Width": 0.062275584787130356,
+        "Height": 0.01486342865973711,
+        "Left": 0.3499217927455902,
+        "Top": 0.19696876406669617
+      }
+    },
+    {
+      "text": "INVOICE #",
+      "confidence": 99.2041015625,
+      "bbox": {
+        "Width": 0.07887154072523117,
+        "Height": 0.014779673889279366,
+        "Left": 0.6167192459106445,
+        "Top": 0.1971302628517151
+      }
+    },
+    {
+      "text": "US-001",
+      "confidence": 99.931640625,
+      "bbox": {
+        "Width": 0.05536915361881256,
+        "Height": 0.010655160062015057,
+        "Left": 0.8717616200447083,
+        "Top": 0.2017667442560196
+      }
+    },
+    {
+      "text": "John Smith",
+      "confidence": 99.9951171875,
+      "bbox": {
+        "Width": 0.0842360109090805,
+        "Height": 0.010425143875181675,
+        "Left": 0.0728999525308609,
+        "Top": 0.22275035083293915
+      }
+    },
+    {
+      "text": "John Smith",
+      "confidence": 99.9951171875,
+      "bbox": {
+        "Width": 0.08445291966199875,
+        "Height": 0.010614505037665367,
+        "Left": 0.34995898604393005,
+        "Top": 0.2225218266248703
+      }
+    },
+    {
+      "text": "INVOICE DATE",
+      "confidence": 99.9365234375,
+      "bbox": {
+        "Width": 0.10944870114326477,
+        "Height": 0.014895443804562092,
+        "Left": 0.6166433691978455,
+        "Top": 0.22155529260635376
+      }
+    },
+    {
+      "text": "11/02/2019",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.08233318477869034,
+        "Height": 0.010784042999148369,
+        "Left": 0.8470043540000916,
+        "Top": 0.22621987760066986
+      }
+    },
+    {
+      "text": "2 Court Square",
+      "confidence": 99.97396087646484,
+      "bbox": {
+        "Width": 0.114008828997612,
+        "Height": 0.012300483882427216,
+        "Left": 0.07313504815101624,
+        "Top": 0.24002215266227722
+      }
+    },
+    {
+      "text": "3787 Pineview Drive",
+      "confidence": 99.98371887207031,
+      "bbox": {
+        "Width": 0.1538391262292862,
+        "Height": 0.010502706281840801,
+        "Left": 0.35010939836502075,
+        "Top": 0.23975098133087158
+      }
+    },
+    {
+      "text": "P.O.#",
+      "confidence": 96.42318725585938,
+      "bbox": {
+        "Width": 0.03994756564497948,
+        "Height": 0.015127884224057198,
+        "Left": 0.616392970085144,
+        "Top": 0.2459801286458969
+      }
+    },
+    {
+      "text": "2312/2019",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.07948490232229233,
+        "Height": 0.010571171529591084,
+        "Left": 0.8495064377784729,
+        "Top": 0.25084856152534485
+      }
+    },
+    {
+      "text": "New York, NY 12210",
+      "confidence": 99.8580551147461,
+      "bbox": {
+        "Width": 0.15679477155208588,
+        "Height": 0.011760981753468513,
+        "Left": 0.07367639243602753,
+        "Top": 0.2569623589515686
+      }
+    },
+    {
+      "text": "Cambridge, MA 12210",
+      "confidence": 99.72476959228516,
+      "bbox": {
+        "Width": 0.1687631756067276,
+        "Height": 0.012950735166668892,
+        "Left": 0.3503209948539734,
+        "Top": 0.25678136944770813
+      }
+    },
+    {
+      "text": "DUE DATE",
+      "confidence": 99.921875,
+      "bbox": {
+        "Width": 0.07768043875694275,
+        "Height": 0.014793944545090199,
+        "Left": 0.6166459918022156,
+        "Top": 0.2706454396247864
+      }
+    },
+    {
+      "text": "26/02/2019",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.08448313176631927,
+        "Height": 0.010565808974206448,
+        "Left": 0.8448376655578613,
+        "Top": 0.2753641605377197
+      }
+    },
+    {
+      "text": "QTY",
+      "confidence": 99.990234375,
+      "bbox": {
+        "Width": 0.03181757777929306,
+        "Height": 0.015217714942991734,
+        "Left": 0.09981518983840942,
+        "Top": 0.32869967818260193
+      }
+    },
+    {
+      "text": "DESCRIPTION",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.10396842658519745,
+        "Height": 0.014768709428608418,
+        "Left": 0.30101799964904785,
+        "Top": 0.32875528931617737
+      }
+    },
+    {
+      "text": "UNIT PRICE",
+      "confidence": 99.9462890625,
+      "bbox": {
+        "Width": 0.08746887743473053,
+        "Height": 0.01486603356897831,
+        "Left": 0.6090331673622131,
+        "Top": 0.32873860001564026
+      }
+    },
+    {
+      "text": "AMOUNT",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.06891412287950516,
+        "Height": 0.01481623761355877,
+        "Left": 0.8460769653320312,
+        "Top": 0.328763872385025
+      }
+    },
+    {
+      "text": "1",
+      "confidence": 99.55655670166016,
+      "bbox": {
+        "Width": 0.0066610658541321754,
+        "Height": 0.009871956892311573,
+        "Left": 0.11132017523050308,
+        "Top": 0.36383935809135437
+      }
+    },
+    {
+      "text": "Front and rear brake cables",
+      "confidence": 99.98828125,
+      "bbox": {
+        "Width": 0.2063317596912384,
+        "Height": 0.010498213581740856,
+        "Left": 0.1717410534620285,
+        "Top": 0.3635885417461395
+      }
+    },
+    {
+      "text": "100.00",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.05090714246034622,
+        "Height": 0.010692428797483444,
+        "Left": 0.6463114023208618,
+        "Top": 0.36345013976097107
+      }
+    },
+    {
+      "text": "100.00",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.05041259527206421,
+        "Height": 0.010535109788179398,
+        "Left": 0.8643040060997009,
+        "Top": 0.3635285794734955
+      }
+    },
+    {
+      "text": "2",
+      "confidence": 99.912109375,
+      "bbox": {
+        "Width": 0.009566755965352058,
+        "Height": 0.010120409540832043,
+        "Left": 0.11022558808326721,
+        "Top": 0.3944537341594696
+      }
+    },
+    {
+      "text": "New set of pedal arms",
+      "confidence": 99.96647644042969,
+      "bbox": {
+        "Width": 0.16752387583255768,
+        "Height": 0.012673541903495789,
+        "Left": 0.1714511215686798,
+        "Top": 0.3942393362522125
+      }
+    },
+    {
+      "text": "15.00",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.04117738828063011,
+        "Height": 0.010568997822701931,
+        "Left": 0.6559721827507019,
+        "Top": 0.39426788687705994
+      }
+    },
+    {
+      "text": "30.00",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.042188625782728195,
+        "Height": 0.01056789793074131,
+        "Left": 0.8724748492240906,
+        "Top": 0.3942861258983612
+      }
+    },
+    {
+      "text": "3",
+      "confidence": 99.88201141357422,
+      "bbox": {
+        "Width": 0.009313213638961315,
+        "Height": 0.01015920378267765,
+        "Left": 0.11052464693784714,
+        "Top": 0.42512375116348267
+      }
+    },
+    {
+      "text": "Labor 3hrs",
+      "confidence": 99.9755859375,
+      "bbox": {
+        "Width": 0.08020390570163727,
+        "Height": 0.010374205186963081,
+        "Left": 0.17167691886425018,
+        "Top": 0.42510369420051575
+      }
+    },
+    {
+      "text": "5.00",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.033227790147066116,
+        "Height": 0.010507240891456604,
+        "Left": 0.6636887192726135,
+        "Top": 0.42507919669151306
+      }
+    },
+    {
+      "text": "15.00",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.040956638753414154,
+        "Height": 0.010691100731492043,
+        "Left": 0.87364661693573,
+        "Top": 0.4250142574310303
+      }
+    },
+    {
+      "text": "Subtotal",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.061699364334344864,
+        "Height": 0.010951436124742031,
+        "Left": 0.6351508498191833,
+        "Top": 0.4659193158149719
+      }
+    },
+    {
+      "text": "145.00",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.05049821734428406,
+        "Height": 0.010621936991810799,
+        "Left": 0.864151120185852,
+        "Top": 0.4661538004875183
+      }
+    },
+    {
+      "text": "Sales Tax 6.25%",
+      "confidence": 99.96745300292969,
+      "bbox": {
+        "Width": 0.12610426545143127,
+        "Height": 0.010615120641887188,
+        "Left": 0.5697112083435059,
+        "Top": 0.49689769744873047
+      }
+    },
+    {
+      "text": "9.06",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.03376414626836777,
+        "Height": 0.010468386113643646,
+        "Left": 0.8812034130096436,
+        "Top": 0.4969729781150818
+      }
+    },
+    {
+      "text": "TOTAL",
+      "confidence": 100.0,
+      "bbox": {
+        "Width": 0.056271009147167206,
+        "Height": 0.016186822205781937,
+        "Left": 0.6410115957260132,
+        "Top": 0.5251880288124084
+      }
+    },
+    {
+      "text": "$154.06",
+      "confidence": 99.970703125,
+      "bbox": {
+        "Width": 0.07685273885726929,
+        "Height": 0.018259843811392784,
+        "Left": 0.8373562097549438,
+        "Top": 0.5241931080818176
+      }
+    },
+    {
+      "text": "JohnSmith",
+      "confidence": 53.64397048950195,
+      "bbox": {
+        "Width": 0.21422436833381653,
+        "Height": 0.09196190536022186,
+        "Left": 0.7150802612304688,
+        "Top": 0.5828506946563721
+      }
+    },
+    {
+      "text": "TERMS & CONDITIONS",
+      "confidence": 99.73799133300781,
+      "bbox": {
+        "Width": 0.17075428366661072,
+        "Height": 0.014967143535614014,
+        "Left": 0.5194901823997498,
+        "Top": 0.8589375019073486
+      }
+    },
+    {
+      "text": "Payment is due within 15 days",
+      "confidence": 99.97870635986328,
+      "bbox": {
+        "Width": 0.22676104307174683,
+        "Height": 0.012469125911593437,
+        "Left": 0.5209752321243286,
+        "Top": 0.9038481712341309
+      }
+    },
+    {
+      "text": "Thank you",
+      "confidence": 99.8962631225586,
+      "bbox": {
+        "Width": 0.3378206789493561,
+        "Height": 0.06637655943632126,
+        "Left": 0.1651138961315155,
+        "Top": 0.8997979760169983
+      }
+    },
+    {
+      "text": "Please make checks payable to: East Repair Inc.",
+      "confidence": 99.9876937866211,
+      "bbox": {
+        "Width": 0.36403781175613403,
+        "Height": 0.012637587264180183,
+        "Left": 0.52083420753479,
+        "Top": 0.9375714659690857
+      }
+    }
+  ],
+  "words": [
+    {
+      "text": "INVOICE",
+      "confidence": 100.0
+    },
+    {
+      "text": "LOGO",
+      "confidence": 99.85112762451172
+    },
+    {
+      "text": "East",
+      "confidence": 99.970703125
+    },
+    {
+      "text": "Repair",
+      "confidence": 100.0
+    },
+    {
+      "text": "Inc.",
+      "confidence": 99.89098358154297
+    },
+    {
+      "text": "1912",
+      "confidence": 99.93083953857422
+    },
+    {
+      "text": "Harvest",
+      "confidence": 100.0
+    },
+    {
+      "text": "Lane",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "New",
+      "confidence": 100.0
+    },
+    {
+      "text": "York,",
+      "confidence": 99.77140808105469
+    },
+    {
+      "text": "NY",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "12210",
+      "confidence": 99.95037078857422
+    },
+    {
+      "text": "BILL",
+      "confidence": 99.970703125
+    },
+    {
+      "text": "TO",
+      "confidence": 99.40848541259766
+    },
+    {
+      "text": "SHIP",
+      "confidence": 99.970703125
+    },
+    {
+      "text": "TO",
+      "confidence": 99.56472778320312
+    },
+    {
+      "text": "INVOICE",
+      "confidence": 99.9609375
+    },
+    {
+      "text": "#",
+      "confidence": 98.447265625
+    },
+    {
+      "text": "US-001",
+      "confidence": 99.931640625
+    },
+    {
+      "text": "John",
+      "confidence": 100.0
+    },
+    {
+      "text": "Smith",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "John",
+      "confidence": 100.0
+    },
+    {
+      "text": "Smith",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "INVOICE",
+      "confidence": 99.921875
+    },
+    {
+      "text": "DATE",
+      "confidence": 99.951171875
+    },
+    {
+      "text": "11/02/2019",
+      "confidence": 100.0
+    },
+    {
+      "text": "2",
+      "confidence": 99.931640625
+    },
+    {
+      "text": "Court",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "Square",
+      "confidence": 100.0
+    },
+    {
+      "text": "3787",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "Pineview",
+      "confidence": 99.970703125
+    },
+    {
+      "text": "Drive",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "P.O.#",
+      "confidence": 96.42318725585938
+    },
+    {
+      "text": "2312/2019",
+      "confidence": 100.0
+    },
+    {
+      "text": "New",
+      "confidence": 100.0
+    },
+    {
+      "text": "York,",
+      "confidence": 99.43219757080078
+    },
+    {
+      "text": "NY",
+      "confidence": 100.0
+    },
+    {
+      "text": "12210",
+      "confidence": 100.0
+    },
+    {
+      "text": "Cambridge,",
+      "confidence": 99.24266052246094
+    },
+    {
+      "text": "MA",
+      "confidence": 99.9609375
+    },
+    {
+      "text": "12210",
+      "confidence": 99.970703125
+    },
+    {
+      "text": "DUE",
+      "confidence": 99.951171875
+    },
+    {
+      "text": "DATE",
+      "confidence": 99.892578125
+    },
+    {
+      "text": "26/02/2019",
+      "confidence": 100.0
+    },
+    {
+      "text": "QTY",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "DESCRIPTION",
+      "confidence": 100.0
+    },
+    {
+      "text": "UNIT",
+      "confidence": 99.931640625
+    },
+    {
+      "text": "PRICE",
+      "confidence": 99.9609375
+    },
+    {
+      "text": "AMOUNT",
+      "confidence": 100.0
+    },
+    {
+      "text": "1",
+      "confidence": 99.55655670166016
+    },
+    {
+      "text": "Front",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "and",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "rear",
+      "confidence": 99.9609375
+    },
+    {
+      "text": "brake",
+      "confidence": 100.0
+    },
+    {
+      "text": "cables",
+      "confidence": 100.0
+    },
+    {
+      "text": "100.00",
+      "confidence": 100.0
+    },
+    {
+      "text": "100.00",
+      "confidence": 100.0
+    },
+    {
+      "text": "2",
+      "confidence": 99.912109375
+    },
+    {
+      "text": "New",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "set",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "of",
+      "confidence": 99.970703125
+    },
+    {
+      "text": "pedal",
+      "confidence": 99.92028045654297
+    },
+    {
+      "text": "arms",
+      "confidence": 99.9609375
+    },
+    {
+      "text": "15.00",
+      "confidence": 100.0
+    },
+    {
+      "text": "30.00",
+      "confidence": 100.0
+    },
+    {
+      "text": "3",
+      "confidence": 99.88201141357422
+    },
+    {
+      "text": "Labor",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "3hrs",
+      "confidence": 99.9609375
+    },
+    {
+      "text": "5.00",
+      "confidence": 100.0
+    },
+    {
+      "text": "15.00",
+      "confidence": 100.0
+    },
+    {
+      "text": "Subtotal",
+      "confidence": 100.0
+    },
+    {
+      "text": "145.00",
+      "confidence": 100.0
+    },
+    {
+      "text": "Sales",
+      "confidence": 100.0
+    },
+    {
+      "text": "Tax",
+      "confidence": 99.951171875
+    },
+    {
+      "text": "6.25%",
+      "confidence": 99.951171875
+    },
+    {
+      "text": "9.06",
+      "confidence": 100.0
+    },
+    {
+      "text": "TOTAL",
+      "confidence": 100.0
+    },
+    {
+      "text": "$154.06",
+      "confidence": 99.970703125
+    },
+    {
+      "text": "JohnSmith",
+      "confidence": 53.64397048950195
+    },
+    {
+      "text": "TERMS",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "&",
+      "confidence": 99.2530288696289
+    },
+    {
+      "text": "CONDITIONS",
+      "confidence": 99.970703125
+    },
+    {
+      "text": "Payment",
+      "confidence": 100.0
+    },
+    {
+      "text": "is",
+      "confidence": 99.9609375
+    },
+    {
+      "text": "due",
+      "confidence": 100.0
+    },
+    {
+      "text": "within",
+      "confidence": 100.0
+    },
+    {
+      "text": "15",
+      "confidence": 99.91131591796875
+    },
+    {
+      "text": "days",
+      "confidence": 100.0
+    },
+    {
+      "text": "Thank",
+      "confidence": 99.88121795654297
+    },
+    {
+      "text": "you",
+      "confidence": 99.91131591796875
+    },
+    {
+      "text": "Please",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "make",
+      "confidence": 100.0
+    },
+    {
+      "text": "checks",
+      "confidence": 100.0
+    },
+    {
+      "text": "payable",
+      "confidence": 100.0
+    },
+    {
+      "text": "to:",
+      "confidence": 99.990234375
+    },
+    {
+      "text": "East",
+      "confidence": 99.970703125
+    },
+    {
+      "text": "Repair",
+      "confidence": 100.0
+    },
+    {
+      "text": "Inc.",
+      "confidence": 99.95037078857422
+    }
+  ],
+  "full_text": "INVOICE\nLOGO\nEast Repair Inc.\n1912 Harvest Lane\nNew York, NY 12210\nBILL TO\nSHIP TO\nINVOICE #\nUS-001\nJohn Smith\nJohn Smith\nINVOICE DATE\n11/02/2019\n2 Court Square\n3787 Pineview Drive\nP.O.#\n2312/2019\nNew York, NY 12210\nCambridge, MA 12210\nDUE DATE\n26/02/2019\nQTY\nDESCRIPTION\nUNIT PRICE\nAMOUNT\n1\nFront and rear brake cables\n100.00\n100.00\n2\nNew set of pedal arms\n15.00\n30.00\n3\nLabor 3hrs\n5.00\n15.00\nSubtotal\n145.00\nSales Tax 6.25%\n9.06\nTOTAL\n$154.06\nJohnSmith\nTERMS & CONDITIONS\nPayment is due within 15 days\nThank you\nPlease make checks payable to: East Repair Inc.",
+  "statistics": {
+    "total_lines": 48,
+    "total_words": 98,
+    "avg_confidence": 98.885675350825
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "summary": {
+    "ADDRESS": "East Repair Inc.\n1912 Harvest Lane\nNew York, NY 12210",
+    "STREET": "1912 Harvest Lane",
+    "CITY": "New York,",
+    "STATE": "NY",
+    "ZIP_CODE": "12210",
+    "NAME": "LOGO",
+    "ADDRESS_BLOCK": "1912 Harvest Lane\nNew York, NY 12210",
+    "DUE_DATE": "26/02/2019",
+    "INVOICE_RECEIPT_DATE": "11/02/2019",
+    "INVOICE_RECEIPT_ID": "US-001",
+    "PO_NUMBER": "2312/2019",
+    "PAYMENT_TERMS": "Payment is due within 15 days",
+    "RECEIVER_ADDRESS": "John Smith\n3787 Pineview Drive\nCambridge, MA 12210",
+    "RECEIVER_NAME": "John Smith",
+    "SUBTOTAL": "145.00",
+    "TAX": "9.06",
+    "TOTAL": "$154.06",
+    "VENDOR_ADDRESS": "East Repair Inc.\n1912 Harvest Lane\nNew York, NY 12210",
+    "VENDOR_NAME": "LOGO",
+    "OTHER": "6.25%"
+  },
+  "line_items": [
+    {
+      "QUANTITY": "1",
+      "ITEM": "Front and rear brake cables",
+      "UNIT_PRICE": "100.00",
+      "PRICE": "100.00",
+      "EXPENSE_ROW": "1 Front and rear brake cables 100.00 100.00"
+    },
+    {
+      "QUANTITY": "2",
+      "ITEM": "New set of pedal arms",
+      "UNIT_PRICE": "15.00",
+      "PRICE": "30.00",
+      "EXPENSE_ROW": "2 New set of pedal arms 15.00 30.00"
+    },
+    {
+      "QUANTITY": "3",
+      "ITEM": "Labor 3hrs",
+      "UNIT_PRICE": "5.00",
+      "PRICE": "15.00",
+      "EXPENSE_ROW": "3 Labor 3hrs 5.00 15.00"
+    }
+  ]
+}

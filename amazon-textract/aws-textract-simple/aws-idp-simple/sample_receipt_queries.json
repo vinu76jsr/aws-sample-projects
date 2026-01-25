@@ -1,0 +1,28 @@
+{
+  "type": "query_extraction",
+  "file": "sample_receipt.png",
+  "queries": [
+    {
+      "question": "What is the total amount?",
+      "alias": "Q1",
+      "answer": "$154.06",
+      "confidence": 91.0
+    },
+    {
+      "question": "What is the vendor name?",
+      "alias": "Q2",
+      "answer": "East Repair Inc.",
+      "confidence": 93.0
+    },
+    {
+      "question": "What is the due date?",
+      "alias": "Q3",
+      "answer": "26/02/2019",
+      "confidence": 99.0
+    }
+  ],
+  "statistics": {
+    "total_queries": 3,
+    "answered": 3
+  }
+}

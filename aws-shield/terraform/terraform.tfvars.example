@@ -1,0 +1,10 @@
+# Copy this file to terraform.tfvars and customize values
+
+aws_region             = "us-east-1"
+project_name           = "shield-demo"
+vpc_cidr               = "10.0.0.0/16"
+environment            = "demo"
+
+# WARNING: Shield Advanced costs $3,000/month + data transfer fees
+# Only enable for production workloads that require enhanced protection
+enable_shield_advanced = false

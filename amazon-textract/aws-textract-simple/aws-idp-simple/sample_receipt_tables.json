@@ -1,0 +1,257 @@
+{
+  "type": "table_extraction",
+  "file": "sample_receipt.png",
+  "tables": [
+    {
+      "rows": [
+        [
+          {
+            "text": "INVOICE #",
+            "row": 1,
+            "col": 1,
+            "confidence": 37.0361328125
+          },
+          {
+            "text": "US-001",
+            "row": 1,
+            "col": 2,
+            "confidence": 41.6259765625
+          }
+        ],
+        [
+          {
+            "text": "INVOICE DATE",
+            "row": 2,
+            "col": 1,
+            "confidence": 35.4736328125
+          },
+          {
+            "text": "11/02/2019",
+            "row": 2,
+            "col": 2,
+            "confidence": 39.8681640625
+          }
+        ],
+        [
+          {
+            "text": "P.O.#",
+            "row": 3,
+            "col": 1,
+            "confidence": 34.2529296875
+          },
+          {
+            "text": "2312/2019",
+            "row": 3,
+            "col": 2,
+            "confidence": 38.5009765625
+          }
+        ],
+        [
+          {
+            "text": "DUE DATE",
+            "row": 4,
+            "col": 1,
+            "confidence": 36.865234375
+          },
+          {
+            "text": "26/02/2019",
+            "row": 4,
+            "col": 2,
+            "confidence": 41.4306640625
+          }
+        ]
+      ],
+      "row_count": 4
+    },
+    {
+      "rows": [
+        [
+          {
+            "text": "QTY",
+            "row": 1,
+            "col": 1,
+            "confidence": 73.828125
+          },
+          {
+            "text": "DESCRIPTION",
+            "row": 1,
+            "col": 2,
+            "confidence": 90.966796875
+          },
+          {
+            "text": "UNIT PRICE",
+            "row": 1,
+            "col": 3,
+            "confidence": 90.087890625
+          },
+          {
+            "text": "AMOUNT",
+            "row": 1,
+            "col": 4,
+            "confidence": 91.30859375
+          }
+        ],
+        [
+          {
+            "text": "1",
+            "row": 2,
+            "col": 1,
+            "confidence": 71.533203125
+          },
+          {
+            "text": "Front and rear brake cables",
+            "row": 2,
+            "col": 2,
+            "confidence": 88.134765625
+          },
+          {
+            "text": "100.00",
+            "row": 2,
+            "col": 3,
+            "confidence": 87.3046875
+          },
+          {
+            "text": "100.00",
+            "row": 2,
+            "col": 4,
+            "confidence": 88.4765625
+          }
+        ],
+        [
+          {
+            "text": "2",
+            "row": 3,
+            "col": 1,
+            "confidence": 71.142578125
+          },
+          {
+            "text": "New set of pedal arms",
+            "row": 3,
+            "col": 2,
+            "confidence": 87.646484375
+          },
+          {
+            "text": "15.00",
+            "row": 3,
+            "col": 3,
+            "confidence": 86.81640625
+          },
+          {
+            "text": "30.00",
+            "row": 3,
+            "col": 4,
+            "confidence": 88.037109375
+          }
+        ],
+        [
+          {
+            "text": "3",
+            "row": 4,
+            "col": 1,
+            "confidence": 71.875
+          },
+          {
+            "text": "Labor 3hrs",
+            "row": 4,
+            "col": 2,
+            "confidence": 88.525390625
+          },
+          {
+            "text": "5.00",
+            "row": 4,
+            "col": 3,
+            "confidence": 87.6953125
+          },
+          {
+            "text": "15.00",
+            "row": 4,
+            "col": 4,
+            "confidence": 88.916015625
+          }
+        ],
+        [
+          {
+            "text": "",
+            "row": 5,
+            "col": 1,
+            "confidence": 54.4921875
+          },
+          {
+            "text": "",
+            "row": 5,
+            "col": 2,
+            "confidence": 54.4921875
+          },
+          {
+            "text": "Subtotal",
+            "row": 5,
+            "col": 3,
+            "confidence": 54.4921875
+          },
+          {
+            "text": "145.00",
+            "row": 5,
+            "col": 4,
+            "confidence": 81.54296875
+          }
+        ],
+        [
+          {
+            "text": "",
+            "row": 6,
+            "col": 1,
+            "confidence": 53.22265625
+          },
+          {
+            "text": "",
+            "row": 6,
+            "col": 2,
+            "confidence": 53.22265625
+          },
+          {
+            "text": "Sales Tax 6.25%",
+            "row": 6,
+            "col": 3,
+            "confidence": 53.22265625
+          },
+          {
+            "text": "9.06",
+            "row": 6,
+            "col": 4,
+            "confidence": 69.3359375
+          }
+        ],
+        [
+          {
+            "text": "",
+            "row": 7,
+            "col": 1,
+            "confidence": 58.69140625
+          },
+          {
+            "text": "",
+            "row": 7,
+            "col": 2,
+            "confidence": 58.69140625
+          },
+          {
+            "text": "TOTAL",
+            "row": 7,
+            "col": 3,
+            "confidence": 58.69140625
+          },
+          {
+            "text": "$154.06",
+            "row": 7,
+            "col": 4,
+            "confidence": 78.662109375
+          }
+        ]
+      ],
+      "row_count": 7
+    }
+  ],
+  "statistics": {
+    "total_tables": 2
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "Id": "faq-001",
+    "Title": "What is Amazon Kendra?",
+    "Content": "Amazon Kendra is an intelligent enterprise search service powered by machine learning. It allows you to search across different content repositories with built-in connectors."
+  },
+  {
+    "Id": "faq-002",
+    "Title": "How is Kendra priced?",
+    "Content": "Amazon Kendra offers two editions: Developer Edition for building and testing, and Enterprise Edition for production workloads. Pricing is based on the number of documents indexed and queries made."
+  },
+  {
+    "Id": "faq-003",
+    "Title": "What file formats does Kendra support?",
+    "Content": "Amazon Kendra supports many file formats including PDF, HTML, Microsoft Word, PowerPoint, plain text, and more. It can also index structured data from databases."
+  },
+  {
+    "Id": "guide-001",
+    "Title": "Setting Up Your First Kendra Index",
+    "Content": "To create your first Kendra index: 1) Open the AWS Console and navigate to Kendra, 2) Click Create Index, 3) Provide a name and IAM role, 4) Select the edition (Developer or Enterprise), 5) Wait for the index to become active."
+  }
+]
