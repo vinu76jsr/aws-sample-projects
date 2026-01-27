@@ -1,0 +1,16 @@
+customer_id,name,email,age,income,signup_date,purchase_count,total_spent,region,is_premium
+1,John Smith,john.smith@email.com,34,75000,2023-01-15,12,1250.50,North,Yes
+2,Jane Doe,jane.doe@email.com,28,52000,2023-02-20,5,320.00,South,No
+3,Bob Wilson,bob.wilson@email.com,45,95000,2022-11-10,25,3500.75,East,Yes
+4,Alice Brown,alice.brown@email.com,31,,2023-03-05,8,890.25,West,No
+5,Charlie Davis,charlie@email.com,52,120000,2022-08-22,42,5200.00,North,Yes
+6,Eva Martinez,,29,48000,2023-04-18,3,150.00,South,No
+7,Frank Lee,frank.lee@email.com,38,82000,2023-01-30,15,1800.50,East,Yes
+8,Grace Kim,grace.kim@email.com,-5,65000,2023-05-12,7,450.00,West,No
+9,Henry Taylor,henry.t@email.com,41,88000,2022-12-01,20,2100.00,North,Yes
+10,Ivy Chen,ivy.chen@email.com,26,45000,2023-06-08,2,75.50,South,No
+11,Jack Brown,jack.b@email.com,33,71000,invalid_date,10,1100.00,East,No
+12,Kate Wilson,kate.w@email.com,47,105000,2022-09-15,30,4200.25,West,Yes
+13,Leo Garcia,leo.garcia@email.com,29,55000,2023-02-28,6,380.00,North,No
+14,Mia Johnson,,36,78000,2023-01-08,14,1650.75,South,Yes
+15,Noah White,noah.white@email.com,200,92000,2022-10-20,22,2800.00,East,Yes
