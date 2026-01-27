@@ -5,6 +5,7 @@ Collection of AWS service examples and demos.
 | Project | Description |
 |---------|-------------|
 | [amazon-kendra](./amazon-kendra/) | Enterprise search service sample |
+| [polls-dynamodb](./polls-dynamodb/) | Flask polls app to learn DynamoDB |
 | [amazon-textract](./amazon-textract/) | Document text extraction (OCR) |
 | [aws-shield](./aws-shield/) | DDoS protection setup with Terraform |
 | [amazon-comprehend.md](./amazon-comprehend.md) | NLP service console guide |
