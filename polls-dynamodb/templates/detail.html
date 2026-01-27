@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ poll.question_text }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ poll.question_text }}</h2>
+
+    <form action="{{ url_for('vote', poll_id=poll.poll_id) }}" method="post">
+        <ul class="choice-list">
+            {% for choice in choices %}
+            <li>
+                <label>
+                    <input type="radio" name="choice" value="{{ choice.choice_id }}">
+                    {{ choice.choice_text }}
+                </label>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div style="margin-top: 20px;">
+            <button type="submit" class="btn btn-success">Vote</button>
+            <a href="{{ url_for('poll_results', poll_id=poll.poll_id) }}" class="btn" style="margin-left: 10px;">View Results</a>
+        </div>
+    </form>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <h3 style="color: #e74c3c; margin-bottom: 15px;">Danger Zone</h3>
+    <form action="{{ url_for('delete_poll', poll_id=poll.poll_id) }}" method="post"
+          onsubmit="return confirm('Are you sure you want to delete this poll?');">
+        <button type="submit" class="btn btn-danger">Delete Poll</button>
+    </form>
+</div>
+{% endblock %}
