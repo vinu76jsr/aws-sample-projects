@@ -11,6 +11,8 @@ Collection of AWS service examples and demos.
 | [amazon-comprehend.md](./amazon-comprehend.md) | NLP service console guide |
 | [amazon-polly.md](./amazon-polly.md) | Text-to-speech console guide |
 | [aws-config.md](./aws-config.md) | Resource configuration tracking exercises |
+| [aws-config-guide.md](./aws-config-guide.md) | Complete AWS Config guide (console) |
+| [aws-security-hub.md](./aws-security-hub.md) | Security findings dashboard (console) |
 | [sagemaker-data-wrangler](./sagemaker-data-wrangler/) | Visual data preparation tool tutorial |
 | [step-functions-intro](./step-functions-intro/) | Learn Step Functions with progressive examples |
 | [aws-landing-zone.md](./aws-landing-zone.md) | Multi-account setup and Control Tower guide |
