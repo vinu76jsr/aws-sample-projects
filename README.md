@@ -14,3 +14,4 @@ Collection of AWS service examples and demos.
 | [sagemaker-data-wrangler](./sagemaker-data-wrangler/) | Visual data preparation tool tutorial |
 | [step-functions-intro](./step-functions-intro/) | Learn Step Functions with progressive examples |
 | [aws-landing-zone.md](./aws-landing-zone.md) | Multi-account setup and Control Tower guide |
+| [ensemble-models.md](./ensemble-models.md) | Bagging, boosting, stacking explained |
