@@ -15,3 +15,4 @@ Collection of AWS service examples and demos.
 | [step-functions-intro](./step-functions-intro/) | Learn Step Functions with progressive examples |
 | [aws-landing-zone.md](./aws-landing-zone.md) | Multi-account setup and Control Tower guide |
 | [ensemble-models.md](./ensemble-models.md) | Bagging, boosting, stacking explained |
+| [linear-regression-intro](./linear-regression-intro/) | Learn linear regression with Python examples |
