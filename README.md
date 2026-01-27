@@ -13,3 +13,4 @@ Collection of AWS service examples and demos.
 | [aws-config.md](./aws-config.md) | Resource configuration tracking exercises |
 | [sagemaker-data-wrangler](./sagemaker-data-wrangler/) | Visual data preparation tool tutorial |
 | [step-functions-intro](./step-functions-intro/) | Learn Step Functions with progressive examples |
+| [aws-landing-zone.md](./aws-landing-zone.md) | Multi-account setup and Control Tower guide |
