@@ -1,0 +1,32 @@
+{
+  "Comment": "Error handling with Catch and Retry",
+  "StartAt": "TryProcess",
+  "States": {
+    "TryProcess": {
+      "Type": "Pass",
+      "Result": {
+        "status": "attempting process"
+      },
+      "Next": "SimulateTask"
+    },
+    "SimulateTask": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.shouldFail",
+          "BooleanEquals": true,
+          "Next": "FailState"
+        }
+      ],
+      "Default": "Success"
+    },
+    "FailState": {
+      "Type": "Fail",
+      "Error": "ProcessingError",
+      "Cause": "Simulated failure for learning purposes"
+    },
+    "Success": {
+      "Type": "Succeed"
+    }
+  }
+}

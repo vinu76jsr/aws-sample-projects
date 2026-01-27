@@ -1,0 +1,60 @@
+{
+  "Comment": "Parallel state - run multiple branches simultaneously",
+  "StartAt": "ProcessOrder",
+  "States": {
+    "ProcessOrder": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "CheckInventory",
+          "States": {
+            "CheckInventory": {
+              "Type": "Pass",
+              "Result": {
+                "task": "inventory",
+                "available": true,
+                "quantity": 50
+              },
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "ValidatePayment",
+          "States": {
+            "ValidatePayment": {
+              "Type": "Pass",
+              "Result": {
+                "task": "payment",
+                "valid": true,
+                "method": "credit_card"
+              },
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "CalculateShipping",
+          "States": {
+            "CalculateShipping": {
+              "Type": "Pass",
+              "Result": {
+                "task": "shipping",
+                "cost": 9.99,
+                "days": 3
+              },
+              "End": true
+            }
+          }
+        }
+      ],
+      "Next": "Consolidate"
+    },
+    "Consolidate": {
+      "Type": "Pass",
+      "Result": "All checks passed - order approved",
+      "ResultPath": "$.summary",
+      "End": true
+    }
+  }
+}

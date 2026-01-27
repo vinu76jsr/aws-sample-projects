@@ -1,0 +1,59 @@
+{
+  "Comment": "Task state calling Lambda - the most common real-world pattern",
+  "StartAt": "ValidateInput",
+  "States": {
+    "ValidateInput": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.email",
+          "IsPresent": true,
+          "Next": "ProcessUser"
+        }
+      ],
+      "Default": "InvalidInput"
+    },
+    "ProcessUser": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:processUser",
+      "Parameters": {
+        "email.$": "$.email",
+        "action.$": "$.action"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": ["Lambda.ServiceException", "Lambda.TooManyRequestsException"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "HandleError"
+        }
+      ],
+      "ResultPath": "$.lambdaResult",
+      "Next": "NotifySuccess"
+    },
+    "NotifySuccess": {
+      "Type": "Pass",
+      "Result": "User processed successfully",
+      "ResultPath": "$.notification",
+      "End": true
+    },
+    "HandleError": {
+      "Type": "Pass",
+      "Result": "Error occurred during processing",
+      "ResultPath": "$.notification",
+      "End": true
+    },
+    "InvalidInput": {
+      "Type": "Fail",
+      "Error": "ValidationError",
+      "Cause": "Email is required"
+    }
+  }
+}

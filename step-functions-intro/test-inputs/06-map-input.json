@@ -1,0 +1,20 @@
+{
+  "orderId": "ORD-12345",
+  "items": [
+    {
+      "name": "Widget",
+      "price": 29.99,
+      "quantity": 2
+    },
+    {
+      "name": "Gadget",
+      "price": 49.99,
+      "quantity": 1
+    },
+    {
+      "name": "Gizmo",
+      "price": 19.99,
+      "quantity": 3
+    }
+  ]
+}

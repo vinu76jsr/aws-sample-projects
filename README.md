@@ -12,3 +12,4 @@ Collection of AWS service examples and demos.
 | [amazon-polly.md](./amazon-polly.md) | Text-to-speech console guide |
 | [aws-config.md](./aws-config.md) | Resource configuration tracking exercises |
 | [sagemaker-data-wrangler](./sagemaker-data-wrangler/) | Visual data preparation tool tutorial |
+| [step-functions-intro](./step-functions-intro/) | Learn Step Functions with progressive examples |

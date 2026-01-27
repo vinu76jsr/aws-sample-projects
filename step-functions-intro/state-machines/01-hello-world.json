@@ -1,0 +1,14 @@
+{
+  "Comment": "Simplest possible state machine - just passes input to output",
+  "StartAt": "HelloWorld",
+  "States": {
+    "HelloWorld": {
+      "Type": "Pass",
+      "Result": {
+        "message": "Hello from Step Functions!",
+        "learned": "Pass state just passes data through"
+      },
+      "End": true
+    }
+  }
+}

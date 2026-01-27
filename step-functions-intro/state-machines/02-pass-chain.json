@@ -1,0 +1,24 @@
+{
+  "Comment": "Chain multiple Pass states - shows how data flows between states",
+  "StartAt": "AddName",
+  "States": {
+    "AddName": {
+      "Type": "Pass",
+      "Result": "John",
+      "ResultPath": "$.name",
+      "Next": "AddAge"
+    },
+    "AddAge": {
+      "Type": "Pass",
+      "Result": 30,
+      "ResultPath": "$.age",
+      "Next": "AddStatus"
+    },
+    "AddStatus": {
+      "Type": "Pass",
+      "Result": "active",
+      "ResultPath": "$.status",
+      "End": true
+    }
+  }
+}

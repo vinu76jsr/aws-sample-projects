@@ -1,0 +1,49 @@
+{
+  "Comment": "Choice state - branching logic based on input",
+  "StartAt": "CheckAge",
+  "States": {
+    "CheckAge": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.age",
+          "NumericLessThan": 18,
+          "Next": "Minor"
+        },
+        {
+          "Variable": "$.age",
+          "NumericGreaterThanEquals": 65,
+          "Next": "Senior"
+        }
+      ],
+      "Default": "Adult"
+    },
+    "Minor": {
+      "Type": "Pass",
+      "Result": {
+        "category": "minor",
+        "discount": "20%",
+        "message": "Youth discount applied"
+      },
+      "End": true
+    },
+    "Adult": {
+      "Type": "Pass",
+      "Result": {
+        "category": "adult",
+        "discount": "0%",
+        "message": "Standard pricing"
+      },
+      "End": true
+    },
+    "Senior": {
+      "Type": "Pass",
+      "Result": {
+        "category": "senior",
+        "discount": "15%",
+        "message": "Senior discount applied"
+      },
+      "End": true
+    }
+  }
+}

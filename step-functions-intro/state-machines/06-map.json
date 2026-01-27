@@ -1,0 +1,36 @@
+{
+  "Comment": "Map state - iterate over an array and process each item",
+  "StartAt": "ProcessItems",
+  "States": {
+    "ProcessItems": {
+      "Type": "Map",
+      "ItemsPath": "$.items",
+      "ItemProcessor": {
+        "ProcessorConfig": {
+          "Mode": "INLINE"
+        },
+        "StartAt": "CalculateItemTotal",
+        "States": {
+          "CalculateItemTotal": {
+            "Type": "Pass",
+            "Parameters": {
+              "name.$": "$.name",
+              "price.$": "$.price",
+              "quantity.$": "$.quantity",
+              "processed": true
+            },
+            "End": true
+          }
+        }
+      },
+      "ResultPath": "$.processedItems",
+      "Next": "Complete"
+    },
+    "Complete": {
+      "Type": "Pass",
+      "Result": "All items processed",
+      "ResultPath": "$.status",
+      "End": true
+    }
+  }
+}

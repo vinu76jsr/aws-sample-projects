@@ -1,0 +1,34 @@
+{
+  "Comment": "Wait state - pause execution for specified time",
+  "StartAt": "OrderReceived",
+  "States": {
+    "OrderReceived": {
+      "Type": "Pass",
+      "Result": "processing",
+      "ResultPath": "$.status",
+      "Next": "WaitForPayment"
+    },
+    "WaitForPayment": {
+      "Type": "Wait",
+      "Seconds": 5,
+      "Next": "PaymentConfirmed"
+    },
+    "PaymentConfirmed": {
+      "Type": "Pass",
+      "Result": "paid",
+      "ResultPath": "$.status",
+      "Next": "WaitForShipping"
+    },
+    "WaitForShipping": {
+      "Type": "Wait",
+      "Seconds": 3,
+      "Next": "Shipped"
+    },
+    "Shipped": {
+      "Type": "Pass",
+      "Result": "shipped",
+      "ResultPath": "$.status",
+      "End": true
+    }
+  }
+}

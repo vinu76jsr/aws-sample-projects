@@ -1,0 +1,14 @@
+{
+  "test_minor": {
+    "age": 15,
+    "name": "Teen User"
+  },
+  "test_adult": {
+    "age": 35,
+    "name": "Adult User"
+  },
+  "test_senior": {
+    "age": 70,
+    "name": "Senior User"
+  }
+}
