@@ -510,3 +510,21 @@ After mastering linear regression:
 4. **Neural Networks** - Complex patterns, images, text
 
 But start here! Linear regression teaches fundamentals used everywhere in ML.
+
+## Appendix: Library Tutorials
+
+New to Python data science libraries? See **[APPENDIX_LIBRARIES.md](./APPENDIX_LIBRARIES.md)** for detailed tutorials on:
+
+| Library | What It Does | Key Functions |
+|---------|--------------|---------------|
+| **pandas** | Data manipulation | `read_csv`, `DataFrame`, `groupby` |
+| **numpy** | Numerical computing | `array`, `mean`, `sqrt`, `reshape` |
+| **scikit-learn** | Machine learning | `train_test_split`, `fit`, `predict` |
+| **matplotlib** | Visualization | `plot`, `scatter`, `hist`, `savefig` |
+| **scipy** | Statistical tests | `shapiro`, `ttest_ind`, `pearsonr` |
+
+Each library section includes:
+- Installation instructions
+- Core concepts explained
+- Common operations with examples
+- Quick reference card

@@ -2,27 +2,53 @@
 Feature Scaling and Preprocessing
 =================================
 Why scaling matters and how to do it properly.
+
+WHAT YOU'LL LEARN:
+- Why features with different scales can be problematic
+- How StandardScaler works (z-score normalization)
+- How MinMaxScaler works (0-1 normalization)
+- The correct way to apply scaling (fit on train only!)
+- How to compare feature importance after scaling
+
+THE PROBLEM:
+  size_sqft: ranges 1100-2500 (large numbers)
+  bedrooms:  ranges 2-5 (small numbers)
+
+  Without scaling, the algorithm might think size is more
+  important just because the numbers are bigger!
 """
 
+# ============================================================
+# IMPORT LIBRARIES
+# ============================================================
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+
+# StandardScaler: Transforms data to have mean=0 and std=1
+# MinMaxScaler: Transforms data to range [0, 1]
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.metrics import r2_score
 
-# Load data
+# ============================================================
+# LOAD DATA
+# ============================================================
 df = pd.read_csv('housing_data.csv')
 
 X = df[['size_sqft', 'bedrooms', 'age_years', 'distance_city_km']]
 y = df['price_lakhs']
 
-# Show the problem: features have different scales
+# ============================================================
+# SHOW THE PROBLEM: DIFFERENT SCALES
+# ============================================================
 print("="*60)
 print("THE SCALING PROBLEM")
 print("="*60)
 print("\nFeature ranges (before scaling):")
 print("-" * 40)
+
+# Show min and max for each feature
 for col in X.columns:
     print(f"  {col:20s}: {X[col].min():>6.0f} to {X[col].max():>6.0f}")
 
@@ -32,13 +58,18 @@ The model might give more weight to features with larger values.
 Solution: Scale all features to similar ranges.
 """)
 
-# Split data FIRST (important: fit scaler only on training data)
+# ============================================================
+# SPLIT DATA FIRST (IMPORTANT!)
+# ============================================================
+# CRITICAL: We MUST split BEFORE scaling!
+# Otherwise, we'd be "leaking" test data information into training
+
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
 # ============================================================
-# Method 1: StandardScaler (Z-score normalization)
+# METHOD 1: StandardScaler (Z-score normalization)
 # ============================================================
 print("="*60)
 print("METHOD 1: StandardScaler (Z-score)")
@@ -46,17 +77,28 @@ print("="*60)
 print("Formula: z = (x - mean) / std_dev")
 print("Result: mean=0, std=1 for each feature\n")
 
+# Create scaler instance
 scaler_standard = StandardScaler()
-X_train_scaled = scaler_standard.fit_transform(X_train)  # Fit AND transform
-X_test_scaled = scaler_standard.transform(X_test)        # Only transform!
 
+# fit_transform on TRAINING data:
+# - fit(): Calculates mean and std from training data
+# - transform(): Applies the formula (x - mean) / std
+X_train_scaled = scaler_standard.fit_transform(X_train)
+
+# transform() on TEST data:
+# - Only transforms using the TRAINING mean and std
+# - We don't "fit" on test data - that would be cheating!
+X_test_scaled = scaler_standard.transform(X_test)
+
+# Check the result
 print("After StandardScaler (training set):")
 print("-" * 40)
 X_train_scaled_df = pd.DataFrame(X_train_scaled, columns=X.columns)
 for col in X_train_scaled_df.columns:
+    # Mean should be ~0, std should be ~1
     print(f"  {col:20s}: mean={X_train_scaled_df[col].mean():>6.2f}, std={X_train_scaled_df[col].std():>5.2f}")
 
-# Train model with scaled data
+# Train and evaluate with scaled data
 model_scaled = LinearRegression()
 model_scaled.fit(X_train_scaled, y_train)
 y_pred_scaled = model_scaled.predict(X_test_scaled)
@@ -65,7 +107,7 @@ r2_scaled = r2_score(y_test, y_pred_scaled)
 print(f"\nR² with StandardScaler: {r2_scaled:.4f}")
 
 # ============================================================
-# Method 2: MinMaxScaler (0-1 normalization)
+# METHOD 2: MinMaxScaler (0-1 normalization)
 # ============================================================
 print("\n" + "="*60)
 print("METHOD 2: MinMaxScaler (0-1 range)")
@@ -81,6 +123,7 @@ print("After MinMaxScaler (training set):")
 print("-" * 40)
 X_train_minmax_df = pd.DataFrame(X_train_minmax, columns=X.columns)
 for col in X_train_minmax_df.columns:
+    # Min should be ~0, max should be ~1
     print(f"  {col:20s}: min={X_train_minmax_df[col].min():>5.2f}, max={X_train_minmax_df[col].max():>5.2f}")
 
 model_minmax = LinearRegression()
@@ -91,7 +134,7 @@ r2_minmax = r2_score(y_test, y_pred_minmax)
 print(f"\nR² with MinMaxScaler: {r2_minmax:.4f}")
 
 # ============================================================
-# Compare with no scaling
+# COMPARE WITH NO SCALING
 # ============================================================
 print("\n" + "="*60)
 print("COMPARISON: Scaling Impact")
@@ -117,7 +160,7 @@ because LR is scale-invariant. However, scaling is CRITICAL for:
 """)
 
 # ============================================================
-# Coefficient comparison after scaling
+# FEATURE IMPORTANCE (SCALED COEFFICIENTS)
 # ============================================================
 print("="*60)
 print("FEATURE IMPORTANCE (Scaled Coefficients)")
@@ -125,6 +168,9 @@ print("="*60)
 print("\nWith StandardScaler, coefficients show relative importance:")
 print("-" * 40)
 
+# After scaling, all features are on the same scale
+# So we can directly compare coefficient magnitudes
+# Larger absolute value = more important feature
 importance = pd.DataFrame({
     'Feature': X.columns,
     'Coefficient': model_scaled.coef_,
@@ -132,6 +178,7 @@ importance = pd.DataFrame({
 }).sort_values('Abs_Coefficient', ascending=False)
 
 for _, row in importance.iterrows():
+    # Create a simple bar visualization
     bar = '█' * int(row['Abs_Coefficient'] * 2)
     print(f"  {row['Feature']:20s}: {row['Coefficient']:>7.2f}  {bar}")
 
