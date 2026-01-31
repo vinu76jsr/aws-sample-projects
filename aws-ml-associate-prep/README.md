@@ -2,6 +2,8 @@
 
 A hands-on project-based learning path for the **AWS Certified Machine Learning Engineer - Associate (MLA-C01)** certification.
 
+**Quick Links:** [Cheat Sheet](./CHEATSHEET.md) | [Start Learning](#learning-path--projects)
+
 ## Exam Overview
 
 | Attribute | Details |
@@ -25,6 +27,11 @@ A hands-on project-based learning path for the **AWS Certified Machine Learning 
 ---
 
 ## Learning Path & Projects
+
+Each project contains:
+- **README.md** - Concepts, theory, and exam-relevant notes
+- **LAB.md** - Hands-on exercises with step-by-step instructions
+- **Code examples** - Python/CLI scripts to run
 
 ### Phase 1: Core Foundation (60% of exam weight)
 
