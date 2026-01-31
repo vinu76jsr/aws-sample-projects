@@ -14,31 +14,31 @@ graph TD
     subgraph AMAZON SAGEMAKER
         subgraph PREPARE
             direction LR
-            A["Data Wrangler"]
-            B["Feature Store"]
-            C["Ground Truth"]
-            D["Processing"]
+            A[":broom: Data Wrangler"]
+            B[":card_index_dividers: Feature Store"]
+            C[":white_check_mark: Ground Truth"]
+            D[":gear: Processing"]
         end
         subgraph BUILD
             direction LR
-            E["Studio"]
-            F["Notebooks"]
-            G["Autopilot"]
-            H["JumpStart"]
+            E[":art: Studio"]
+            F[":notebook: Notebooks"]
+            G[":robot: Autopilot"]
+            H[":rocket: JumpStart"]
         end
         subgraph "TRAIN & TUNE"
             direction LR
-            I["Training Jobs"]
-            J["HPO"]
-            K["Debugger"]
-            L["Experiments"]
+            I[":weight_lifter: Training Jobs"]
+            J[":level_slider: HPO"]
+            K[":bug: Debugger"]
+            L[":test_tube: Experiments"]
         end
         subgraph DEPLOY
             direction LR
-            M["Endpoints"]
-            N["Batch"]
-            O["Async"]
-            P["Serverless"]
+            M[":electric_plug: Endpoints"]
+            N[":inbox_tray: Batch"]
+            O[":hourglass_flowing_sand: Async"]
+            P[":cloud: Serverless"]
         end
     end
 ```
@@ -129,10 +129,10 @@ graph TD
 ```mermaid
 graph TD
     subgraph "Training Job Workflow"
-        S3_Data[S3 (Data)] --> Training_Instance[Training Instance]
-        Training_Instance --> Model_Artifacts[Model Artifacts]
-        Model_Artifacts --> S3_Output[S3 (Output)]
-        Training_Instance --> CloudWatch[CloudWatch (Logs)]
+        S3_Data[":file_folder: S3 (Data)"] --> Training_Instance[":computer: Training Instance"]
+        Training_Instance --> Model_Artifacts[":package: Model Artifacts"]
+        Model_Artifacts --> S3_Output[":outbox_tray: S3 (Output)"]
+        Training_Instance --> CloudWatch[":chart_with_upwards_trend: CloudWatch (Logs)"]
     end
 ```
 
@@ -190,9 +190,9 @@ hyperparameter_ranges = {
 ```mermaid
 graph TD
     subgraph "Real-time Endpoint Variants"
-        Endpoint[SageMaker Endpoint] --> Variant_A[Variant A (70%)]
-        Endpoint --> Variant_B[Variant B (20%)]
-        Endpoint --> Variant_C[Variant C (10%)]
+        Endpoint[":electric_plug: SageMaker Endpoint"] --> Variant_A[":a: Variant A (70%)"]
+        Endpoint --> Variant_B[":b: Variant B (20%)"]
+        Endpoint --> Variant_C[":regional_indicator_c: Variant C (10%)"]
     end
 ```
 
@@ -226,9 +226,9 @@ graph TD
 ```mermaid
 graph TD
     subgraph "Notebook Instance Lifecycle"
-        Stopped -- start --> Starting
-        Starting -- completes --> InService
-        InService -- stop --> Stopping
+        Stopped[":octagonal_sign: Stopped"] -- start --> Starting[":arrow_forward: Starting"]
+        Starting -- completes --> InService[":white_check_mark: InService"]
+        InService -- stop --> Stopping[":stop_button: Stopping"]
         Stopping -- completes --> Stopped
         InService -- running --> InService
     end
