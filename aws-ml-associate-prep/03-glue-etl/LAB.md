@@ -9,6 +9,107 @@ In this lab, you'll use AWS Glue to catalog, transform, and prepare data for mac
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Sources["Data Sources"]
+        S1[customers.csv]
+        S2[transactions.csv]
+    end
+
+    subgraph S3Raw["S3 Raw Zone"]
+        R1[raw/customers/]
+        R2[raw/transactions/]
+    end
+
+    subgraph GlueCatalog["Glue Data Catalog"]
+        Crawler[Glue Crawler]
+        DB[(ml_lab_database)]
+        T1[customers table]
+        T2[transactions table]
+    end
+
+    subgraph GlueJob["Glue ETL Job"]
+        Extract[Extract<br/>Read from Catalog]
+        Transform[Transform<br/>Clean & Join]
+        Load[Load<br/>Write Parquet]
+    end
+
+    subgraph S3Processed["S3 Processed Zone"]
+        P1[processed/ml_dataset/]
+    end
+
+    Sources --> S3Raw
+    R1 --> Crawler
+    R2 --> Crawler
+    Crawler --> DB
+    DB --> T1
+    DB --> T2
+    T1 --> Extract
+    T2 --> Extract
+    Extract --> Transform
+    Transform --> Load
+    Load --> P1
+
+    style Sources fill:#e3f2fd
+    style S3Raw fill:#ffebee
+    style GlueCatalog fill:#e8f5e9
+    style GlueJob fill:#fff3e0
+    style S3Processed fill:#f3e5f5
+```
+
+### Crawler Discovery Process
+
+```mermaid
+sequenceDiagram
+    participant CLI as AWS CLI
+    participant Crawler as Glue Crawler
+    participant S3 as S3 Bucket
+    participant Catalog as Data Catalog
+
+    CLI->>Crawler: start-crawler
+    Crawler->>S3: Scan s3://bucket/raw/
+    S3-->>Crawler: File metadata & samples
+    Crawler->>Crawler: Infer schema (CSV)
+    Crawler->>Catalog: Create/Update tables
+    Catalog-->>CLI: Tables ready
+```
+
+### ETL Job Data Flow
+
+```mermaid
+flowchart LR
+    subgraph Extract
+        A1[Read customers<br/>DynamicFrame]
+        A2[Read transactions<br/>DynamicFrame]
+    end
+
+    subgraph Transform
+        B1[Clean & Filter]
+        B2[Aggregate Features]
+        B3[Join Data]
+        B4[Create Target]
+    end
+
+    subgraph Load
+        C1[Write Parquet<br/>to S3]
+    end
+
+    A1 --> B3
+    A2 --> B1
+    B1 --> B2
+    B2 --> B3
+    B3 --> B4
+    B4 --> C1
+
+    style Extract fill:#e3f2fd
+    style Transform fill:#fff3e0
+    style Load fill:#e8f5e9
+```
+
+---
+
 ## Lab Objectives
 
 By the end of this lab, you will be able to:

@@ -9,6 +9,96 @@ Extract text, forms, and tables from documents using Amazon Textract.
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Input["Document Input"]
+        PDF[PDF Files]
+        Images[Images<br/>PNG/JPEG]
+        S3[(S3 Bucket)]
+    end
+
+    subgraph Textract["Amazon Textract APIs"]
+        Detect[DetectDocumentText<br/>Basic OCR]
+        Analyze[AnalyzeDocument<br/>Forms & Tables]
+        Expense[AnalyzeExpense<br/>Receipts/Invoices]
+        ID[AnalyzeID<br/>Identity Documents]
+        Queries[Queries<br/>Specific Questions]
+    end
+
+    subgraph Output["Extracted Data"]
+        Text[Raw Text Lines]
+        KV[Key-Value Pairs]
+        Tables[Table Data]
+        Structured[Structured Fields]
+    end
+
+    Input --> Textract
+    Textract --> Output
+
+    style Input fill:#e3f2fd
+    style Textract fill:#fff3e0
+    style Output fill:#e8f5e9
+```
+
+### Block Hierarchy
+
+```mermaid
+flowchart TB
+    subgraph Document["Document Structure"]
+        Page[PAGE]
+        Line[LINE]
+        Word[WORD]
+    end
+
+    subgraph Forms["Form Analysis"]
+        KVSet[KEY_VALUE_SET]
+        Key[KEY]
+        Value[VALUE]
+    end
+
+    subgraph Tables["Table Analysis"]
+        Table[TABLE]
+        Cell[CELL]
+        MergedCell[MERGED_CELL]
+    end
+
+    Page --> Line
+    Line --> Word
+    KVSet --> Key
+    KVSet --> Value
+    Table --> Cell
+
+    style Document fill:#e3f2fd
+    style Forms fill:#fff3e0
+    style Tables fill:#e8f5e9
+```
+
+### Async Processing for Large Documents
+
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant TX as Textract
+    participant S3 as S3 Bucket
+    participant SNS as SNS Topic
+
+    App->>TX: StartDocumentAnalysis(PDF)
+    TX-->>App: JobId
+
+    TX->>S3: Process multi-page PDF
+    TX->>TX: Analyze each page
+
+    TX->>SNS: Job completed notification
+    SNS->>App: Notification
+
+    App->>TX: GetDocumentAnalysis(JobId)
+    TX-->>App: Paginated results
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Extract text from documents

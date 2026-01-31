@@ -9,6 +9,108 @@ Use Amazon Comprehend for natural language processing tasks.
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Input["Text Input"]
+        Single[Single Document]
+        Batch[Batch Documents]
+        Async[Async Jobs]
+    end
+
+    subgraph Comprehend["Amazon Comprehend APIs"]
+        Sentiment[DetectSentiment<br/>Positive/Negative/Neutral]
+        Entities[DetectEntities<br/>Person/Location/Org]
+        KeyPhrases[DetectKeyPhrases<br/>Important Terms]
+        Language[DetectDominantLanguage]
+        PII[DetectPiiEntities<br/>Personal Data]
+        Syntax[DetectSyntax<br/>Part of Speech]
+    end
+
+    subgraph Custom["Custom Models"]
+        Classifier[Custom Classifier]
+        EntityRec[Custom Entity Recognition]
+    end
+
+    subgraph Output["Results"]
+        JSON[JSON Response]
+        Scores[Confidence Scores]
+        Positions[Text Positions]
+    end
+
+    Input --> Comprehend
+    Input --> Custom
+    Comprehend --> Output
+    Custom --> Output
+
+    style Input fill:#e3f2fd
+    style Comprehend fill:#fff3e0
+    style Custom fill:#e8f5e9
+    style Output fill:#fce4ec
+```
+
+### Sentiment Analysis Flow
+
+```mermaid
+flowchart LR
+    Text["Customer Review"] --> API[DetectSentiment]
+
+    API --> Scores
+
+    subgraph Scores["Sentiment Scores"]
+        Pos[Positive: 0.85]
+        Neg[Negative: 0.05]
+        Neu[Neutral: 0.08]
+        Mix[Mixed: 0.02]
+    end
+
+    Scores --> Result[Overall: POSITIVE]
+
+    style Scores fill:#e8f5e9
+```
+
+### Entity Types
+
+```mermaid
+flowchart TB
+    subgraph EntityTypes["Detected Entity Types"]
+        PERSON[PERSON<br/>Names of people]
+        LOCATION[LOCATION<br/>Places, addresses]
+        ORG[ORGANIZATION<br/>Companies, agencies]
+        DATE[DATE<br/>Dates and times]
+        QUANTITY[QUANTITY<br/>Numbers, percentages]
+        EVENT[EVENT<br/>Named events]
+        TITLE[TITLE<br/>Job titles, works]
+        OTHER[OTHER<br/>Miscellaneous]
+    end
+
+    Text[Input Text] --> EntityTypes
+
+    style EntityTypes fill:#fff3e0
+```
+
+### PII Detection for Compliance
+
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Comp as Comprehend
+    participant Store as Data Store
+
+    App->>Comp: DetectPiiEntities(text)
+    Comp-->>App: PII locations + types
+
+    alt PII Found
+        App->>App: Mask/Redact PII
+        App->>Store: Store sanitized data
+    else No PII
+        App->>Store: Store original data
+    end
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Perform sentiment analysis

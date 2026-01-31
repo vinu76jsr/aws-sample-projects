@@ -9,6 +9,93 @@ Use Amazon Rekognition for image analysis including object detection, face analy
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Input["Image Input"]
+        S3[(S3 Bucket)]
+        Bytes[Image Bytes]
+    end
+
+    subgraph Rekognition["Amazon Rekognition APIs"]
+        Labels[DetectLabels<br/>Objects & Scenes]
+        Faces[DetectFaces<br/>Facial Analysis]
+        Text[DetectText<br/>OCR]
+        Celeb[RecognizeCelebrities]
+        Mod[DetectModerationLabels]
+    end
+
+    subgraph FaceCollection["Face Collections"]
+        Create[CreateCollection]
+        Index[IndexFaces]
+        Search[SearchFacesByImage]
+    end
+
+    subgraph Output["Results"]
+        JSON[JSON Response]
+        Confidence[Confidence Scores]
+        BoundingBox[Bounding Boxes]
+    end
+
+    S3 --> Rekognition
+    Bytes --> Rekognition
+    Rekognition --> Output
+    Rekognition --> FaceCollection
+
+    style Input fill:#e3f2fd
+    style Rekognition fill:#fff3e0
+    style FaceCollection fill:#e8f5e9
+    style Output fill:#fce4ec
+```
+
+### Face Collection Workflow
+
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Rek as Rekognition
+    participant Col as Face Collection
+
+    App->>Rek: CreateCollection("employees")
+    Rek->>Col: Create index
+
+    loop For each employee
+        App->>Rek: IndexFaces(image, collection)
+        Rek->>Col: Store face vector
+        Rek-->>App: FaceId returned
+    end
+
+    Note over App,Col: Later - Identity verification
+
+    App->>Rek: SearchFacesByImage(new_image)
+    Rek->>Col: Search similar vectors
+    Col-->>Rek: Matching FaceIds
+    Rek-->>App: Match results + confidence
+```
+
+### Video Analysis Pipeline
+
+```mermaid
+flowchart LR
+    subgraph Async["Async Video Analysis"]
+        Video[S3 Video]
+        Start[StartLabelDetection]
+        SNS[SNS Notification]
+        Get[GetLabelDetection]
+        Results[Timestamped Labels]
+    end
+
+    Video --> Start
+    Start --> |JobId| SNS
+    SNS --> Get
+    Get --> Results
+
+    style Async fill:#e3f2fd
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Detect labels (objects) in images

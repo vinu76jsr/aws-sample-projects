@@ -9,6 +9,104 @@ Build a Retrieval Augmented Generation (RAG) application using Amazon Bedrock.
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph RAG["RAG Pipeline"]
+        subgraph Ingestion["Document Ingestion"]
+            Docs[Documents]
+            Chunk[Chunking]
+            Embed1[Titan Embeddings]
+        end
+
+        subgraph VectorStore["Vector Store"]
+            VS[(Vector Database<br/>OpenSearch/Pinecone)]
+        end
+
+        subgraph Query["Query Processing"]
+            Q[User Query]
+            Embed2[Query Embedding]
+            Search[Semantic Search]
+            Context[Retrieved Context]
+        end
+
+        subgraph Generation["Response Generation"]
+            Prompt[Augmented Prompt]
+            LLM[Claude/Titan LLM]
+            Response[Generated Response]
+        end
+    end
+
+    Docs --> Chunk
+    Chunk --> Embed1
+    Embed1 --> VS
+
+    Q --> Embed2
+    Embed2 --> Search
+    VS --> Search
+    Search --> Context
+
+    Context --> Prompt
+    Q --> Prompt
+    Prompt --> LLM
+    LLM --> Response
+
+    style Ingestion fill:#e3f2fd
+    style VectorStore fill:#fff3e0
+    style Query fill:#e8f5e9
+    style Generation fill:#fce4ec
+```
+
+### Bedrock Model Invocation
+
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant BR as Bedrock Runtime
+    participant Model as Foundation Model
+
+    App->>BR: invoke_model(modelId, body)
+    BR->>Model: Forward request
+    Model->>Model: Process with LLM
+    Model-->>BR: Generated response
+    BR-->>App: Response JSON
+```
+
+### Knowledge Bases Architecture
+
+```mermaid
+flowchart LR
+    subgraph Sources["Data Sources"]
+        S3[(S3 Bucket)]
+    end
+
+    subgraph KB["Knowledge Base"]
+        Sync[Data Sync]
+        Embed[Embedding Model]
+        Index[Vector Index]
+    end
+
+    subgraph Query["RetrieveAndGenerate"]
+        Retrieve[Retrieve]
+        Augment[Augment Prompt]
+        Generate[Generate Response]
+    end
+
+    S3 --> Sync
+    Sync --> Embed
+    Embed --> Index
+    Index --> Retrieve
+    Retrieve --> Augment
+    Augment --> Generate
+
+    style Sources fill:#e3f2fd
+    style KB fill:#fff3e0
+    style Query fill:#e8f5e9
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Invoke foundation models via Bedrock

@@ -9,6 +9,116 @@ Set up Model Monitor to detect data drift in a deployed model endpoint.
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Inference["Real-time Inference"]
+        Client[Client App]
+        Endpoint[SageMaker Endpoint]
+        Capture[Data Capture]
+    end
+
+    subgraph Storage["Data Storage"]
+        S3Cap[(S3: Captured Data)]
+        S3Base[(S3: Baseline)]
+        S3Report[(S3: Reports)]
+    end
+
+    subgraph Monitor["Model Monitor"]
+        Schedule[Monitoring Schedule<br/>Hourly/Daily]
+        Job[Processing Job<br/>Compare to Baseline]
+        Analyze[Analyze Violations]
+    end
+
+    subgraph Alerts["Alerting"]
+        CW[CloudWatch Metrics]
+        Alarm[CloudWatch Alarm]
+        SNS[SNS Notification]
+    end
+
+    Client --> Endpoint
+    Endpoint --> Capture
+    Capture --> S3Cap
+
+    S3Cap --> Job
+    S3Base --> Job
+    Schedule --> Job
+    Job --> S3Report
+    Job --> Analyze
+    Analyze --> CW
+    CW --> Alarm
+    Alarm --> SNS
+
+    style Inference fill:#e3f2fd
+    style Storage fill:#fff3e0
+    style Monitor fill:#e8f5e9
+    style Alerts fill:#fce4ec
+```
+
+### Monitor Types
+
+```mermaid
+flowchart LR
+    subgraph DataQuality["Data Quality Monitor"]
+        DQ1[Feature Statistics]
+        DQ2[Missing Values]
+        DQ3[Data Type Changes]
+    end
+
+    subgraph ModelQuality["Model Quality Monitor"]
+        MQ1[Accuracy Metrics]
+        MQ2[Precision/Recall]
+        MQ3[Ground Truth Required]
+    end
+
+    subgraph BiasDrift["Bias Drift Monitor"]
+        BD1[Demographic Parity]
+        BD2[Equalized Odds]
+        BD3[Fairness Metrics]
+    end
+
+    subgraph FeatureAttribution["Feature Attribution"]
+        FA1[SHAP Values]
+        FA2[Feature Importance]
+        FA3[Explainability Drift]
+    end
+
+    style DataQuality fill:#e3f2fd
+    style ModelQuality fill:#e8f5e9
+    style BiasDrift fill:#fff3e0
+    style FeatureAttribution fill:#fce4ec
+```
+
+### Drift Detection Flow
+
+```mermaid
+sequenceDiagram
+    participant Train as Training Data
+    participant Base as Baseline Job
+    participant Prod as Production Traffic
+    participant Mon as Monitor Job
+    participant CW as CloudWatch
+
+    Train->>Base: Create baseline statistics
+    Base->>Base: Calculate mean, std, min, max
+    Note over Base: Store baseline in S3
+
+    loop Every hour
+        Prod->>Mon: Captured inference data
+        Mon->>Mon: Calculate current statistics
+        Mon->>Mon: Compare to baseline
+        alt Drift detected
+            Mon->>CW: Publish violation metrics
+            CW->>CW: Trigger alarm
+        else No drift
+            Mon->>CW: Publish normal metrics
+        end
+    end
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Enable data capture on an endpoint

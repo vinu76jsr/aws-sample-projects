@@ -9,6 +9,108 @@ In this lab, you'll build an automated ML pipeline that includes data processing
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Pipeline["SageMaker Pipeline"]
+        direction TB
+        Params[Pipeline Parameters]
+
+        subgraph Steps["Pipeline Steps"]
+            P[ProcessingStep<br/>Data Preprocessing]
+            T[TrainingStep<br/>XGBoost Training]
+            E[ProcessingStep<br/>Model Evaluation]
+        end
+
+        subgraph Condition["Condition Step"]
+            C{Accuracy >= 0.7?}
+        end
+
+        subgraph Outcomes["Outcomes"]
+            R[RegisterModel<br/>Model Registry]
+            F[FailStep<br/>Quality Gate Failed]
+        end
+    end
+
+    subgraph Registry["Model Registry"]
+        MG[Model Package Group]
+        MP[Model Package<br/>PendingApproval]
+    end
+
+    Params --> P
+    P --> T
+    T --> E
+    E --> C
+    C -->|Yes| R
+    C -->|No| F
+    R --> MG
+    MG --> MP
+
+    style Pipeline fill:#e3f2fd
+    style Steps fill:#fff3e0
+    style Condition fill:#fce4ec
+    style Registry fill:#e8f5e9
+```
+
+### Step Dependencies
+
+```mermaid
+flowchart LR
+    subgraph Processing
+        P1[Input: Raw Data S3]
+        P2[Output: Processed Train]
+        P3[Output: Processed Val]
+        P4[Output: Processed Test]
+    end
+
+    subgraph Training
+        T1[Input: Processed Train]
+        T2[Input: Processed Val]
+        T3[Output: Model Artifacts]
+    end
+
+    subgraph Evaluation
+        E1[Input: Model Artifacts]
+        E2[Input: Processed Test]
+        E3[Output: evaluation.json]
+    end
+
+    P2 --> T1
+    P3 --> T2
+    T3 --> E1
+    P4 --> E2
+
+    style Processing fill:#ffebee
+    style Training fill:#e3f2fd
+    style Evaluation fill:#e8f5e9
+```
+
+### Conditional Model Registration
+
+```mermaid
+sequenceDiagram
+    participant Eval as Evaluation Step
+    participant PF as PropertyFile
+    participant Cond as ConditionStep
+    participant Reg as RegisterModel
+    participant MR as Model Registry
+
+    Eval->>PF: Write evaluation.json
+    PF-->>Cond: metrics.accuracy = 0.85
+    Cond->>Cond: Check: 0.85 >= 0.7?
+    alt accuracy >= threshold
+        Cond->>Reg: Execute RegisterModel
+        Reg->>MR: Create Model Package
+        MR-->>Reg: Status: PendingApproval
+    else accuracy < threshold
+        Cond->>Cond: Execute FailStep
+        Note over Cond: Pipeline fails with error
+    end
+```
+
+---
+
 ## Lab Objectives
 
 By the end of this lab, you will be able to:

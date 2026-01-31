@@ -9,6 +9,93 @@ In this lab, you'll create a Step Functions state machine that orchestrates an M
 
 ---
 
+## Architecture Overview
+
+```mermaid
+stateDiagram-v2
+    [*] --> StartTraining
+    StartTraining --> CheckTrainingStatus
+    CheckTrainingStatus --> TrainingComplete: Status = Completed
+    CheckTrainingStatus --> WaitForTraining: Status = InProgress
+    CheckTrainingStatus --> TrainingFailed: Status = Failed
+
+    WaitForTraining --> CheckTrainingStatus
+
+    TrainingComplete --> CreateModel
+    CreateModel --> DeployEndpoint
+    DeployEndpoint --> SendNotification
+    SendNotification --> [*]
+
+    TrainingFailed --> SendFailureNotification
+    SendFailureNotification --> [*]
+```
+
+### Service Integration Pattern
+
+```mermaid
+flowchart TB
+    subgraph StepFunctions["Step Functions State Machine"]
+        Start[Start]
+        Train[SageMaker<br/>CreateTrainingJob]
+        Wait[Wait State<br/>30 seconds]
+        Check[SageMaker<br/>DescribeTrainingJob]
+        Choice{Job Status?}
+        Model[SageMaker<br/>CreateModel]
+        Deploy[SageMaker<br/>CreateEndpoint]
+        Notify[SNS<br/>Publish]
+    end
+
+    subgraph AWSServices["AWS Services"]
+        SM[(SageMaker)]
+        SNS[(SNS Topic)]
+        S3[(S3 Bucket)]
+    end
+
+    Start --> Train
+    Train --> Wait
+    Wait --> Check
+    Check --> Choice
+    Choice -->|InProgress| Wait
+    Choice -->|Completed| Model
+    Choice -->|Failed| Notify
+    Model --> Deploy
+    Deploy --> Notify
+
+    Train -.-> SM
+    Check -.-> SM
+    Model -.-> SM
+    Deploy -.-> SM
+    Notify -.-> SNS
+    SM -.-> S3
+
+    style StepFunctions fill:#e3f2fd
+    style AWSServices fill:#e8f5e9
+```
+
+### Error Handling with Retries
+
+```mermaid
+flowchart LR
+    subgraph Retry["Retry Configuration"]
+        R1[MaxAttempts: 3]
+        R2[IntervalSeconds: 5]
+        R3[BackoffRate: 2.0]
+    end
+
+    subgraph Execution
+        A1[Attempt 1] -->|Fail| W1[Wait 5s]
+        W1 --> A2[Attempt 2]
+        A2 -->|Fail| W2[Wait 10s]
+        W2 --> A3[Attempt 3]
+        A3 -->|Fail| Catch[Catch Block]
+    end
+
+    style Retry fill:#fff3e0
+    style Execution fill:#ffebee
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Create a Step Functions state machine for ML

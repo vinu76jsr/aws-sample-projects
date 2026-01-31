@@ -9,6 +9,91 @@ In this lab, you'll create and use a SageMaker Feature Store for managing ML fea
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Ingestion["Feature Ingestion"]
+        Batch[Batch Ingestion<br/>DataFrame]
+        Stream[Streaming<br/>put_record]
+    end
+
+    subgraph FeatureStore["SageMaker Feature Store"]
+        FG[Feature Group<br/>customer-features]
+
+        subgraph Online["Online Store"]
+            direction LR
+            OS[(Low-latency<br/>Key-Value Store)]
+        end
+
+        subgraph Offline["Offline Store"]
+            direction LR
+            S3[(S3 Parquet<br/>+ Glue Catalog)]
+        end
+    end
+
+    subgraph Consumers["Feature Consumers"]
+        RT[Real-time Inference<br/>GetRecord API]
+        Train[Training Jobs<br/>Athena Queries]
+    end
+
+    Batch --> FG
+    Stream --> FG
+    FG --> Online
+    FG --> |Auto-sync| Offline
+
+    Online --> RT
+    Offline --> Train
+
+    style Ingestion fill:#e3f2fd
+    style Online fill:#e8f5e9
+    style Offline fill:#fff3e0
+    style Consumers fill:#fce4ec
+```
+
+### Online vs Offline Store
+
+```mermaid
+flowchart LR
+    subgraph OnlineStore["Online Store"]
+        O1[Single-digit ms latency]
+        O2[Latest feature values only]
+        O3[GetRecord / BatchGetRecord]
+        O4[Real-time inference]
+    end
+
+    subgraph OfflineStore["Offline Store"]
+        F1[Historical data in S3]
+        F2[All versions preserved]
+        F3[Query via Athena]
+        F4[Training & batch scoring]
+    end
+
+    style OnlineStore fill:#e8f5e9
+    style OfflineStore fill:#fff3e0
+```
+
+### Point-in-Time Query
+
+```mermaid
+sequenceDiagram
+    participant Labels as Label Data
+    participant FS as Feature Store
+    participant Query as Training Query
+
+    Note over Labels: Churn label at T=100
+    Note over FS: Features at T=80
+    Note over FS: Features at T=90
+    Note over FS: Features at T=110
+
+    Query->>Labels: Get label_timestamp (T=100)
+    Query->>FS: Get features WHERE event_time <= 100
+    FS-->>Query: Return features from T=90
+    Note over Query: Avoids data leakage!
+```
+
+---
+
 ## Lab Objectives
 
 By the end of this lab, you will be able to:

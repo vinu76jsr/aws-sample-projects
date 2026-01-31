@@ -9,6 +9,84 @@ In this lab, you'll set up an S3-based data lake optimized for ML workflows, inc
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph DataLake["S3 Data Lake Structure"]
+        subgraph Raw["Raw Zone"]
+            R1[Source 1]
+            R2[Source 2]
+        end
+
+        subgraph Processed["Processed Zone"]
+            P1[Train]
+            P2[Validation]
+            P3[Test]
+        end
+
+        subgraph Features["Feature Zone"]
+            F1[Customer Features]
+            F2[Product Features]
+        end
+
+        subgraph Models["Model Zone"]
+            M1[Production]
+            M2[Staging]
+            M3[Archived]
+        end
+    end
+
+    Raw --> |Glue ETL| Processed
+    Processed --> |Feature Eng| Features
+    Features --> |Training| Models
+
+    style Raw fill:#ffebee
+    style Processed fill:#e3f2fd
+    style Features fill:#e8f5e9
+    style Models fill:#fff3e0
+```
+
+### Lifecycle & Storage Classes
+
+```mermaid
+flowchart LR
+    subgraph StorageClasses["S3 Storage Class Transitions"]
+        Standard[S3 Standard<br/>Frequent Access]
+        IA[S3 Standard-IA<br/>Infrequent Access]
+        Glacier[S3 Glacier<br/>Archive]
+        Deep[Glacier Deep Archive<br/>Long-term]
+    end
+
+    Standard --> |30 days| IA
+    IA --> |90 days| Glacier
+    Glacier --> |180 days| Deep
+
+    style Standard fill:#4caf50,color:#fff
+    style IA fill:#2196f3,color:#fff
+    style Glacier fill:#9c27b0,color:#fff
+    style Deep fill:#607d8b,color:#fff
+```
+
+### Event-Driven Pipeline
+
+```mermaid
+sequenceDiagram
+    participant App as Data Source
+    participant S3 as S3 Bucket
+    participant SNS as SNS Topic
+    participant Lambda as Lambda
+    participant Glue as Glue Job
+
+    App->>S3: Upload new data (raw/)
+    S3->>SNS: ObjectCreated event
+    SNS->>Lambda: Trigger notification
+    Lambda->>Glue: Start ETL job
+    Glue->>S3: Write to processed/
+```
+
+---
+
 ## Lab Objectives
 
 By the end of this lab, you will be able to:

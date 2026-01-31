@@ -9,6 +9,89 @@ Deploy a lightweight ML model in AWS Lambda for serverless inference.
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Client["Client"]
+        App[Application]
+    end
+
+    subgraph APIGW["API Gateway"]
+        API[REST API<br/>/predict]
+    end
+
+    subgraph Lambda["AWS Lambda"]
+        Handler[Lambda Handler]
+        Model[ML Model<br/>from S3]
+        Layer[sklearn Layer]
+    end
+
+    subgraph Storage["Storage"]
+        S3[(S3 Bucket<br/>model.pkl)]
+    end
+
+    App -->|POST /predict| API
+    API --> Handler
+    Handler --> Model
+    S3 -.->|Load on cold start| Model
+    Layer -.-> Handler
+    Handler -->|Prediction| API
+    API -->|Response| App
+
+    style Client fill:#e3f2fd
+    style APIGW fill:#fff3e0
+    style Lambda fill:#e8f5e9
+    style Storage fill:#fce4ec
+```
+
+### Cold Start Optimization
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Lambda
+    participant S3
+
+    Note over Lambda: Cold Start
+    Lambda->>Lambda: Initialize runtime
+    Lambda->>S3: Download model.pkl
+    Lambda->>Lambda: Load model to memory
+    Client->>Lambda: First request
+    Lambda-->>Client: Response (~5-10s)
+
+    Note over Lambda: Warm Instance
+    Client->>Lambda: Second request
+    Lambda->>Lambda: Model already in memory
+    Lambda-->>Client: Response (~100ms)
+```
+
+### Lambda vs SageMaker Endpoints
+
+```mermaid
+flowchart LR
+    subgraph Lambda["Lambda Inference"]
+        L1[Serverless]
+        L2[Pay per request]
+        L3[Max 10GB container]
+        L4[Cold starts]
+        L5[Good for sporadic traffic]
+    end
+
+    subgraph SageMaker["SageMaker Endpoint"]
+        S1[Always-on instances]
+        S2[Pay per hour]
+        S3[GPU support]
+        S4[No cold starts]
+        S5[Good for high throughput]
+    end
+
+    style Lambda fill:#e3f2fd
+    style SageMaker fill:#e8f5e9
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Create a Lambda function for ML inference

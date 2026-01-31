@@ -9,6 +9,101 @@ Use Amazon EMR with Spark MLlib for distributed machine learning.
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph EMR["Amazon EMR Cluster"]
+        subgraph Master["Master Node"]
+            YARN[YARN ResourceManager]
+            Spark[Spark Driver]
+        end
+
+        subgraph Core["Core Nodes"]
+            HDFS[(HDFS Storage)]
+            Exec1[Spark Executor]
+        end
+
+        subgraph Task["Task Nodes"]
+            Exec2[Spark Executor]
+            Exec3[Spark Executor]
+        end
+    end
+
+    subgraph Storage["S3 Storage"]
+        Input[(Input Data)]
+        Output[(Model Output)]
+        Logs[(EMR Logs)]
+    end
+
+    Input --> Spark
+    Spark --> Exec1
+    Spark --> Exec2
+    Spark --> Exec3
+    Exec1 --> Output
+    Exec2 --> Output
+    Master --> Logs
+
+    style Master fill:#ffebee
+    style Core fill:#e3f2fd
+    style Task fill:#e8f5e9
+    style Storage fill:#fff3e0
+```
+
+### EMR Node Types
+
+```mermaid
+flowchart LR
+    subgraph NodeTypes["EMR Node Types"]
+        subgraph Master["Master Node"]
+            M1[Coordinates cluster]
+            M2[YARN ResourceManager]
+            M3[HDFS NameNode]
+            M4[Never use Spot!]
+        end
+
+        subgraph Core["Core Nodes"]
+            C1[Process data]
+            C2[Store HDFS data]
+            C3[Run Executors]
+            C4[Spot: Use cautiously]
+        end
+
+        subgraph Task["Task Nodes"]
+            T1[Process only]
+            T2[No HDFS storage]
+            T3[Elastic scaling]
+            T4[Ideal for Spot!]
+        end
+    end
+
+    style Master fill:#ffebee
+    style Core fill:#e3f2fd
+    style Task fill:#e8f5e9
+```
+
+### Spark MLlib Pipeline
+
+```mermaid
+flowchart LR
+    subgraph Pipeline["ML Pipeline Stages"]
+        Load[Load Data]
+        Assemble[VectorAssembler]
+        Scale[StandardScaler]
+        Train[RandomForest]
+        Evaluate[Evaluator]
+    end
+
+    Load --> Assemble
+    Assemble --> Scale
+    Scale --> Train
+    Train --> Evaluate
+
+    style Pipeline fill:#e3f2fd
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Create an EMR cluster

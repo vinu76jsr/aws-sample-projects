@@ -9,6 +9,59 @@ In this lab, you'll get hands-on experience with Amazon SageMaker's core capabil
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Preparation["1. Data Preparation"]
+        Local[Local Data] --> S3Train[S3: Training Data]
+        Local --> S3Val[S3: Validation Data]
+    end
+
+    subgraph Training["2. Model Training"]
+        S3Train --> TrainJob[SageMaker Training Job]
+        S3Val --> TrainJob
+        TrainJob --> |XGBoost Algorithm| Model[Model Artifacts]
+        Model --> S3Model[S3: Model Output]
+    end
+
+    subgraph Deployment["3. Model Deployment"]
+        S3Model --> CreateModel[Create Model]
+        CreateModel --> Endpoint[Real-time Endpoint]
+    end
+
+    subgraph Inference["4. Inference"]
+        Client[Client App] --> |REST API| Endpoint
+        Endpoint --> |Predictions| Client
+    end
+
+    style Preparation fill:#e1f5fe
+    style Training fill:#fff3e0
+    style Deployment fill:#e8f5e9
+    style Inference fill:#fce4ec
+```
+
+### Training Job Flow
+
+```mermaid
+sequenceDiagram
+    participant SDK as SageMaker SDK
+    participant SM as SageMaker Service
+    participant EC2 as Training Instance
+    participant S3 as S3 Bucket
+
+    SDK->>SM: CreateTrainingJob()
+    SM->>EC2: Provision ml.m5.large
+    SM->>EC2: Pull XGBoost container
+    EC2->>S3: Download training data
+    EC2->>EC2: Train model
+    EC2->>S3: Upload model.tar.gz
+    EC2->>SM: Job Complete
+    SM->>SDK: Return success
+```
+
+---
+
 ## Lab Objectives
 
 By the end of this lab, you will be able to:

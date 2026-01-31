@@ -9,6 +9,113 @@ Set up CloudWatch monitoring and alerts for ML workloads.
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Endpoint["SageMaker Endpoint"]
+        Invoke[Invocations]
+        Latency[Model Latency]
+        Errors[4XX/5XX Errors]
+        CPU[CPU Utilization]
+    end
+
+    subgraph CloudWatch["Amazon CloudWatch"]
+        Metrics[Metrics<br/>AWS/SageMaker]
+        Alarms[Alarms]
+        Dashboard[Dashboard]
+        Logs[Logs Insights]
+    end
+
+    subgraph Alerting["Alert Actions"]
+        SNS[SNS Topic]
+        Email[Email Notification]
+        Lambda[Lambda Action]
+    end
+
+    subgraph EventBridge["EventBridge"]
+        Rules[Event Rules]
+        Targets[Targets]
+    end
+
+    Endpoint --> Metrics
+    Metrics --> Alarms
+    Metrics --> Dashboard
+    Alarms --> SNS
+    SNS --> Email
+    SNS --> Lambda
+    EventBridge --> Targets
+
+    style Endpoint fill:#e3f2fd
+    style CloudWatch fill:#fff3e0
+    style Alerting fill:#fce4ec
+    style EventBridge fill:#e8f5e9
+```
+
+### Alarm Configuration
+
+```mermaid
+flowchart LR
+    subgraph Alarm["CloudWatch Alarm"]
+        Metric[ModelLatency<br/>Average]
+        Period[Period: 60s]
+        Threshold[Threshold: 1000ms]
+        Eval[EvaluationPeriods: 3]
+        Compare[GreaterThanThreshold]
+    end
+
+    subgraph States["Alarm States"]
+        OK[OK<br/>Below threshold]
+        ALARM[ALARM<br/>Breached]
+        INSUFFICIENT[INSUFFICIENT_DATA<br/>No data]
+    end
+
+    Alarm --> States
+
+    style Alarm fill:#e3f2fd
+    style States fill:#fff3e0
+```
+
+### EventBridge ML Events
+
+```mermaid
+sequenceDiagram
+    participant SM as SageMaker
+    participant EB as EventBridge
+    participant Rule as Event Rule
+    participant SNS as SNS Topic
+    participant Team as ML Team
+
+    SM->>EB: Training Job Failed Event
+    EB->>Rule: Match pattern
+    Rule->>Rule: Check: source=aws.sagemaker
+    Rule->>Rule: Check: status=Failed
+    Rule->>SNS: Trigger target
+    SNS->>Team: Alert notification
+```
+
+### Dashboard Layout
+
+```mermaid
+flowchart TB
+    subgraph Dashboard["ML Endpoint Dashboard"]
+        subgraph Row1["Row 1"]
+            W1[Invocations<br/>Line Chart]
+            W2[Latency<br/>Line Chart]
+        end
+
+        subgraph Row2["Row 2"]
+            W3[Errors<br/>4XX + 5XX]
+            W4[CPU/Memory<br/>Utilization]
+        end
+    end
+
+    style Row1 fill:#e3f2fd
+    style Row2 fill:#e8f5e9
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Monitor SageMaker endpoint metrics

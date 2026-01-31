@@ -9,6 +9,109 @@ Build and deploy a custom training container for SageMaker using Amazon ECR.
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Local["Local Development"]
+        Code[Training Script]
+        Docker[Dockerfile]
+        Build[Docker Build]
+    end
+
+    subgraph ECR["Amazon ECR"]
+        Repo[(Container Repository)]
+        Image[Container Image]
+    end
+
+    subgraph SageMaker["SageMaker Training"]
+        Job[Training Job]
+        Instance[ML Instance]
+        Container[Your Container]
+    end
+
+    subgraph Storage["S3 Storage"]
+        Input[(Training Data)]
+        Output[(Model Artifacts)]
+    end
+
+    Code --> Docker
+    Docker --> Build
+    Build --> |docker push| Repo
+    Repo --> Image
+
+    Image --> Job
+    Job --> Instance
+    Instance --> Container
+    Input --> Container
+    Container --> Output
+
+    style Local fill:#e3f2fd
+    style ECR fill:#fff3e0
+    style SageMaker fill:#e8f5e9
+    style Storage fill:#fce4ec
+```
+
+### SageMaker Container Contract
+
+```mermaid
+flowchart TB
+    subgraph Container["/opt/ml/ Directory Structure"]
+        subgraph Input["/opt/ml/input/"]
+            Config["/config/<br/>hyperparameters.json"]
+            Data["/data/{channel}/<br/>training files"]
+        end
+
+        subgraph Model["/opt/ml/model/"]
+            Artifacts["model artifacts<br/>(saved here)"]
+        end
+
+        subgraph Output["/opt/ml/output/"]
+            Failure["failure<br/>(error message)"]
+        end
+
+        subgraph Code["/opt/ml/code/"]
+            Scripts["your scripts<br/>(if script mode)"]
+        end
+    end
+
+    style Input fill:#e3f2fd
+    style Model fill:#e8f5e9
+    style Output fill:#ffebee
+    style Code fill:#fff3e0
+```
+
+### Training vs Inference Container
+
+```mermaid
+flowchart LR
+    subgraph Training["Training Container"]
+        T1[Entry: train script]
+        T2[Reads: /opt/ml/input/]
+        T3[Writes: /opt/ml/model/]
+    end
+
+    subgraph Inference["Inference Container"]
+        I1[Entry: serve script]
+        I2[Loads: /opt/ml/model/]
+        I3[Endpoints: /ping, /invocations]
+    end
+
+    subgraph BYO["Bring Your Own"]
+        B1[Same container]
+        B2[Different entry points]
+    end
+
+    Training --> BYO
+    Inference --> BYO
+
+    style Training fill:#e3f2fd
+    style Inference fill:#e8f5e9
+    style BYO fill:#fff3e0
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Create a custom training container

@@ -9,6 +9,90 @@ Use Athena to query and analyze ML data stored in S3.
 
 ---
 
+## Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph DataSources["Data Sources"]
+        S3[(S3 Data Lake<br/>Parquet/CSV)]
+        FS[(Feature Store<br/>Offline)]
+    end
+
+    subgraph Catalog["Glue Data Catalog"]
+        DB[(Database)]
+        Tables[(Tables)]
+    end
+
+    subgraph Athena["Amazon Athena"]
+        Query[SQL Query]
+        Engine[Presto Engine]
+        Results[Query Results]
+    end
+
+    subgraph Output["Output"]
+        S3Out[(S3 Results)]
+        Console[Athena Console]
+        SDK[SDK/API]
+    end
+
+    DataSources --> Catalog
+    Catalog --> Engine
+    Query --> Engine
+    Engine --> Results
+    Results --> Output
+
+    style DataSources fill:#e3f2fd
+    style Catalog fill:#fff3e0
+    style Athena fill:#e8f5e9
+    style Output fill:#fce4ec
+```
+
+### Cost Optimization with Partitioning
+
+```mermaid
+flowchart LR
+    subgraph Before["Without Partitioning"]
+        B1[Query: WHERE date='2024-01'<br/>Scans: ALL data<br/>Cost: $5.00]
+    end
+
+    subgraph After["With Partitioning"]
+        A1[Query: WHERE date='2024-01'<br/>Scans: 1 partition<br/>Cost: $0.50]
+    end
+
+    Before -.->|10x savings| After
+
+    style Before fill:#ffebee
+    style After fill:#e8f5e9
+```
+
+### CTAS Optimization Pattern
+
+```mermaid
+flowchart TB
+    subgraph Source["Source Data"]
+        CSV[Raw CSV<br/>1 TB uncompressed]
+    end
+
+    subgraph CTAS["CTAS Transformation"]
+        Query["CREATE TABLE ... AS SELECT"]
+    end
+
+    subgraph Target["Optimized Table"]
+        Parquet[Parquet Format<br/>Compressed]
+        Part[Partitioned by date]
+        100GB[~100 GB]
+    end
+
+    CSV --> CTAS
+    CTAS --> Target
+
+    style Source fill:#ffebee
+    style CTAS fill:#fff3e0
+    style Target fill:#e8f5e9
+```
+
+---
+
 ## Lab Objectives
 
 - [ ] Create Athena tables from S3 data
