@@ -13,26 +13,26 @@ Build and deploy a custom training container for SageMaker using Amazon ECR.
 
 ```mermaid
 flowchart TB
-    subgraph Local["Local Development"]
-        Code[Training Script]
-        Docker[Dockerfile]
-        Build[Docker Build]
+    subgraph Local["fa:fa-laptop Local Development"]
+        Code[fa:fa-code Training Script]
+        Docker[fa:fa-docker Dockerfile]
+        Build[fa:fa-hammer Docker Build]
     end
 
-    subgraph ECR["Amazon ECR"]
-        Repo[(Container Repository)]
-        Image[Container Image]
+    subgraph ECR["fa:fa-box Amazon ECR"]
+        Repo[(fa:fa-archive Container Repository)]
+        Image[fa:fa-cube Container Image]
     end
 
-    subgraph SageMaker["SageMaker Training"]
-        Job[Training Job]
-        Instance[ML Instance]
-        Container[Your Container]
+    subgraph SageMaker["fa:fa-brain SageMaker Training"]
+        Job[fa:fa-play Training Job]
+        Instance[fa:fa-server ML Instance]
+        Container[fa:fa-cube Your Container]
     end
 
-    subgraph Storage["S3 Storage"]
-        Input[(Training Data)]
-        Output[(Model Artifacts)]
+    subgraph Storage["fa:fa-database S3 Storage"]
+        Input[(fa:fa-table Training Data)]
+        Output[(fa:fa-cube Model Artifacts)]
     end
 
     Code --> Docker
@@ -56,22 +56,22 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    subgraph Container["/opt/ml/ Directory Structure"]
-        subgraph Input["/opt/ml/input/"]
-            Config["/config/<br/>hyperparameters.json"]
-            Data["/data/{channel}/<br/>training files"]
+    subgraph Container["fa:fa-folder /opt/ml/ Directory Structure"]
+        subgraph Input["fa:fa-sign-in-alt /opt/ml/input/"]
+            Config["fa:fa-cog /config/<br/>hyperparameters.json"]
+            Data["fa:fa-table /data/{channel}/<br/>training files"]
         end
 
-        subgraph Model["/opt/ml/model/"]
-            Artifacts["model artifacts<br/>(saved here)"]
+        subgraph Model["fa:fa-cube /opt/ml/model/"]
+            Artifacts["fa:fa-save model artifacts<br/>(saved here)"]
         end
 
-        subgraph Output["/opt/ml/output/"]
-            Failure["failure<br/>(error message)"]
+        subgraph Output["fa:fa-sign-out-alt /opt/ml/output/"]
+            Failure["fa:fa-exclamation-circle failure<br/>(error message)"]
         end
 
-        subgraph Code["/opt/ml/code/"]
-            Scripts["your scripts<br/>(if script mode)"]
+        subgraph Code["fa:fa-code /opt/ml/code/"]
+            Scripts["fa:fa-file-code your scripts<br/>(if script mode)"]
         end
     end
 

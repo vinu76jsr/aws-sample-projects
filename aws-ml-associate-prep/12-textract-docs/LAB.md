@@ -13,25 +13,25 @@ Extract text, forms, and tables from documents using Amazon Textract.
 
 ```mermaid
 flowchart TB
-    subgraph Input["Document Input"]
-        PDF[PDF Files]
-        Images[Images<br/>PNG/JPEG]
-        S3[(S3 Bucket)]
+    subgraph Input["fa:fa-file-alt Document Input"]
+        PDF[fa:fa-file-pdf PDF Files]
+        Images[fa:fa-image Images<br/>PNG/JPEG]
+        S3[(fa:fa-database S3 Bucket)]
     end
 
-    subgraph Textract["Amazon Textract APIs"]
-        Detect[DetectDocumentText<br/>Basic OCR]
-        Analyze[AnalyzeDocument<br/>Forms & Tables]
-        Expense[AnalyzeExpense<br/>Receipts/Invoices]
-        ID[AnalyzeID<br/>Identity Documents]
-        Queries[Queries<br/>Specific Questions]
+    subgraph Textract["fa:fa-file-invoice Amazon Textract APIs"]
+        Detect[fa:fa-font DetectDocumentText<br/>Basic OCR]
+        Analyze[fa:fa-table AnalyzeDocument<br/>Forms & Tables]
+        Expense[fa:fa-receipt AnalyzeExpense<br/>Receipts/Invoices]
+        ID[fa:fa-id-card AnalyzeID<br/>Identity Documents]
+        Queries[fa:fa-question-circle Queries<br/>Specific Questions]
     end
 
-    subgraph Output["Extracted Data"]
-        Text[Raw Text Lines]
-        KV[Key-Value Pairs]
-        Tables[Table Data]
-        Structured[Structured Fields]
+    subgraph Output["fa:fa-file-export Extracted Data"]
+        Text[fa:fa-align-left Raw Text Lines]
+        KV[fa:fa-list Key-Value Pairs]
+        Tables[fa:fa-th Table Data]
+        Structured[fa:fa-sitemap Structured Fields]
     end
 
     Input --> Textract
@@ -46,22 +46,22 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    subgraph Document["Document Structure"]
-        Page[PAGE]
-        Line[LINE]
-        Word[WORD]
+    subgraph Document["fa:fa-file-alt Document Structure"]
+        Page[fa:fa-file PAGE]
+        Line[fa:fa-minus LINE]
+        Word[fa:fa-font WORD]
     end
 
-    subgraph Forms["Form Analysis"]
-        KVSet[KEY_VALUE_SET]
-        Key[KEY]
-        Value[VALUE]
+    subgraph Forms["fa:fa-wpforms Form Analysis"]
+        KVSet[fa:fa-list-alt KEY_VALUE_SET]
+        Key[fa:fa-key KEY]
+        Value[fa:fa-equals VALUE]
     end
 
-    subgraph Tables["Table Analysis"]
-        Table[TABLE]
-        Cell[CELL]
-        MergedCell[MERGED_CELL]
+    subgraph Tables["fa:fa-table Table Analysis"]
+        Table[fa:fa-th TABLE]
+        Cell[fa:fa-square CELL]
+        MergedCell[fa:fa-th-large MERGED_CELL]
     end
 
     Page --> Line

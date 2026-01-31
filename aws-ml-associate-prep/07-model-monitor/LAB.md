@@ -13,28 +13,28 @@ Set up Model Monitor to detect data drift in a deployed model endpoint.
 
 ```mermaid
 flowchart TB
-    subgraph Inference["Real-time Inference"]
-        Client[Client App]
-        Endpoint[SageMaker Endpoint]
-        Capture[Data Capture]
+    subgraph Inference["fa:fa-broadcast-tower Real-time Inference"]
+        Client[fa:fa-user Client App]
+        Endpoint[fa:fa-server SageMaker Endpoint]
+        Capture[fa:fa-camera Data Capture]
     end
 
-    subgraph Storage["Data Storage"]
-        S3Cap[(S3: Captured Data)]
-        S3Base[(S3: Baseline)]
-        S3Report[(S3: Reports)]
+    subgraph Storage["fa:fa-database Data Storage"]
+        S3Cap[(fa:fa-database S3: Captured Data)]
+        S3Base[(fa:fa-ruler S3: Baseline)]
+        S3Report[(fa:fa-file-alt S3: Reports)]
     end
 
-    subgraph Monitor["Model Monitor"]
-        Schedule[Monitoring Schedule<br/>Hourly/Daily]
-        Job[Processing Job<br/>Compare to Baseline]
-        Analyze[Analyze Violations]
+    subgraph Monitor["fa:fa-eye Model Monitor"]
+        Schedule[fa:fa-calendar Monitoring Schedule<br/>Hourly/Daily]
+        Job[fa:fa-cogs Processing Job<br/>Compare to Baseline]
+        Analyze[fa:fa-search Analyze Violations]
     end
 
-    subgraph Alerts["Alerting"]
-        CW[CloudWatch Metrics]
-        Alarm[CloudWatch Alarm]
-        SNS[SNS Notification]
+    subgraph Alerts["fa:fa-bell Alerting"]
+        CW[fa:fa-chart-line CloudWatch Metrics]
+        Alarm[fa:fa-exclamation-triangle CloudWatch Alarm]
+        SNS[fa:fa-envelope SNS Notification]
     end
 
     Client --> Endpoint
@@ -60,28 +60,28 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph DataQuality["Data Quality Monitor"]
-        DQ1[Feature Statistics]
-        DQ2[Missing Values]
-        DQ3[Data Type Changes]
+    subgraph DataQuality["fa:fa-table Data Quality Monitor"]
+        DQ1[fa:fa-chart-bar Feature Statistics]
+        DQ2[fa:fa-question-circle Missing Values]
+        DQ3[fa:fa-exchange-alt Data Type Changes]
     end
 
-    subgraph ModelQuality["Model Quality Monitor"]
-        MQ1[Accuracy Metrics]
-        MQ2[Precision/Recall]
-        MQ3[Ground Truth Required]
+    subgraph ModelQuality["fa:fa-bullseye Model Quality Monitor"]
+        MQ1[fa:fa-percentage Accuracy Metrics]
+        MQ2[fa:fa-balance-scale Precision/Recall]
+        MQ3[fa:fa-check-double Ground Truth Required]
     end
 
-    subgraph BiasDrift["Bias Drift Monitor"]
-        BD1[Demographic Parity]
-        BD2[Equalized Odds]
-        BD3[Fairness Metrics]
+    subgraph BiasDrift["fa:fa-balance-scale-right Bias Drift Monitor"]
+        BD1[fa:fa-users Demographic Parity]
+        BD2[fa:fa-equals Equalized Odds]
+        BD3[fa:fa-gavel Fairness Metrics]
     end
 
-    subgraph FeatureAttribution["Feature Attribution"]
-        FA1[SHAP Values]
-        FA2[Feature Importance]
-        FA3[Explainability Drift]
+    subgraph FeatureAttribution["fa:fa-lightbulb Feature Attribution"]
+        FA1[fa:fa-project-diagram SHAP Values]
+        FA2[fa:fa-sort-amount-down Feature Importance]
+        FA3[fa:fa-random Explainability Drift]
     end
 
     style DataQuality fill:#e3f2fd
@@ -94,10 +94,10 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
-    participant Train as Training Data
-    participant Base as Baseline Job
-    participant Prod as Production Traffic
-    participant Mon as Monitor Job
+    participant Train as fa:fa-database Training Data
+    participant Base as fa:fa-ruler Baseline Job
+    participant Prod as fa:fa-broadcast-tower Production Traffic
+    participant Mon as fa:fa-eye Monitor Job
     participant CW as CloudWatch
 
     Train->>Base: Create baseline statistics

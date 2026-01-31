@@ -13,29 +13,29 @@ Use Amazon Rekognition for image analysis including object detection, face analy
 
 ```mermaid
 flowchart TB
-    subgraph Input["Image Input"]
-        S3[(S3 Bucket)]
-        Bytes[Image Bytes]
+    subgraph Input["fa:fa-image Image Input"]
+        S3[(fa:fa-database S3 Bucket)]
+        Bytes[fa:fa-file-image Image Bytes]
     end
 
-    subgraph Rekognition["Amazon Rekognition APIs"]
-        Labels[DetectLabels<br/>Objects & Scenes]
-        Faces[DetectFaces<br/>Facial Analysis]
-        Text[DetectText<br/>OCR]
-        Celeb[RecognizeCelebrities]
-        Mod[DetectModerationLabels]
+    subgraph Rekognition["fa:fa-eye Amazon Rekognition APIs"]
+        Labels[fa:fa-tags DetectLabels<br/>Objects & Scenes]
+        Faces[fa:fa-smile DetectFaces<br/>Facial Analysis]
+        Text[fa:fa-font DetectText<br/>OCR]
+        Celeb[fa:fa-star RecognizeCelebrities]
+        Mod[fa:fa-shield-alt DetectModerationLabels]
     end
 
-    subgraph FaceCollection["Face Collections"]
-        Create[CreateCollection]
-        Index[IndexFaces]
-        Search[SearchFacesByImage]
+    subgraph FaceCollection["fa:fa-users Face Collections"]
+        Create[fa:fa-plus-circle CreateCollection]
+        Index[fa:fa-user-plus IndexFaces]
+        Search[fa:fa-search SearchFacesByImage]
     end
 
-    subgraph Output["Results"]
-        JSON[JSON Response]
-        Confidence[Confidence Scores]
-        BoundingBox[Bounding Boxes]
+    subgraph Output["fa:fa-file-alt Results"]
+        JSON[fa:fa-code JSON Response]
+        Confidence[fa:fa-percentage Confidence Scores]
+        BoundingBox[fa:fa-vector-square Bounding Boxes]
     end
 
     S3 --> Rekognition
@@ -53,9 +53,9 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
-    participant App as Application
-    participant Rek as Rekognition
-    participant Col as Face Collection
+    participant App as fa:fa-code Application
+    participant Rek as fa:fa-eye Rekognition
+    participant Col as fa:fa-users Face Collection
 
     App->>Rek: CreateCollection("employees")
     Rek->>Col: Create index
@@ -78,11 +78,11 @@ sequenceDiagram
 
 ```mermaid
 flowchart LR
-    subgraph Async["Async Video Analysis"]
-        Video[S3 Video]
-        Start[StartLabelDetection]
-        SNS[SNS Notification]
-        Get[GetLabelDetection]
+    subgraph Async["fa:fa-video Async Video Analysis"]
+        Video[fa:fa-film S3 Video]
+        Start[fa:fa-play StartLabelDetection]
+        SNS[fa:fa-bell SNS Notification]
+        Get[fa:fa-download GetLabelDetection]
         Results[Timestamped Labels]
     end
 

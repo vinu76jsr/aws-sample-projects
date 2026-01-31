@@ -13,31 +13,31 @@ In this lab, you'll use AWS Glue to catalog, transform, and prepare data for mac
 
 ```mermaid
 flowchart TB
-    subgraph Sources["Data Sources"]
-        S1[customers.csv]
-        S2[transactions.csv]
+    subgraph Sources["fa:fa-file-csv Data Sources"]
+        S1[fa:fa-file customers.csv]
+        S2[fa:fa-file transactions.csv]
     end
 
-    subgraph S3Raw["S3 Raw Zone"]
-        R1[raw/customers/]
-        R2[raw/transactions/]
+    subgraph S3Raw["fa:fa-folder S3 Raw Zone"]
+        R1[fa:fa-folder-open raw/customers/]
+        R2[fa:fa-folder-open raw/transactions/]
     end
 
-    subgraph GlueCatalog["Glue Data Catalog"]
-        Crawler[Glue Crawler]
-        DB[(ml_lab_database)]
-        T1[customers table]
-        T2[transactions table]
+    subgraph GlueCatalog["fa:fa-book Glue Data Catalog"]
+        Crawler[fa:fa-spider Glue Crawler]
+        DB[(fa:fa-database ml_lab_database)]
+        T1[fa:fa-table customers table]
+        T2[fa:fa-table transactions table]
     end
 
-    subgraph GlueJob["Glue ETL Job"]
-        Extract[Extract<br/>Read from Catalog]
-        Transform[Transform<br/>Clean & Join]
-        Load[Load<br/>Write Parquet]
+    subgraph GlueJob["fa:fa-cogs Glue ETL Job"]
+        Extract[fa:fa-download Extract<br/>Read from Catalog]
+        Transform[fa:fa-random Transform<br/>Clean & Join]
+        Load[fa:fa-upload Load<br/>Write Parquet]
     end
 
-    subgraph S3Processed["S3 Processed Zone"]
-        P1[processed/ml_dataset/]
+    subgraph S3Processed["fa:fa-check-circle S3 Processed Zone"]
+        P1[fa:fa-file-archive processed/ml_dataset/]
     end
 
     Sources --> S3Raw
@@ -63,10 +63,10 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
-    participant CLI as AWS CLI
-    participant Crawler as Glue Crawler
-    participant S3 as S3 Bucket
-    participant Catalog as Data Catalog
+    participant CLI as fa:fa-terminal AWS CLI
+    participant Crawler as fa:fa-spider Glue Crawler
+    participant S3 as fa:fa-database S3 Bucket
+    participant Catalog as fa:fa-book Data Catalog
 
     CLI->>Crawler: start-crawler
     Crawler->>S3: Scan s3://bucket/raw/
@@ -80,20 +80,20 @@ sequenceDiagram
 
 ```mermaid
 flowchart LR
-    subgraph Extract
-        A1[Read customers<br/>DynamicFrame]
-        A2[Read transactions<br/>DynamicFrame]
+    subgraph Extract["fa:fa-download Extract"]
+        A1[fa:fa-users Read customers<br/>DynamicFrame]
+        A2[fa:fa-receipt Read transactions<br/>DynamicFrame]
     end
 
-    subgraph Transform
-        B1[Clean & Filter]
-        B2[Aggregate Features]
-        B3[Join Data]
-        B4[Create Target]
+    subgraph Transform["fa:fa-random Transform"]
+        B1[fa:fa-broom Clean & Filter]
+        B2[fa:fa-calculator Aggregate Features]
+        B3[fa:fa-code-branch Join Data]
+        B4[fa:fa-bullseye Create Target]
     end
 
-    subgraph Load
-        C1[Write Parquet<br/>to S3]
+    subgraph Load["fa:fa-upload Load"]
+        C1[fa:fa-file-archive Write Parquet<br/>to S3]
     end
 
     A1 --> B3

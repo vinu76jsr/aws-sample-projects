@@ -13,22 +13,22 @@ Deploy a lightweight ML model in AWS Lambda for serverless inference.
 
 ```mermaid
 flowchart TB
-    subgraph Client["Client"]
-        App[Application]
+    subgraph Client["fa:fa-user Client"]
+        App[fa:fa-desktop Application]
     end
 
-    subgraph APIGW["API Gateway"]
-        API[REST API<br/>/predict]
+    subgraph APIGW["fa:fa-plug API Gateway"]
+        API[fa:fa-exchange-alt REST API<br/>/predict]
     end
 
-    subgraph Lambda["AWS Lambda"]
-        Handler[Lambda Handler]
-        Model[ML Model<br/>from S3]
-        Layer[sklearn Layer]
+    subgraph Lambda["fa:fa-bolt AWS Lambda"]
+        Handler[fa:fa-code Lambda Handler]
+        Model[fa:fa-cube ML Model<br/>from S3]
+        Layer[fa:fa-layer-group sklearn Layer]
     end
 
-    subgraph Storage["Storage"]
-        S3[(S3 Bucket<br/>model.pkl)]
+    subgraph Storage["fa:fa-database Storage"]
+        S3[(fa:fa-database S3 Bucket<br/>model.pkl)]
     end
 
     App -->|POST /predict| API
@@ -49,9 +49,9 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
-    participant Client
-    participant Lambda
-    participant S3
+    participant Client as fa:fa-user Client
+    participant Lambda as fa:fa-bolt Lambda
+    participant S3 as fa:fa-database S3
 
     Note over Lambda: Cold Start
     Lambda->>Lambda: Initialize runtime

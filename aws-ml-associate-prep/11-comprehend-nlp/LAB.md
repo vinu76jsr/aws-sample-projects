@@ -13,30 +13,30 @@ Use Amazon Comprehend for natural language processing tasks.
 
 ```mermaid
 flowchart TB
-    subgraph Input["Text Input"]
-        Single[Single Document]
-        Batch[Batch Documents]
-        Async[Async Jobs]
+    subgraph Input["fa:fa-file-alt Text Input"]
+        Single[fa:fa-file Single Document]
+        Batch[fa:fa-copy Batch Documents]
+        Async[fa:fa-clock Async Jobs]
     end
 
-    subgraph Comprehend["Amazon Comprehend APIs"]
-        Sentiment[DetectSentiment<br/>Positive/Negative/Neutral]
-        Entities[DetectEntities<br/>Person/Location/Org]
-        KeyPhrases[DetectKeyPhrases<br/>Important Terms]
-        Language[DetectDominantLanguage]
-        PII[DetectPiiEntities<br/>Personal Data]
-        Syntax[DetectSyntax<br/>Part of Speech]
+    subgraph Comprehend["fa:fa-language Amazon Comprehend APIs"]
+        Sentiment[fa:fa-smile DetectSentiment<br/>Positive/Negative/Neutral]
+        Entities[fa:fa-tags DetectEntities<br/>Person/Location/Org]
+        KeyPhrases[fa:fa-key DetectKeyPhrases<br/>Important Terms]
+        Language[fa:fa-globe DetectDominantLanguage]
+        PII[fa:fa-user-secret DetectPiiEntities<br/>Personal Data]
+        Syntax[fa:fa-spell-check DetectSyntax<br/>Part of Speech]
     end
 
-    subgraph Custom["Custom Models"]
-        Classifier[Custom Classifier]
-        EntityRec[Custom Entity Recognition]
+    subgraph Custom["fa:fa-cogs Custom Models"]
+        Classifier[fa:fa-sitemap Custom Classifier]
+        EntityRec[fa:fa-crosshairs Custom Entity Recognition]
     end
 
-    subgraph Output["Results"]
-        JSON[JSON Response]
-        Scores[Confidence Scores]
-        Positions[Text Positions]
+    subgraph Output["fa:fa-file-alt Results"]
+        JSON[fa:fa-code JSON Response]
+        Scores[fa:fa-percentage Confidence Scores]
+        Positions[fa:fa-map-marker-alt Text Positions]
     end
 
     Input --> Comprehend
@@ -54,18 +54,18 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    Text["Customer Review"] --> API[DetectSentiment]
+    Text["fa:fa-comment Customer Review"] --> API[fa:fa-brain DetectSentiment]
 
     API --> Scores
 
-    subgraph Scores["Sentiment Scores"]
-        Pos[Positive: 0.85]
-        Neg[Negative: 0.05]
-        Neu[Neutral: 0.08]
-        Mix[Mixed: 0.02]
+    subgraph Scores["fa:fa-chart-pie Sentiment Scores"]
+        Pos[fa:fa-smile Positive: 0.85]
+        Neg[fa:fa-frown Negative: 0.05]
+        Neu[fa:fa-meh Neutral: 0.08]
+        Mix[fa:fa-random Mixed: 0.02]
     end
 
-    Scores --> Result[Overall: POSITIVE]
+    Scores --> Result[fa:fa-check-circle Overall: POSITIVE]
 
     style Scores fill:#e8f5e9
 ```
@@ -74,15 +74,15 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    subgraph EntityTypes["Detected Entity Types"]
-        PERSON[PERSON<br/>Names of people]
-        LOCATION[LOCATION<br/>Places, addresses]
-        ORG[ORGANIZATION<br/>Companies, agencies]
-        DATE[DATE<br/>Dates and times]
-        QUANTITY[QUANTITY<br/>Numbers, percentages]
-        EVENT[EVENT<br/>Named events]
-        TITLE[TITLE<br/>Job titles, works]
-        OTHER[OTHER<br/>Miscellaneous]
+    subgraph EntityTypes["fa:fa-tags Detected Entity Types"]
+        PERSON[fa:fa-user PERSON<br/>Names of people]
+        LOCATION[fa:fa-map-marker-alt LOCATION<br/>Places, addresses]
+        ORG[fa:fa-building ORGANIZATION<br/>Companies, agencies]
+        DATE[fa:fa-calendar DATE<br/>Dates and times]
+        QUANTITY[fa:fa-hashtag QUANTITY<br/>Numbers, percentages]
+        EVENT[fa:fa-calendar-check EVENT<br/>Named events]
+        TITLE[fa:fa-id-badge TITLE<br/>Job titles, works]
+        OTHER[fa:fa-ellipsis-h OTHER<br/>Miscellaneous]
     end
 
     Text[Input Text] --> EntityTypes

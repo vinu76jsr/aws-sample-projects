@@ -13,28 +13,28 @@ In this lab, you'll create and use a SageMaker Feature Store for managing ML fea
 
 ```mermaid
 flowchart TB
-    subgraph Ingestion["Feature Ingestion"]
-        Batch[Batch Ingestion<br/>DataFrame]
-        Stream[Streaming<br/>put_record]
+    subgraph Ingestion["fa:fa-sign-in-alt Feature Ingestion"]
+        Batch[fa:fa-layer-group Batch Ingestion<br/>DataFrame]
+        Stream[fa:fa-stream Streaming<br/>put_record]
     end
 
-    subgraph FeatureStore["SageMaker Feature Store"]
-        FG[Feature Group<br/>customer-features]
+    subgraph FeatureStore["fa:fa-warehouse SageMaker Feature Store"]
+        FG[fa:fa-th Feature Group<br/>customer-features]
 
-        subgraph Online["Online Store"]
+        subgraph Online["fa:fa-bolt Online Store"]
             direction LR
-            OS[(Low-latency<br/>Key-Value Store)]
+            OS[(fa:fa-database Low-latency<br/>Key-Value Store)]
         end
 
-        subgraph Offline["Offline Store"]
+        subgraph Offline["fa:fa-archive Offline Store"]
             direction LR
-            S3[(S3 Parquet<br/>+ Glue Catalog)]
+            S3[(fa:fa-database S3 Parquet<br/>+ Glue Catalog)]
         end
     end
 
-    subgraph Consumers["Feature Consumers"]
-        RT[Real-time Inference<br/>GetRecord API]
-        Train[Training Jobs<br/>Athena Queries]
+    subgraph Consumers["fa:fa-users Feature Consumers"]
+        RT[fa:fa-broadcast-tower Real-time Inference<br/>GetRecord API]
+        Train[fa:fa-graduation-cap Training Jobs<br/>Athena Queries]
     end
 
     Batch --> FG
@@ -55,18 +55,18 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph OnlineStore["Online Store"]
-        O1[Single-digit ms latency]
-        O2[Latest feature values only]
-        O3[GetRecord / BatchGetRecord]
-        O4[Real-time inference]
+    subgraph OnlineStore["fa:fa-bolt Online Store"]
+        O1[fa:fa-tachometer-alt Single-digit ms latency]
+        O2[fa:fa-clock Latest feature values only]
+        O3[fa:fa-search GetRecord / BatchGetRecord]
+        O4[fa:fa-broadcast-tower Real-time inference]
     end
 
-    subgraph OfflineStore["Offline Store"]
-        F1[Historical data in S3]
-        F2[All versions preserved]
-        F3[Query via Athena]
-        F4[Training & batch scoring]
+    subgraph OfflineStore["fa:fa-archive Offline Store"]
+        F1[fa:fa-history Historical data in S3]
+        F2[fa:fa-layer-group All versions preserved]
+        F3[fa:fa-search Query via Athena]
+        F4[fa:fa-graduation-cap Training & batch scoring]
     end
 
     style OnlineStore fill:#e8f5e9
@@ -77,9 +77,9 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
-    participant Labels as Label Data
-    participant FS as Feature Store
-    participant Query as Training Query
+    participant Labels as fa:fa-tag Label Data
+    participant FS as fa:fa-warehouse Feature Store
+    participant Query as fa:fa-search Training Query
 
     Note over Labels: Churn label at T=100
     Note over FS: Features at T=80

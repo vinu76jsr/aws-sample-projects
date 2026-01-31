@@ -34,21 +34,21 @@ stateDiagram-v2
 
 ```mermaid
 flowchart TB
-    subgraph StepFunctions["Step Functions State Machine"]
-        Start[Start]
-        Train[SageMaker<br/>CreateTrainingJob]
-        Wait[Wait State<br/>30 seconds]
-        Check[SageMaker<br/>DescribeTrainingJob]
-        Choice{Job Status?}
-        Model[SageMaker<br/>CreateModel]
-        Deploy[SageMaker<br/>CreateEndpoint]
-        Notify[SNS<br/>Publish]
+    subgraph StepFunctions["fa:fa-sitemap Step Functions State Machine"]
+        Start[fa:fa-play Start]
+        Train[fa:fa-graduation-cap SageMaker<br/>CreateTrainingJob]
+        Wait[fa:fa-clock Wait State<br/>30 seconds]
+        Check[fa:fa-search SageMaker<br/>DescribeTrainingJob]
+        Choice{fa:fa-code-branch Job Status?}
+        Model[fa:fa-cube SageMaker<br/>CreateModel]
+        Deploy[fa:fa-rocket SageMaker<br/>CreateEndpoint]
+        Notify[fa:fa-bell SNS<br/>Publish]
     end
 
-    subgraph AWSServices["AWS Services"]
-        SM[(SageMaker)]
-        SNS[(SNS Topic)]
-        S3[(S3 Bucket)]
+    subgraph AWSServices["fa:fa-cloud AWS Services"]
+        SM[(fa:fa-brain SageMaker)]
+        SNS[(fa:fa-bell SNS Topic)]
+        S3[(fa:fa-database S3 Bucket)]
     end
 
     Start --> Train
@@ -76,18 +76,18 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph Retry["Retry Configuration"]
-        R1[MaxAttempts: 3]
-        R2[IntervalSeconds: 5]
-        R3[BackoffRate: 2.0]
+    subgraph Retry["fa:fa-redo Retry Configuration"]
+        R1[fa:fa-hashtag MaxAttempts: 3]
+        R2[fa:fa-clock IntervalSeconds: 5]
+        R3[fa:fa-chart-line BackoffRate: 2.0]
     end
 
-    subgraph Execution
-        A1[Attempt 1] -->|Fail| W1[Wait 5s]
-        W1 --> A2[Attempt 2]
-        A2 -->|Fail| W2[Wait 10s]
-        W2 --> A3[Attempt 3]
-        A3 -->|Fail| Catch[Catch Block]
+    subgraph Execution["fa:fa-spinner Execution"]
+        A1[fa:fa-play Attempt 1] -->|Fail| W1[fa:fa-clock Wait 5s]
+        W1 --> A2[fa:fa-redo Attempt 2]
+        A2 -->|Fail| W2[fa:fa-clock Wait 10s]
+        W2 --> A3[fa:fa-redo Attempt 3]
+        A3 -->|Fail| Catch[fa:fa-exclamation-triangle Catch Block]
     end
 
     style Retry fill:#fff3e0

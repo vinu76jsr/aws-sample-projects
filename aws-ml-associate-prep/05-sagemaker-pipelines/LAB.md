@@ -13,29 +13,29 @@ In this lab, you'll build an automated ML pipeline that includes data processing
 
 ```mermaid
 flowchart TB
-    subgraph Pipeline["SageMaker Pipeline"]
+    subgraph Pipeline["fa:fa-project-diagram SageMaker Pipeline"]
         direction TB
-        Params[Pipeline Parameters]
+        Params[fa:fa-sliders-h Pipeline Parameters]
 
-        subgraph Steps["Pipeline Steps"]
-            P[ProcessingStep<br/>Data Preprocessing]
-            T[TrainingStep<br/>XGBoost Training]
-            E[ProcessingStep<br/>Model Evaluation]
+        subgraph Steps["fa:fa-tasks Pipeline Steps"]
+            P[fa:fa-cogs ProcessingStep<br/>Data Preprocessing]
+            T[fa:fa-graduation-cap TrainingStep<br/>XGBoost Training]
+            E[fa:fa-chart-bar ProcessingStep<br/>Model Evaluation]
         end
 
-        subgraph Condition["Condition Step"]
-            C{Accuracy >= 0.7?}
+        subgraph Condition["fa:fa-code-branch Condition Step"]
+            C{fa:fa-question Accuracy >= 0.7?}
         end
 
-        subgraph Outcomes["Outcomes"]
-            R[RegisterModel<br/>Model Registry]
-            F[FailStep<br/>Quality Gate Failed]
+        subgraph Outcomes["fa:fa-flag-checkered Outcomes"]
+            R[fa:fa-check-circle RegisterModel<br/>Model Registry]
+            F[fa:fa-times-circle FailStep<br/>Quality Gate Failed]
         end
     end
 
-    subgraph Registry["Model Registry"]
-        MG[Model Package Group]
-        MP[Model Package<br/>PendingApproval]
+    subgraph Registry["fa:fa-archive Model Registry"]
+        MG[fa:fa-folder Model Package Group]
+        MP[fa:fa-cube Model Package<br/>PendingApproval]
     end
 
     Params --> P
@@ -57,23 +57,23 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph Processing
-        P1[Input: Raw Data S3]
-        P2[Output: Processed Train]
-        P3[Output: Processed Val]
-        P4[Output: Processed Test]
+    subgraph Processing["fa:fa-cogs Processing"]
+        P1[fa:fa-database Input: Raw Data S3]
+        P2[fa:fa-table Output: Processed Train]
+        P3[fa:fa-table Output: Processed Val]
+        P4[fa:fa-table Output: Processed Test]
     end
 
-    subgraph Training
-        T1[Input: Processed Train]
-        T2[Input: Processed Val]
-        T3[Output: Model Artifacts]
+    subgraph Training["fa:fa-graduation-cap Training"]
+        T1[fa:fa-sign-in-alt Input: Processed Train]
+        T2[fa:fa-sign-in-alt Input: Processed Val]
+        T3[fa:fa-cube Output: Model Artifacts]
     end
 
-    subgraph Evaluation
-        E1[Input: Model Artifacts]
-        E2[Input: Processed Test]
-        E3[Output: evaluation.json]
+    subgraph Evaluation["fa:fa-chart-bar Evaluation"]
+        E1[fa:fa-cube Input: Model Artifacts]
+        E2[fa:fa-table Input: Processed Test]
+        E3[fa:fa-file-alt Output: evaluation.json]
     end
 
     P2 --> T1

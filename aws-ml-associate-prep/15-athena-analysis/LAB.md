@@ -13,26 +13,26 @@ Use Athena to query and analyze ML data stored in S3.
 
 ```mermaid
 flowchart TB
-    subgraph DataSources["Data Sources"]
-        S3[(S3 Data Lake<br/>Parquet/CSV)]
-        FS[(Feature Store<br/>Offline)]
+    subgraph DataSources["fa:fa-database Data Sources"]
+        S3[(fa:fa-database S3 Data Lake<br/>Parquet/CSV)]
+        FS[(fa:fa-warehouse Feature Store<br/>Offline)]
     end
 
-    subgraph Catalog["Glue Data Catalog"]
-        DB[(Database)]
-        Tables[(Tables)]
+    subgraph Catalog["fa:fa-book Glue Data Catalog"]
+        DB[(fa:fa-database Database)]
+        Tables[(fa:fa-table Tables)]
     end
 
-    subgraph Athena["Amazon Athena"]
-        Query[SQL Query]
-        Engine[Presto Engine]
-        Results[Query Results]
+    subgraph Athena["fa:fa-search Amazon Athena"]
+        Query[fa:fa-code SQL Query]
+        Engine[fa:fa-cogs Presto Engine]
+        Results[fa:fa-file-alt Query Results]
     end
 
-    subgraph Output["Output"]
-        S3Out[(S3 Results)]
-        Console[Athena Console]
-        SDK[SDK/API]
+    subgraph Output["fa:fa-sign-out-alt Output"]
+        S3Out[(fa:fa-database S3 Results)]
+        Console[fa:fa-desktop Athena Console]
+        SDK[fa:fa-code SDK/API]
     end
 
     DataSources --> Catalog
@@ -51,12 +51,12 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph Before["Without Partitioning"]
-        B1[Query: WHERE date='2024-01'<br/>Scans: ALL data<br/>Cost: $5.00]
+    subgraph Before["fa:fa-times-circle Without Partitioning"]
+        B1[fa:fa-search Query: WHERE date='2024-01'<br/>Scans: ALL data<br/>Cost: $5.00]
     end
 
-    subgraph After["With Partitioning"]
-        A1[Query: WHERE date='2024-01'<br/>Scans: 1 partition<br/>Cost: $0.50]
+    subgraph After["fa:fa-check-circle With Partitioning"]
+        A1[fa:fa-search Query: WHERE date='2024-01'<br/>Scans: 1 partition<br/>Cost: $0.50]
     end
 
     Before -.->|10x savings| After
@@ -69,8 +69,8 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    subgraph Source["Source Data"]
-        CSV[Raw CSV<br/>1 TB uncompressed]
+    subgraph Source["fa:fa-file-csv Source Data"]
+        CSV[fa:fa-file Raw CSV<br/>1 TB uncompressed]
     end
 
     subgraph CTAS["CTAS Transformation"]

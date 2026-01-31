@@ -13,28 +13,28 @@ Build a Retrieval Augmented Generation (RAG) application using Amazon Bedrock.
 
 ```mermaid
 flowchart TB
-    subgraph RAG["RAG Pipeline"]
-        subgraph Ingestion["Document Ingestion"]
-            Docs[Documents]
-            Chunk[Chunking]
-            Embed1[Titan Embeddings]
+    subgraph RAG["fa:fa-project-diagram RAG Pipeline"]
+        subgraph Ingestion["fa:fa-file-import Document Ingestion"]
+            Docs[fa:fa-file-alt Documents]
+            Chunk[fa:fa-cut Chunking]
+            Embed1[fa:fa-vector-square Titan Embeddings]
         end
 
-        subgraph VectorStore["Vector Store"]
-            VS[(Vector Database<br/>OpenSearch/Pinecone)]
+        subgraph VectorStore["fa:fa-database Vector Store"]
+            VS[(fa:fa-th Vector Database<br/>OpenSearch/Pinecone)]
         end
 
-        subgraph Query["Query Processing"]
-            Q[User Query]
-            Embed2[Query Embedding]
-            Search[Semantic Search]
-            Context[Retrieved Context]
+        subgraph Query["fa:fa-search Query Processing"]
+            Q[fa:fa-user User Query]
+            Embed2[fa:fa-vector-square Query Embedding]
+            Search[fa:fa-search-plus Semantic Search]
+            Context[fa:fa-file-alt Retrieved Context]
         end
 
-        subgraph Generation["Response Generation"]
-            Prompt[Augmented Prompt]
-            LLM[Claude/Titan LLM]
-            Response[Generated Response]
+        subgraph Generation["fa:fa-robot Response Generation"]
+            Prompt[fa:fa-edit Augmented Prompt]
+            LLM[fa:fa-brain Claude/Titan LLM]
+            Response[fa:fa-comment-alt Generated Response]
         end
     end
 
@@ -62,9 +62,9 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
-    participant App as Application
-    participant BR as Bedrock Runtime
-    participant Model as Foundation Model
+    participant App as fa:fa-code Application
+    participant BR as fa:fa-cloud Bedrock Runtime
+    participant Model as fa:fa-brain Foundation Model
 
     App->>BR: invoke_model(modelId, body)
     BR->>Model: Forward request
@@ -77,12 +77,12 @@ sequenceDiagram
 
 ```mermaid
 flowchart LR
-    subgraph Sources["Data Sources"]
-        S3[(S3 Bucket)]
+    subgraph Sources["fa:fa-database Data Sources"]
+        S3[(fa:fa-database S3 Bucket)]
     end
 
-    subgraph KB["Knowledge Base"]
-        Sync[Data Sync]
+    subgraph KB["fa:fa-book Knowledge Base"]
+        Sync[fa:fa-sync Data Sync]
         Embed[Embedding Model]
         Index[Vector Index]
     end

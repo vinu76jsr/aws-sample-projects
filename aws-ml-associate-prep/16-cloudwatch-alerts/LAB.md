@@ -13,29 +13,29 @@ Set up CloudWatch monitoring and alerts for ML workloads.
 
 ```mermaid
 flowchart TB
-    subgraph Endpoint["SageMaker Endpoint"]
-        Invoke[Invocations]
-        Latency[Model Latency]
-        Errors[4XX/5XX Errors]
-        CPU[CPU Utilization]
+    subgraph Endpoint["fa:fa-broadcast-tower SageMaker Endpoint"]
+        Invoke[fa:fa-exchange-alt Invocations]
+        Latency[fa:fa-tachometer-alt Model Latency]
+        Errors[fa:fa-exclamation-circle 4XX/5XX Errors]
+        CPU[fa:fa-microchip CPU Utilization]
     end
 
-    subgraph CloudWatch["Amazon CloudWatch"]
-        Metrics[Metrics<br/>AWS/SageMaker]
-        Alarms[Alarms]
-        Dashboard[Dashboard]
-        Logs[Logs Insights]
+    subgraph CloudWatch["fa:fa-chart-line Amazon CloudWatch"]
+        Metrics[fa:fa-chart-bar Metrics<br/>AWS/SageMaker]
+        Alarms[fa:fa-bell Alarms]
+        Dashboard[fa:fa-th-large Dashboard]
+        Logs[fa:fa-search Logs Insights]
     end
 
-    subgraph Alerting["Alert Actions"]
-        SNS[SNS Topic]
-        Email[Email Notification]
-        Lambda[Lambda Action]
+    subgraph Alerting["fa:fa-bell Alert Actions"]
+        SNS[fa:fa-paper-plane SNS Topic]
+        Email[fa:fa-envelope Email Notification]
+        Lambda[fa:fa-bolt Lambda Action]
     end
 
-    subgraph EventBridge["EventBridge"]
-        Rules[Event Rules]
-        Targets[Targets]
+    subgraph EventBridge["fa:fa-random EventBridge"]
+        Rules[fa:fa-filter Event Rules]
+        Targets[fa:fa-bullseye Targets]
     end
 
     Endpoint --> Metrics
@@ -56,18 +56,18 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph Alarm["CloudWatch Alarm"]
-        Metric[ModelLatency<br/>Average]
-        Period[Period: 60s]
-        Threshold[Threshold: 1000ms]
-        Eval[EvaluationPeriods: 3]
-        Compare[GreaterThanThreshold]
+    subgraph Alarm["fa:fa-bell CloudWatch Alarm"]
+        Metric[fa:fa-tachometer-alt ModelLatency<br/>Average]
+        Period[fa:fa-clock Period: 60s]
+        Threshold[fa:fa-ruler-vertical Threshold: 1000ms]
+        Eval[fa:fa-hashtag EvaluationPeriods: 3]
+        Compare[fa:fa-greater-than GreaterThanThreshold]
     end
 
-    subgraph States["Alarm States"]
-        OK[OK<br/>Below threshold]
-        ALARM[ALARM<br/>Breached]
-        INSUFFICIENT[INSUFFICIENT_DATA<br/>No data]
+    subgraph States["fa:fa-traffic-light Alarm States"]
+        OK[fa:fa-check-circle OK<br/>Below threshold]
+        ALARM[fa:fa-exclamation-triangle ALARM<br/>Breached]
+        INSUFFICIENT[fa:fa-question-circle INSUFFICIENT_DATA<br/>No data]
     end
 
     Alarm --> States

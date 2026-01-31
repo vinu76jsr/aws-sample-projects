@@ -13,25 +13,25 @@ In this lab, you'll get hands-on experience with Amazon SageMaker's core capabil
 
 ```mermaid
 flowchart TB
-    subgraph Preparation["1. Data Preparation"]
-        Local[Local Data] --> S3Train[S3: Training Data]
-        Local --> S3Val[S3: Validation Data]
+    subgraph Preparation["fa:fa-database 1. Data Preparation"]
+        Local[fa:fa-laptop Local Data] --> S3Train[fa:fa-cloud S3: Training Data]
+        Local --> S3Val[fa:fa-cloud S3: Validation Data]
     end
 
-    subgraph Training["2. Model Training"]
-        S3Train --> TrainJob[SageMaker Training Job]
+    subgraph Training["fa:fa-cogs 2. Model Training"]
+        S3Train --> TrainJob[fa:fa-server SageMaker Training Job]
         S3Val --> TrainJob
-        TrainJob --> |XGBoost Algorithm| Model[Model Artifacts]
-        Model --> S3Model[S3: Model Output]
+        TrainJob --> |XGBoost Algorithm| Model[fa:fa-cube Model Artifacts]
+        Model --> S3Model[fa:fa-cloud S3: Model Output]
     end
 
-    subgraph Deployment["3. Model Deployment"]
-        S3Model --> CreateModel[Create Model]
-        CreateModel --> Endpoint[Real-time Endpoint]
+    subgraph Deployment["fa:fa-rocket 3. Model Deployment"]
+        S3Model --> CreateModel[fa:fa-cube Create Model]
+        CreateModel --> Endpoint[fa:fa-broadcast-tower Real-time Endpoint]
     end
 
-    subgraph Inference["4. Inference"]
-        Client[Client App] --> |REST API| Endpoint
+    subgraph Inference["fa:fa-exchange-alt 4. Inference"]
+        Client[fa:fa-user Client App] --> |REST API| Endpoint
         Endpoint --> |Predictions| Client
     end
 
@@ -45,10 +45,10 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
-    participant SDK as SageMaker SDK
-    participant SM as SageMaker Service
-    participant EC2 as Training Instance
-    participant S3 as S3 Bucket
+    participant SDK as fa:fa-code SageMaker SDK
+    participant SM as fa:fa-cloud SageMaker Service
+    participant EC2 as fa:fa-server Training Instance
+    participant S3 as fa:fa-database S3 Bucket
 
     SDK->>SM: CreateTrainingJob()
     SM->>EC2: Provision ml.m5.large

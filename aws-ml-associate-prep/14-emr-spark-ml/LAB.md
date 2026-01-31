@@ -13,27 +13,27 @@ Use Amazon EMR with Spark MLlib for distributed machine learning.
 
 ```mermaid
 flowchart TB
-    subgraph EMR["Amazon EMR Cluster"]
-        subgraph Master["Master Node"]
-            YARN[YARN ResourceManager]
-            Spark[Spark Driver]
+    subgraph EMR["fa:fa-server Amazon EMR Cluster"]
+        subgraph Master["fa:fa-crown Master Node"]
+            YARN[fa:fa-project-diagram YARN ResourceManager]
+            Spark[fa:fa-fire Spark Driver]
         end
 
-        subgraph Core["Core Nodes"]
-            HDFS[(HDFS Storage)]
-            Exec1[Spark Executor]
+        subgraph Core["fa:fa-hdd Core Nodes"]
+            HDFS[(fa:fa-database HDFS Storage)]
+            Exec1[fa:fa-microchip Spark Executor]
         end
 
-        subgraph Task["Task Nodes"]
-            Exec2[Spark Executor]
-            Exec3[Spark Executor]
+        subgraph Task["fa:fa-tasks Task Nodes"]
+            Exec2[fa:fa-microchip Spark Executor]
+            Exec3[fa:fa-microchip Spark Executor]
         end
     end
 
-    subgraph Storage["S3 Storage"]
-        Input[(Input Data)]
-        Output[(Model Output)]
-        Logs[(EMR Logs)]
+    subgraph Storage["fa:fa-database S3 Storage"]
+        Input[(fa:fa-table Input Data)]
+        Output[(fa:fa-cube Model Output)]
+        Logs[(fa:fa-file-alt EMR Logs)]
     end
 
     Input --> Spark
@@ -54,25 +54,25 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph NodeTypes["EMR Node Types"]
-        subgraph Master["Master Node"]
-            M1[Coordinates cluster]
-            M2[YARN ResourceManager]
-            M3[HDFS NameNode]
-            M4[Never use Spot!]
+    subgraph NodeTypes["fa:fa-sitemap EMR Node Types"]
+        subgraph Master["fa:fa-crown Master Node"]
+            M1[fa:fa-project-diagram Coordinates cluster]
+            M2[fa:fa-tasks YARN ResourceManager]
+            M3[fa:fa-folder HDFS NameNode]
+            M4[fa:fa-exclamation-triangle Never use Spot!]
         end
 
-        subgraph Core["Core Nodes"]
-            C1[Process data]
-            C2[Store HDFS data]
-            C3[Run Executors]
-            C4[Spot: Use cautiously]
+        subgraph Core["fa:fa-hdd Core Nodes"]
+            C1[fa:fa-cogs Process data]
+            C2[fa:fa-database Store HDFS data]
+            C3[fa:fa-microchip Run Executors]
+            C4[fa:fa-question-circle Spot: Use cautiously]
         end
 
-        subgraph Task["Task Nodes"]
-            T1[Process only]
-            T2[No HDFS storage]
-            T3[Elastic scaling]
+        subgraph Task["fa:fa-tasks Task Nodes"]
+            T1[fa:fa-microchip Process only]
+            T2[fa:fa-times No HDFS storage]
+            T3[fa:fa-expand-arrows-alt Elastic scaling]
             T4[Ideal for Spot!]
         end
     end
