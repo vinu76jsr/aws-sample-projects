@@ -13,25 +13,25 @@ In this lab, you'll get hands-on experience with Amazon SageMaker's[^sagemaker] 
 
 ```mermaid
 flowchart TB
-    subgraph Preparation["fa:fa-database 1. Data Preparation"]
-        Local[fa:fa-laptop Local Data] --> S3Train[fa:fa-cloud S3: Training Data]
-        Local --> S3Val[fa:fa-cloud S3: Validation Data]
+    subgraph Preparation[":file_folder: 1. Data Preparation"]
+        Local[":computer: Local Data"] --> S3Train[":cloud: S3: Training Data"]
+        Local --> S3Val[":cloud: S3: Validation Data"]
     end
 
-    subgraph Training["fa:fa-cogs 2. Model Training"]
-        S3Train --> TrainJob[fa:fa-server SageMaker Training Job]
+    subgraph Training[":gear: 2. Model Training"]
+        S3Train --> TrainJob[":server: SageMaker Training Job"]
         S3Val --> TrainJob
-        TrainJob --> |XGBoost Algorithm| Model[fa:fa-cube Model Artifacts]
-        Model --> S3Model[fa:fa-cloud S3: Model Output]
+        TrainJob --> |XGBoost Algorithm| Model[":package: Model Artifacts"]
+        Model --> S3Model[":cloud: S3: Model Output"]
     end
 
-    subgraph Deployment["fa:fa-rocket 3. Model Deployment"]
-        S3Model --> CreateModel[fa:fa-cube Create Model]
-        CreateModel --> Endpoint[fa:fa-broadcast-tower Real-time Endpoint]
+    subgraph Deployment[":rocket: 3. Model Deployment"]
+        S3Model --> CreateModel[":package: Create Model"]
+        CreateModel --> Endpoint[":satellite: Real-time Endpoint"]
     end
 
-    subgraph Inference["fa:fa-exchange-alt 4. Inference"]
-        Client[fa:fa-user Client App] --> |REST API| Endpoint
+    subgraph Inference[":left_right_arrow: 4. Inference"]
+        Client[":bust_in_silhouette: Client App"] --> |REST API| Endpoint
         Endpoint --> |Predictions| Client
     end
 
@@ -45,10 +45,10 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
-    participant SDK as fa:fa-code SageMaker SDK
-    participant SM as fa:fa-cloud SageMaker Service
-    participant EC2 as fa:fa-server Training Instance
-    participant S3 as fa:fa-database S3 Bucket
+    participant SDK as ":computer: SageMaker SDK"
+    participant SM as ":cloud: SageMaker Service"
+    participant EC2 as ":server: Training Instance"
+    participant S3 as ":file_folder: S3 Bucket"
 
     SDK->>SM: CreateTrainingJob()
     SM->>EC2: Provision ml.m5.large
