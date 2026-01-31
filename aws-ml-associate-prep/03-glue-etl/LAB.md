@@ -1,11 +1,24 @@
-# Lab 03: AWS Glue ETL for ML Data Preparation
+# Lab 03: AWS <abbr title="Serverless ETL service for data preparation, cataloging, and transformation">Glue</abbr> ETL for ML Data Preparation
 
 ## Overview
 In this lab, you'll use AWS Glue to catalog, transform, and prepare data for machine learning workflows.
 
 **Duration**: 60-90 minutes
-**Cost**: ~$2-5 (Glue charges per DPU-hour)
+**Cost**: ~$2-5 (Glue charges per <abbr title="Data Processing Unit - billing unit for Glue jobs; 1 DPU = 4 vCPUs + 16GB memory">DPU</abbr>-hour)
 **Prerequisites**: Completed Lab 02 (S3 Data Lake)
+
+---
+
+## Key Terms (hover for definitions)
+
+| Term | Quick Reference |
+|------|-----------------|
+| <abbr title="Extract, Transform, Load - process of moving data from sources, transforming it, and loading to destination">ETL</abbr> | Data pipeline pattern |
+| <abbr title="Glue component that automatically discovers data schemas and creates table definitions">Crawler</abbr> | Auto-discovers data schemas |
+| <abbr title="Central metadata repository storing table definitions, schemas, and locations">Data Catalog</abbr> | Metadata store for tables |
+| <abbr title="Glue's flexible data structure similar to DataFrame but handles schema inconsistencies">DynamicFrame</abbr> | Glue's flexible data structure |
+| <abbr title="Tracks processed data to avoid reprocessing in subsequent job runs">Job Bookmarks</abbr> | Incremental processing tracker |
+| <abbr title="Data Processing Unit - Glue billing unit; 1 DPU = 4 vCPUs + 16GB RAM">DPU</abbr> | Glue compute billing unit |
 
 ---
 
@@ -663,11 +676,11 @@ Modify the job to output data partitioned by region.
 
 ## Exam Relevance
 
-- ✅ Glue crawlers and Data Catalog
-- ✅ DynamicFrame vs DataFrame transformations
-- ✅ Job bookmarks for incremental processing
-- ✅ Data cleaning and feature engineering
-- ✅ Output formats (Parquet) and partitioning
+- ✅ <abbr title="Automatically discovers schema from S3 data and creates table definitions in Data Catalog">Glue crawlers</abbr> and Data Catalog
+- ✅ <abbr title="DynamicFrame handles schema variations; DataFrame is stricter but more performant">DynamicFrame vs DataFrame</abbr> transformations
+- ✅ <abbr title="Tracks processed data so subsequent runs only process new data - enables incremental ETL">Job bookmarks</abbr> for incremental processing
+- ✅ Data cleaning and <abbr title="Creating new features from raw data (aggregations, encodings, derived columns)">feature engineering</abbr>
+- ✅ Output formats (<abbr title="Columnar storage - compressed, fast queries, ideal for analytics">Parquet</abbr>) and partitioning
 
 ---
 

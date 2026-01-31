@@ -1,4 +1,4 @@
-# Lab 05: SageMaker Pipelines - ML CI/CD
+# Lab 05: SageMaker <abbr title="Native ML workflow orchestration service for building automated, reproducible ML pipelines">Pipelines</abbr> - ML CI/CD
 
 ## Overview
 In this lab, you'll build an automated ML pipeline that includes data processing, model training, evaluation, and conditional model registration.
@@ -6,6 +6,19 @@ In this lab, you'll build an automated ML pipeline that includes data processing
 **Duration**: 90-120 minutes
 **Cost**: ~$5-10
 **Prerequisites**: Completed Labs 01-04
+
+---
+
+## Key Terms (hover for definitions)
+
+| Term | Quick Reference |
+|------|-----------------|
+| <abbr title="Individual unit of work in a pipeline (Processing, Training, Evaluation, etc.)">Pipeline Step</abbr> | Unit of work in pipeline |
+| <abbr title="Variables that can be changed at pipeline execution time without modifying code">Pipeline Parameters</abbr> | Runtime configuration |
+| <abbr title="Step that branches pipeline based on conditions (e.g., accuracy >= threshold)">ConditionStep</abbr> | Conditional branching |
+| <abbr title="JSON file output that can be read by ConditionStep to make decisions">PropertyFile</abbr> | Metrics for conditions |
+| <abbr title="Central repository for versioned models with approval workflow">Model Registry</abbr> | Model version management |
+| <abbr title="Stores step outputs to avoid re-running unchanged steps on subsequent runs">CacheConfig</abbr> | Step output caching |
 
 ---
 
@@ -783,12 +796,12 @@ Add a LambdaStep to send Slack notification when pipeline completes.
 
 ## Exam Relevance
 
-- ✅ Pipeline steps and their purposes
-- ✅ Step dependencies via .properties
-- ✅ PropertyFile for metric extraction
-- ✅ ConditionStep for quality gates
-- ✅ Model Registry and approval workflow
-- ✅ CacheConfig for cost optimization
+- ✅ <abbr title="ProcessingStep (data prep), TrainingStep (model training), CreateModelStep, RegisterModel, etc.">Pipeline steps</abbr> and their purposes
+- ✅ Step dependencies via <abbr title="Access outputs from previous steps using step.properties.OutputConfig...">`.properties`</abbr>
+- ✅ <abbr title="JSON file written by evaluation step, read by ConditionStep to make branching decisions">PropertyFile</abbr> for metric extraction
+- ✅ <abbr title="Implements quality gates - only register model if metrics meet threshold">ConditionStep</abbr> for quality gates
+- ✅ <abbr title="Stores model versions with approval status (PendingApproval, Approved, Rejected)">Model Registry</abbr> and approval workflow
+- ✅ <abbr title="Caches step outputs to skip re-execution if inputs haven't changed">CacheConfig</abbr> for cost optimization
 
 ---
 

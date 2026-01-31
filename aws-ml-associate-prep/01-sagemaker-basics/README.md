@@ -9,17 +9,38 @@ Amazon SageMaker is a fully managed ML platform that provides every component ne
 
 ## Key Components (Exam Focus)
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        AMAZON SAGEMAKER                              │
-├─────────────────────────────────────────────────────────────────────┤
-│  PREPARE          │  BUILD           │  TRAIN & TUNE    │  DEPLOY   │
-│  ─────────────    │  ─────────────   │  ─────────────   │  ──────── │
-│  • Data Wrangler  │  • Studio        │  • Training Jobs │  • Endpoints│
-│  • Feature Store  │  • Notebooks     │  • HPO           │  • Batch   │
-│  • Ground Truth   │  • Autopilot     │  • Debugger      │  • Async   │
-│  • Processing     │  • JumpStart     │  • Experiments   │  • Serverless│
-└─────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph AMAZON SAGEMAKER
+        subgraph PREPARE
+            direction LR
+            A["Data Wrangler"]
+            B["Feature Store"]
+            C["Ground Truth"]
+            D["Processing"]
+        end
+        subgraph BUILD
+            direction LR
+            E["Studio"]
+            F["Notebooks"]
+            G["Autopilot"]
+            H["JumpStart"]
+        end
+        subgraph "TRAIN & TUNE"
+            direction LR
+            I["Training Jobs"]
+            J["HPO"]
+            K["Debugger"]
+            L["Experiments"]
+        end
+        subgraph DEPLOY
+            direction LR
+            M["Endpoints"]
+            N["Batch"]
+            O["Async"]
+            P["Serverless"]
+        end
+    end
 ```
 
 ---
@@ -53,10 +74,12 @@ Amazon SageMaker is a fully managed ML platform that provides every component ne
 
 | Algorithm | Type | Use Case | Input Format |
 |-----------|------|----------|--------------|
-| **XGBoost** | Classification/Regression | Tabular data, most versatile | CSV, Parquet, RecordIO |
+| **XGBoost**[^1] | Classification/Regression | Tabular data, most versatile | CSV, Parquet, RecordIO |
 | **Linear Learner** | Classification/Regression | Linear problems, fast | RecordIO (recommended), CSV |
 | **K-NN** | Classification/Regression | Similarity-based | RecordIO |
 | **Factorization Machines** | Classification/Regression | Sparse data, recommendations | RecordIO |
+
+[^1]: **XGBoost (eXtreme Gradient Boosting):** An optimized and scalable machine learning library that implements gradient boosting on decision trees. It's widely used for its high performance and speed in classification and regression tasks.
 
 ### Unsupervised Learning
 
@@ -103,17 +126,14 @@ Amazon SageMaker is a fully managed ML platform that provides every component ne
 
 ## Training Job Workflow
 
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   S3        │────▶│  Training   │────▶│   Model     │────▶│    S3       │
-│   (Data)    │     │   Instance  │     │  Artifacts  │     │  (Output)   │
-└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │ CloudWatch  │
-                    │   (Logs)    │
-                    └─────────────┘
+```mermaid
+graph TD
+    subgraph "Training Job Workflow"
+        S3_Data[S3 (Data)] --> Training_Instance[Training Instance]
+        Training_Instance --> Model_Artifacts[Model Artifacts]
+        Model_Artifacts --> S3_Output[S3 (Output)]
+        Training_Instance --> CloudWatch[CloudWatch (Logs)]
+    end
 ```
 
 ### Key Training Concepts
@@ -167,17 +187,13 @@ hyperparameter_ranges = {
 
 ### Real-time Endpoint Variants
 
-```
-                    ┌─────────────────────────────────────┐
-                    │         SageMaker Endpoint          │
-                    └─────────────────────────────────────┘
-                                     │
-                    ┌────────────────┼────────────────┐
-                    ▼                ▼                ▼
-            ┌───────────┐    ┌───────────┐    ┌───────────┐
-            │ Variant A │    │ Variant B │    │ Variant C │
-            │   (70%)   │    │   (20%)   │    │   (10%)   │
-            └───────────┘    └───────────┘    └───────────┘
+```mermaid
+graph TD
+    subgraph "Real-time Endpoint Variants"
+        Endpoint[SageMaker Endpoint] --> Variant_A[Variant A (70%)]
+        Endpoint --> Variant_B[Variant B (20%)]
+        Endpoint --> Variant_C[Variant C (10%)]
+    end
 ```
 
 | Deployment Strategy | Description | Use Case |
@@ -206,11 +222,16 @@ hyperparameter_ranges = {
 - **Autopilot**: AutoML solution
 
 ### Notebook Instance Lifecycle
-```
-Stopped ──▶ Starting ──▶ InService ──▶ Stopping ──▶ Stopped
-                              │
-                              ▼
-                          (Running)
+
+```mermaid
+graph TD
+    subgraph "Notebook Instance Lifecycle"
+        Stopped -- start --> Starting
+        Starting -- completes --> InService
+        InService -- stop --> Stopping
+        Stopping -- completes --> Stopped
+        InService -- running --> InService
+    end
 ```
 
 ---

@@ -1,25 +1,11 @@
 # Lab 01: Amazon SageMaker Fundamentals
 
 ## Overview
-In this lab, you'll get hands-on experience with Amazon <abbr title="Fully managed ML service for building, training, and deploying models">SageMaker</abbr>'s core capabilities including training jobs, model deployment, and inference.
+In this lab, you'll get hands-on experience with Amazon SageMaker's[^sagemaker] core capabilities including training jobs, model deployment, and inference.
 
 **Duration**: 90-120 minutes
 **Cost**: ~$5-10 (use `ml.t3.medium` to minimize costs)
-**Prerequisites**: AWS Account, <abbr title="Identity and Access Management - AWS service for managing access permissions">IAM</abbr> permissions for SageMaker
-
----
-
-## Key Terms (hover for definitions)
-
-| Term | Quick Reference |
-|------|-----------------|
-| <abbr title="eXtreme Gradient Boosting - A fast, scalable gradient boosting algorithm that builds an ensemble of decision trees sequentially, with each tree correcting errors from previous ones">XGBoost</abbr> | Gradient boosting ML algorithm |
-| <abbr title="A SageMaker class that encapsulates training configuration including algorithm, instance type, hyperparameters, and output location">Estimator</abbr> | SageMaker training configuration object |
-| <abbr title="Configuration values set BEFORE training (e.g., learning rate, tree depth) - unlike model parameters which are learned during training">Hyperparameters</abbr> | Pre-training model settings |
-| <abbr title="A deployed model hosted on an instance that serves real-time predictions via REST API">Endpoint</abbr> | Deployed model for inference |
-| <abbr title="Hyperparameter Optimization - Automated search for best hyperparameter values using strategies like Bayesian optimization">HPO</abbr> | Automated hyperparameter search |
-| <abbr title="Area Under the ROC Curve - Classification metric where 1.0 is perfect and 0.5 is random guessing">AUC</abbr> | Classification quality metric (0-1) |
-| <abbr title="Discounted EC2 instances (up to 90% off) that AWS can reclaim with 2-min notice - ideal for fault-tolerant training jobs">Spot Instances</abbr> | Cheap, interruptible compute |
+**Prerequisites**: AWS Account, IAM[^iam] permissions for SageMaker
 
 ---
 
@@ -80,9 +66,9 @@ sequenceDiagram
 
 By the end of this lab, you will be able to:
 - [ ] Create a SageMaker notebook instance
-- [ ] Prepare data and upload to <abbr title="Simple Storage Service - AWS object storage for data lakes, backups, and ML datasets">S3</abbr>
-- [ ] Train a model using <abbr title="eXtreme Gradient Boosting - Fast, scalable gradient boosting algorithm that builds sequential decision trees">XGBoost</abbr> built-in algorithm
-- [ ] Deploy a model to a real-time <abbr title="A deployed model hosted on an instance that serves predictions via REST API">endpoint</abbr>
+- [ ] Prepare data and upload to S3[^s3]
+- [ ] Train a model using XGBoost[^xgboost] built-in algorithm
+- [ ] Deploy a model to a real-time endpoint[^endpoint]
 - [ ] Make predictions and evaluate results
 - [ ] Clean up resources
 
@@ -222,9 +208,9 @@ print(f"Test data: {test_path}")
 
 ---
 
-## Part 3: Train Model with <abbr title="eXtreme Gradient Boosting - Ensemble algorithm that builds sequential decision trees, each correcting previous errors">XGBoost</abbr>
+## Part 3: Train Model with XGBoost[^xgboost]
 
-### Step 3.1: Configure XGBoost <abbr title="A SageMaker class that encapsulates training configuration including algorithm, instance type, hyperparameters, and output location">Estimator</abbr>
+### Step 3.1: Configure XGBoost Estimator[^estimator]
 
 ```python
 # Cell 5: Get XGBoost container image
@@ -239,7 +225,7 @@ xgboost_image = retrieve(
 print(f"XGBoost Image: {xgboost_image}")
 ```
 
-### Step 3.2: Create Estimator and Set <abbr title="Configuration values set BEFORE training (e.g., learning_rate, max_depth) - unlike model parameters which are learned during training">Hyperparameters</abbr>
+### Step 3.2: Create Estimator and Set Hyperparameters[^hyperparameters]
 
 ```python
 # Cell 6: Create XGBoost Estimator
@@ -307,7 +293,7 @@ print(f"Model artifacts: {xgb_estimator.model_data}")
 
 ## Part 4: Deploy Model
 
-### Step 4.1: Deploy to Real-time <abbr title="A deployed model hosted on an instance that serves predictions via REST API - incurs charges while running">Endpoint</abbr>
+### Step 4.1: Deploy to Real-time Endpoint[^endpoint]
 
 ```python
 # Cell 8: Deploy model to endpoint
@@ -383,9 +369,9 @@ print(f"\nTest Accuracy: {accuracy:.4f}")
 
 ---
 
-## Part 5: Experiment with <abbr title="HPO - Automated search for optimal hyperparameter values using strategies like Bayesian optimization or random search">Hyperparameter Tuning</abbr> (Optional)
+## Part 5: Experiment with Hyperparameter Tuning[^hpo] (Optional)
 
-### Step 5.1: Set Up <abbr title="Hyperparameter Optimization - SageMaker runs multiple training jobs with different hyperparameter combinations to find the best performing model">HPO</abbr> Job
+### Step 5.1: Set Up HPO[^hpo] Job
 
 ```python
 # Cell 11: Configure HPO
@@ -519,7 +505,7 @@ linear_image = retrieve('linear-learner', session.boto_region_name)
 Use hyperparameters: `predictor_type='binary_classifier'`
 </details>
 
-### Challenge 2: Use <abbr title="Discounted EC2 instances (up to 90% off) that AWS can reclaim with 2-minute notice - ideal for fault-tolerant training jobs">Spot Instances</abbr>
+### Challenge 2: Use Spot Instances[^spot]
 Modify the training job to use Spot instances for cost savings.
 
 <details>
@@ -534,7 +520,7 @@ checkpoint_s3_uri=f's3://{bucket}/{prefix}/checkpoints/'
 ```
 </details>
 
-### Challenge 3: Deploy <abbr title="Pay-per-request inference endpoint that auto-scales to zero when not in use - cost-effective for sporadic traffic patterns">Serverless Endpoint</abbr>
+### Challenge 3: Deploy Serverless Endpoint[^serverless]
 Deploy the model to a serverless endpoint instead of real-time.
 
 <details>
@@ -575,13 +561,41 @@ In this lab, you learned:
 
 This lab covered these exam topics:
 
-- ✅ SageMaker built-in algorithms (<abbr title="eXtreme Gradient Boosting - Fast, scalable gradient boosting algorithm ideal for tabular data">XGBoost</abbr>)
+- ✅ SageMaker built-in algorithms (XGBoost[^xgboost])
 - ✅ Training job configuration
-- ✅ <abbr title="Different ML instance families: ml.m5 (general), ml.c5 (compute), ml.p3/p4 (GPU), ml.inf1 (inference)">Instance types</abbr> for training/inference
-- ✅ Data input formats (<abbr title="Comma-Separated Values - common format for tabular data; SageMaker built-in algorithms expect target column FIRST">CSV</abbr>, target-first)
+- ✅ Instance types[^instance-types] for training/inference
+- ✅ Data input formats (CSV[^csv], target-first)
 - ✅ Model deployment options
-- ✅ <abbr title="HPO strategies: Random (fast, broad), Bayesian (smart, learns from results), Grid (exhaustive)">Hyperparameter tuning strategies</abbr>
-- ✅ Cost optimization (<abbr title="Up to 90% cheaper but can be interrupted; use checkpointing for long training jobs">Spot instances</abbr>, right-sizing)
+- ✅ Hyperparameter tuning strategies[^hpo]
+- ✅ Cost optimization (Spot instances[^spot], right-sizing)
+
+---
+
+## Glossary
+
+[^sagemaker]: **SageMaker** - Fully managed AWS service for building, training, and deploying machine learning models at scale.
+
+[^iam]: **IAM** - Identity and Access Management. AWS service for managing access permissions to AWS resources.
+
+[^s3]: **S3** - Simple Storage Service. AWS object storage with 99.999999999% durability, used for data lakes and ML datasets.
+
+[^xgboost]: **XGBoost** - eXtreme Gradient Boosting. A fast, scalable gradient boosting algorithm that builds an ensemble of decision trees sequentially, with each tree correcting errors from previous ones. Excellent for tabular data.
+
+[^endpoint]: **Endpoint** - A deployed model hosted on an instance that serves real-time predictions via REST API. Incurs charges while running.
+
+[^estimator]: **Estimator** - A SageMaker class that encapsulates training configuration including algorithm container, instance type, hyperparameters, and output location.
+
+[^hyperparameters]: **Hyperparameters** - Configuration values set BEFORE training (e.g., learning_rate, max_depth). Unlike model parameters, these are not learned during training.
+
+[^hpo]: **HPO** - Hyperparameter Optimization. Automated search for best hyperparameter values using strategies like Bayesian optimization, random search, or grid search.
+
+[^spot]: **Spot Instances** - Discounted EC2 instances (up to 90% off) that AWS can reclaim with 2-minute notice. Ideal for fault-tolerant training jobs. Use checkpointing for long jobs.
+
+[^serverless]: **Serverless Endpoint** - Pay-per-request inference endpoint that auto-scales to zero when not in use. Cost-effective for sporadic traffic patterns.
+
+[^instance-types]: **Instance Types** - Different ML instance families: ml.m5 (general purpose), ml.c5 (compute optimized), ml.p3/p4 (GPU for deep learning), ml.inf1 (inference optimized).
+
+[^csv]: **CSV** - Comma-Separated Values. Common format for tabular data. SageMaker built-in algorithms expect target column FIRST with no header.
 
 ---
 

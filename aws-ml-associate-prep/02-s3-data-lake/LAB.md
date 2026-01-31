@@ -1,7 +1,7 @@
-# Lab 02: S3 Data Lake for Machine Learning
+# Lab 02: S3[^s3] Data Lake for Machine Learning
 
 ## Overview
-In this lab, you'll set up an S3-based data lake optimized for ML workflows, including proper organization, lifecycle policies, and event-driven automation.
+In this lab, you'll set up an S3-based data lake[^data-lake] optimized for ML workflows, including proper organization, lifecycle policies[^lifecycle], and event-driven automation.
 
 **Duration**: 45-60 minutes
 **Cost**: <$1
@@ -47,7 +47,7 @@ flowchart TB
     style Models fill:#fff3e0
 ```
 
-### Lifecycle & Storage Classes
+### Lifecycle & Storage Classes[^storage-classes]
 
 ```mermaid
 flowchart LR
@@ -92,9 +92,9 @@ sequenceDiagram
 By the end of this lab, you will be able to:
 - [ ] Create and configure an S3 bucket for ML data
 - [ ] Implement proper data lake folder structure
-- [ ] Set up lifecycle policies for cost optimization
+- [ ] Set up lifecycle policies[^lifecycle] for cost optimization
 - [ ] Configure event notifications
-- [ ] Understand data formats and partitioning
+- [ ] Understand data formats and partitioning[^partitioning]
 - [ ] Upload and organize training data
 
 ---
@@ -114,7 +114,7 @@ aws s3 mb s3://$BUCKET_NAME --region $REGION
 echo "Created bucket: $BUCKET_NAME"
 ```
 
-### Step 1.2: Enable Versioning
+### Step 1.2: Enable Versioning[^versioning]
 
 ```bash
 # Enable versioning for model artifact tracking
@@ -208,7 +208,7 @@ aws s3 ls s3://$BUCKET_NAME/ --recursive
 
 ---
 
-## Part 3: Configure Lifecycle Policies
+## Part 3: Configure Lifecycle Policies[^lifecycle]
 
 ### Step 3.1: Create Lifecycle Policy JSON
 
@@ -297,7 +297,7 @@ aws s3api get-bucket-lifecycle-configuration --bucket $BUCKET_NAME
 
 ---
 
-## Part 4: Upload Sample Data with Partitioning
+## Part 4: Upload Sample Data with Partitioning[^partitioning]
 
 ### Step 4.1: Generate Sample Data (Python)
 
@@ -497,7 +497,7 @@ aws s3 ls s3://$BUCKET_NAME/temp/
 **📊 Observation**: Notice the file size differences:
 - CSV: Largest (text format)
 - JSON: Medium (text + structure)
-- Parquet: Smallest (columnar + compressed)
+- Parquet[^parquet]: Smallest (columnar + compressed)
 
 ### Step 6.2: Generate Presigned URL
 
@@ -565,7 +565,7 @@ aws s3 mb s3://${BUCKET_NAME}-replica --region us-west-2
 ```
 </details>
 
-### Challenge 2: S3 Intelligent-Tiering
+### Challenge 2: S3 Intelligent-Tiering[^intelligent-tiering]
 Configure Intelligent-Tiering for automatic storage class optimization.
 
 <details>
@@ -599,18 +599,40 @@ Enable S3 request metrics for monitoring data access patterns.
 | **Lifecycle Policies** | Configured automatic archival and deletion |
 | **Partitioning** | Uploaded data with date-based partitioning |
 | **Event Notifications** | Set up SNS notifications for new data |
-| **Data Formats** | Compared CSV, JSON, Parquet sizes |
+| **Data Formats** | Compared CSV, JSON, Parquet[^parquet] sizes |
 
 ---
 
 ## Exam Relevance
 
 This lab covered:
-- ✅ S3 storage classes and lifecycle policies
-- ✅ Data organization and partitioning strategies
-- ✅ S3 security (encryption, public access block)
+- ✅ S3 storage classes[^storage-classes] and lifecycle policies[^lifecycle]
+- ✅ Data organization and partitioning[^partitioning] strategies
+- ✅ S3 security (SSE[^sse], public access block)
 - ✅ Event-driven architecture with S3 notifications
-- ✅ Data formats for ML (Parquet recommended)
+- ✅ Data formats for ML (Parquet[^parquet] recommended)
+
+---
+
+## Glossary
+
+[^s3]: **S3** - Simple Storage Service. AWS object storage with 99.999999999% (11 nines) durability, used for data lakes, backups, and ML datasets.
+
+[^data-lake]: **Data Lake** - A centralized repository that stores structured and unstructured data at any scale. Enables big data analytics and ML without predefined schemas.
+
+[^lifecycle]: **Lifecycle Policy** - Rules that automatically transition objects between storage classes or delete them after specified time periods. Essential for cost optimization.
+
+[^storage-classes]: **Storage Classes** - Different S3 tiers with varying costs and retrieval times: Standard (frequent), Standard-IA (infrequent, 30+ days), Glacier (archive, minutes-hours retrieval), Deep Archive (long-term, 12+ hours).
+
+[^partitioning]: **Partitioning** - Organizing data by columns like date (year=2024/month=01) to reduce query scan costs. Can reduce Athena costs by 90%+ by scanning only relevant partitions.
+
+[^versioning]: **Versioning** - S3 feature that keeps multiple versions of objects. Enables recovery from accidental deletes and overwrites. Required for replication.
+
+[^parquet]: **Parquet** - Columnar storage format that's compressed and efficient for analytics. Much smaller than CSV (often 10x) and faster to query. Recommended for ML datasets.
+
+[^sse]: **SSE** - Server-Side Encryption. Data encrypted at rest using AES-256. Options: SSE-S3 (AWS managed), SSE-KMS (customer managed keys), SSE-C (customer provided keys).
+
+[^intelligent-tiering]: **Intelligent-Tiering** - S3 storage class that automatically moves objects between access tiers based on usage patterns. No retrieval fees, small monitoring fee.
 
 ---
 

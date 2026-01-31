@@ -1,11 +1,24 @@
-# Lab 04: SageMaker Feature Store
+# Lab 04: SageMaker <abbr title="Centralized repository for storing, sharing, and managing ML features with both real-time and batch access">Feature Store</abbr>
 
 ## Overview
-In this lab, you'll create and use a SageMaker Feature Store for managing ML features, including both online (real-time) and offline (batch) access patterns.
+In this lab, you'll create and use a SageMaker Feature Store for managing ML features, including both <abbr title="Low-latency store for real-time inference - single-digit millisecond lookups">online</abbr> (real-time) and <abbr title="S3-based store for batch processing and training - stores full feature history">offline</abbr> (batch) access patterns.
 
 **Duration**: 60-90 minutes
 **Cost**: ~$2-5
 **Prerequisites**: AWS Account with SageMaker permissions
+
+---
+
+## Key Terms (hover for definitions)
+
+| Term | Quick Reference |
+|------|-----------------|
+| <abbr title="A collection of features with defined schema, stored in both online and offline stores">Feature Group</abbr> | Container for related features |
+| <abbr title="Low-latency key-value store for real-time inference - millisecond lookups">Online Store</abbr> | Real-time feature access |
+| <abbr title="S3-based historical store for training data - queryable via Athena">Offline Store</abbr> | Batch/training feature access |
+| <abbr title="Timestamp when feature values were recorded - critical for avoiding data leakage">Event Time</abbr> | Feature timestamp |
+| <abbr title="Unique identifier for each record in a Feature Group (e.g., customer_id)">Record Identifier</abbr> | Primary key for features |
+| <abbr title="Query that retrieves features as they existed at a specific timestamp - prevents data leakage in training">Point-in-Time Query</abbr> | Historical feature lookup |
 
 ---
 
@@ -663,11 +676,11 @@ Create a training job that reads from Feature Store offline store.
 
 ## Exam Relevance
 
-- ✅ Online vs Offline store use cases
-- ✅ Record identifier and event time requirements
-- ✅ Ingestion patterns (batch, streaming)
-- ✅ Query patterns (GetRecord, Athena)
-- ✅ Point-in-time correctness for training
+- ✅ <abbr title="Online: real-time inference (ms latency); Offline: training/batch (historical data in S3)">Online vs Offline store</abbr> use cases
+- ✅ <abbr title="Record ID is primary key; event_time tracks when features were valid">Record identifier and event time</abbr> requirements
+- ✅ Ingestion patterns (batch via DataFrame, streaming via <abbr title="PutRecord API for single record ingestion">put_record</abbr>)
+- ✅ Query patterns (<abbr title="Single record lookup from online store">GetRecord</abbr>, <abbr title="SQL queries against offline store in S3">Athena</abbr>)
+- ✅ <abbr title="Retrieve features as they existed at label time to avoid using future data in training">Point-in-time correctness</abbr> for training
 
 ---
 
