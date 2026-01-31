@@ -433,11 +433,11 @@ transformer.transform(
 
 ## Diagram with Icons
 
-Here is an example of a diagram with a Font Awesome icon:
+Here is an example of a diagram with an emoji shortcode icon:
 
 ```mermaid
 graph TD
-    A["fa:fa-user User"] --> B{"fa:fa-database Database"}
+    A[":bust_in_silhouette: User"] --> B{":floppy_disk: Database"}
 ```
 
 ---
