@@ -431,6 +431,17 @@ transformer.transform(
 
 ---
 
+## Diagram with Icons
+
+Here is an example of a diagram with a Font Awesome icon:
+
+```mermaid
+graph TD
+    A["fa:fa-user User"] --> B{"fa:fa-database Database"}
+```
+
+---
+
 ## Next Steps
 
 After completing this module, proceed to:
