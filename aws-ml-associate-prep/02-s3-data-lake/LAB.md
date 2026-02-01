@@ -13,27 +13,27 @@ In this lab, you'll set up an S3-based data lake[^data-lake] optimized for ML wo
 
 ```mermaid
 flowchart TB
-    subgraph DataLake["fa:fa-database S3 Data Lake Structure"]
-        subgraph Raw["fa:fa-file-import Raw Zone"]
-            R1[fa:fa-file Source 1]
-            R2[fa:fa-file Source 2]
+    subgraph DataLake["🗄️ S3 Data Lake Structure"]
+        subgraph Raw["📥 Raw Zone"]
+            R1[📄 Source 1]
+            R2[📄 Source 2]
         end
 
-        subgraph Processed["fa:fa-cogs Processed Zone"]
-            P1[fa:fa-table Train]
-            P2[fa:fa-table Validation]
-            P3[fa:fa-table Test]
+        subgraph Processed["⚙️ Processed Zone"]
+            P1[📋 Train]
+            P2[📋 Validation]
+            P3[📋 Test]
         end
 
-        subgraph Features["fa:fa-th Feature Zone"]
-            F1[fa:fa-users Customer Features]
-            F2[fa:fa-box Product Features]
+        subgraph Features["📊 Feature Zone"]
+            F1[👥 Customer Features]
+            F2[📦 Product Features]
         end
 
-        subgraph Models["fa:fa-cube Model Zone"]
-            M1[fa:fa-check-circle Production]
-            M2[fa:fa-flask Staging]
-            M3[fa:fa-archive Archived]
+        subgraph Models["📦 Model Zone"]
+            M1[✅ Production]
+            M2[🧪 Staging]
+            M3[🗃️ Archived]
         end
     end
 
@@ -51,11 +51,11 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    subgraph StorageClasses["fa:fa-layer-group S3 Storage Class Transitions"]
-        Standard[fa:fa-bolt S3 Standard<br/>Frequent Access]
-        IA[fa:fa-clock S3 Standard-IA<br/>Infrequent Access]
-        Glacier[fa:fa-snowflake S3 Glacier<br/>Archive]
-        Deep[fa:fa-mountain Glacier Deep Archive<br/>Long-term]
+    subgraph StorageClasses["📚 S3 Storage Class Transitions"]
+        Standard[⚡ S3 Standard<br/>Frequent Access]
+        IA[⏰ S3 Standard-IA<br/>Infrequent Access]
+        Glacier[❄️ S3 Glacier<br/>Archive]
+        Deep[🏔️ Glacier Deep Archive<br/>Long-term]
     end
 
     Standard --> |30 days| IA
@@ -72,11 +72,11 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
-    participant App as fa:fa-upload Data Source
-    participant S3 as fa:fa-database S3 Bucket
-    participant SNS as fa:fa-bell SNS Topic
-    participant Lambda as fa:fa-bolt Lambda
-    participant Glue as fa:fa-cogs Glue Job
+    participant App as 📤 Data Source
+    participant S3 as 🗄️ S3 Bucket
+    participant SNS as 🔔 SNS Topic
+    participant Lambda as ⚡ Lambda
+    participant Glue as ⚙️ Glue Job
 
     App->>S3: Upload new data (raw/)
     S3->>SNS: ObjectCreated event

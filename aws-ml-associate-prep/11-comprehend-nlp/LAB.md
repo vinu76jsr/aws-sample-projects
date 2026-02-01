@@ -1,7 +1,7 @@
 # Lab 11: Amazon Comprehend NLP
 
 ## Overview
-Use Amazon Comprehend for natural language processing tasks.
+Use Amazon Comprehend[^comprehend] for natural language processing[^nlp] tasks.
 
 **Duration**: 30-45 minutes
 **Cost**: ~$1
@@ -113,10 +113,10 @@ sequenceDiagram
 
 ## Lab Objectives
 
-- [ ] Perform sentiment analysis
-- [ ] Extract entities from text
-- [ ] Detect key phrases
-- [ ] Identify PII data
+- [ ] Perform sentiment analysis[^sentiment-analysis]
+- [ ] Extract entities[^entity-recognition] from text
+- [ ] Detect key phrases[^key-phrases]
+- [ ] Identify PII[^pii-detection] data
 
 ---
 
@@ -292,6 +292,25 @@ for text in texts:
 - ✅ Entity types (PERSON, ORGANIZATION, etc.)
 - ✅ PII detection for compliance
 - ✅ Batch processing for scale
+- ✅ Custom classifiers[^custom-classifier] for domain-specific tasks
+
+---
+
+## Glossary
+
+[^comprehend]: **Amazon Comprehend** - A fully managed NLP service that uses machine learning to extract insights, entities, sentiment, and key phrases from text.
+
+[^sentiment-analysis]: **Sentiment Analysis** - An NLP technique that determines the emotional tone of text, classifying it as positive, negative, neutral, or mixed.
+
+[^entity-recognition]: **Entity Recognition** - The process of identifying and categorizing named entities in text such as people, organizations, locations, dates, and quantities.
+
+[^key-phrases]: **Key Phrases** - Important noun phrases extracted from text that represent the main topics or concepts discussed in the document.
+
+[^pii-detection]: **PII Detection** - The identification of Personally Identifiable Information in text, such as names, addresses, phone numbers, SSNs, and credit card numbers.
+
+[^nlp]: **NLP (Natural Language Processing)** - A field of AI focused on enabling computers to understand, interpret, and generate human language.
+
+[^custom-classifier]: **Custom Classifier** - A Comprehend feature that allows training custom text classification models for domain-specific categorization tasks.
 
 ---
 

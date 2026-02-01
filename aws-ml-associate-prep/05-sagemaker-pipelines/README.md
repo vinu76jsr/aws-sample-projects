@@ -1,4 +1,4 @@
-# 05 - SageMaker Pipelines
+# 05 - SageMaker Pipelines[^pipeline]
 
 > **Exam Weight**: Part of Deployment & Orchestration domain (22%)
 > **Priority**: HIGH - Core MLOps component
@@ -36,17 +36,17 @@ SageMaker Pipelines is a purpose-built CI/CD service for ML that enables you to 
 
 ---
 
-## Pipeline Steps (KNOW FOR EXAM)
+## Pipeline Steps[^pipeline-step] (KNOW FOR EXAM)
 
 | Step Type | Purpose | Use Case |
 |-----------|---------|----------|
-| **ProcessingStep** | Data preprocessing, evaluation | ETL, feature engineering, model evaluation |
-| **TrainingStep** | Model training | Run SageMaker training job |
+| **ProcessingStep**[^processing-step] | Data preprocessing, evaluation | ETL, feature engineering, model evaluation |
+| **TrainingStep**[^training-step] | Model training | Run SageMaker training job |
 | **TuningStep** | Hyperparameter tuning | Run HPO job |
 | **CreateModelStep** | Create SageMaker model | Package model for deployment |
-| **RegisterModelStep** | Register in Model Registry | Version and track models |
+| **RegisterModelStep** | Register in Model Registry[^model-registry] | Version and track models |
 | **TransformStep** | Batch inference | Run batch transform |
-| **ConditionStep** | Conditional branching | If-else logic based on metrics |
+| **ConditionStep**[^condition-step] | Conditional branching | If-else logic based on metrics |
 | **FailStep** | Fail pipeline | Stop on error conditions |
 | **CallbackStep** | External integration | Wait for external systems |
 | **LambdaStep** | Run Lambda function | Custom logic |
@@ -179,7 +179,7 @@ from sagemaker.workflow.steps import ProcessingStep
 from sagemaker.workflow.properties import PropertyFile
 
 # Define property file for metrics
-evaluation_report = PropertyFile(
+evaluation_report = PropertyFile(  # PropertyFile[^property-file]
     name="EvaluationReport",
     output_name="evaluation",
     path="evaluation.json"
@@ -374,7 +374,7 @@ execution = pipeline.start()
 
 ---
 
-## Caching
+## Caching[^cache-config]
 
 Enable caching to skip unchanged steps.
 
@@ -473,6 +473,26 @@ training_step = TrainingStep(
 - [ ] Understand caching for cost optimization
 - [ ] Know how to trigger pipelines (manual, scheduled, event-driven)
 - [ ] Understand when to use Pipelines vs Step Functions
+
+---
+
+## Glossary
+
+[^pipeline]: **Pipeline** - A SageMaker Pipelines workflow that defines a series of interconnected steps for ML workflows. Pipelines enable automation, reproducibility, and CI/CD practices for machine learning.
+
+[^pipeline-step]: **Pipeline Step** - An individual unit of work within a SageMaker Pipeline. Steps can include data processing, model training, evaluation, and deployment, with dependencies automatically managed.
+
+[^condition-step]: **ConditionStep** - A pipeline step that enables conditional branching based on the output of previous steps. Used to implement quality gates that determine whether to proceed with deployment.
+
+[^property-file]: **PropertyFile** - A mechanism in SageMaker Pipelines for extracting specific values (like metrics) from step outputs. PropertyFiles are used with ConditionSteps to make decisions based on model performance.
+
+[^model-registry]: **Model Registry** - A SageMaker component for cataloging and versioning trained models. It tracks model packages, approval status, and metadata, enabling model governance and deployment workflows.
+
+[^cache-config]: **CacheConfig** - A configuration that enables step caching in SageMaker Pipelines. When enabled, steps with unchanged inputs are skipped, reducing execution time and cost.
+
+[^processing-step]: **ProcessingStep** - A pipeline step that runs data processing jobs using SageMaker Processing. Used for ETL, feature engineering, data validation, and model evaluation tasks.
+
+[^training-step]: **TrainingStep** - A pipeline step that runs SageMaker training jobs. It takes processed data as input and produces model artifacts, which can be referenced by subsequent steps.
 
 ---
 

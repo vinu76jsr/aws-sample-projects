@@ -1,7 +1,7 @@
 # Lab 12: Amazon Textract
 
 ## Overview
-Extract text, forms, and tables from documents using Amazon Textract.
+Extract text, forms, and tables from documents using Amazon Textract[^textract].
 
 **Duration**: 30-45 minutes
 **Cost**: ~$1
@@ -101,10 +101,10 @@ sequenceDiagram
 
 ## Lab Objectives
 
-- [ ] Extract text from documents
-- [ ] Parse form key-value pairs
-- [ ] Extract table data
-- [ ] Use Queries for specific information
+- [ ] Extract text from documents using OCR[^ocr]
+- [ ] Parse form key-value pairs[^key-value-pairs]
+- [ ] Extract table[^tables] data
+- [ ] Use Queries[^queries] for specific information
 
 ---
 
@@ -131,6 +131,8 @@ for block in response['Blocks']:
     if block['BlockType'] == 'LINE':
         print(block['Text'])
 ```
+
+The DetectDocumentText[^detect-document-text] API performs basic OCR to extract raw text from documents.
 
 ---
 
@@ -197,6 +199,8 @@ print("-" * 50)
 for key, value in kv_pairs.items():
     print(f"  {key}: {value}")
 ```
+
+The AnalyzeDocument[^analyze-document] API with FORMS[^forms] feature extracts structured key-value pairs from forms.
 
 ---
 
@@ -327,6 +331,29 @@ for doc in response['ExpenseDocuments']:
 - ✅ Textract API features (Forms, Tables, Queries)
 - ✅ When to use Textract vs Rekognition
 - ✅ Async processing for multi-page PDFs
+- ✅ Block[^block] structure and relationships
+
+---
+
+## Glossary
+
+[^textract]: **Amazon Textract** - A fully managed ML service that automatically extracts text, handwriting, and structured data from scanned documents.
+
+[^ocr]: **OCR (Optical Character Recognition)** - The technology that converts images of text into machine-readable text data.
+
+[^detect-document-text]: **DetectDocumentText** - A Textract API that performs basic OCR to extract raw text lines and words from single-page documents.
+
+[^analyze-document]: **AnalyzeDocument** - A Textract API that extracts structured data including forms, tables, and query responses from documents.
+
+[^forms]: **Forms** - A Textract feature type that identifies and extracts key-value pairs from form fields in documents.
+
+[^tables]: **Tables** - A Textract feature type that detects and extracts tabular data with row and column structure from documents.
+
+[^queries]: **Queries** - A Textract feature that allows asking natural language questions about document content to extract specific information.
+
+[^block]: **Block** - The fundamental unit of data in Textract responses, representing detected elements like pages, lines, words, tables, cells, and key-value pairs.
+
+[^key-value-pairs]: **Key-Value Pairs** - Structured data extracted from forms where a label (key) is associated with its corresponding value, such as "Name: John Smith".
 
 ---
 

@@ -1,7 +1,7 @@
 # Lab 10: Amazon Rekognition
 
 ## Overview
-Use Amazon Rekognition for image analysis including object detection, face analysis, and text detection.
+Use Amazon Rekognition[^rekognition] for image analysis including object detection, face analysis, and text detection.
 
 **Duration**: 30-45 minutes
 **Cost**: ~$1 (free tier available)
@@ -98,10 +98,10 @@ flowchart LR
 
 ## Lab Objectives
 
-- [ ] Detect labels (objects) in images
-- [ ] Analyze faces in photos
-- [ ] Detect text in images
-- [ ] Create a face collection
+- [ ] Detect labels[^detect-labels] (objects) in images
+- [ ] Analyze faces[^detect-faces] in photos
+- [ ] Detect text[^detect-text] in images
+- [ ] Create a face collection[^face-collection]
 
 ---
 
@@ -270,6 +270,28 @@ rekognition.delete_collection(CollectionId=collection_id)
 - ✅ Rekognition API capabilities
 - ✅ Face collections for search
 - ✅ When to use Rekognition vs Textract
+- ✅ Confidence scores[^confidence-score] and bounding boxes[^bounding-box]
+- ✅ Content moderation[^moderation] features
+
+---
+
+## Glossary
+
+[^rekognition]: **Amazon Rekognition** - A fully managed computer vision service that provides pre-trained and customizable models for image and video analysis tasks.
+
+[^detect-labels]: **DetectLabels** - A Rekognition API that identifies objects, scenes, activities, and concepts in images, returning labels with confidence scores.
+
+[^detect-faces]: **DetectFaces** - A Rekognition API that detects faces in images and returns facial attributes such as age range, emotions, gender, and facial landmarks.
+
+[^detect-text]: **DetectText** - A Rekognition API that performs OCR to detect and extract text from images, returning detected words and lines with their locations.
+
+[^face-collection]: **Face Collection** - A searchable repository of face vectors in Rekognition used for face matching and identity verification workflows.
+
+[^bounding-box]: **Bounding Box** - A rectangular region defined by coordinates that indicates where a detected object, face, or text appears within an image.
+
+[^confidence-score]: **Confidence Score** - A percentage value (0-100) indicating how certain Rekognition is about a detection or classification result.
+
+[^moderation]: **Content Moderation** - Rekognition's DetectModerationLabels API that identifies potentially unsafe or inappropriate content in images and videos.
 
 ---
 

@@ -1,11 +1,11 @@
-# 06 - AWS Step Functions for ML Workflows
+# 06 - AWS Step Functions[^step-functions] for ML Workflows
 
 > **Exam Weight**: Part of Deployment & Orchestration domain (22%)
 > **Priority**: MEDIUM-HIGH - Alternative to SageMaker Pipelines
 
 ## What is AWS Step Functions?
 
-AWS Step Functions is a serverless orchestration service that lets you coordinate multiple AWS services into workflows using visual state machines. For ML, it's used to orchestrate complex workflows involving multiple AWS services.
+AWS Step Functions is a serverless orchestration service that lets you coordinate multiple AWS services into workflows using visual state machines[^state-machine]. For ML, it's used to orchestrate complex workflows involving multiple AWS services.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -44,9 +44,9 @@ AWS Step Functions is a serverless orchestration service that lets you coordinat
 
 | State Type | Purpose | ML Use Case |
 |------------|---------|-------------|
-| **Task** | Execute work | Invoke Lambda, SageMaker, Glue |
-| **Choice** | Branching logic | Route based on model metrics |
-| **Wait** | Pause execution | Wait for async job completion |
+| **Task**[^task-state] | Execute work | Invoke Lambda, SageMaker, Glue |
+| **Choice**[^choice-state] | Branching logic | Route based on model metrics |
+| **Wait**[^wait-state] | Pause execution | Wait for async job completion |
 | **Parallel** | Concurrent execution | Train multiple models |
 | **Map** | Iterate over items | Process multiple datasets |
 | **Pass** | Transform data | Modify state input/output |
@@ -86,7 +86,7 @@ AWS Step Functions is a serverless orchestration service that lets you coordinat
 }
 ```
 
-### Exam Tip: .sync Suffix
+### Exam Tip: .sync Integration[^sync-integration]
 - `.sync` = Wait for completion (synchronous)
 - No suffix = Start and continue (asynchronous)
 - `.waitForTaskToken` = Wait for callback
@@ -225,7 +225,7 @@ AWS Step Functions is a serverless orchestration service that lets you coordinat
 
 ---
 
-## Error Handling
+## Error Handling[^retry-catch]
 
 ```json
 {
@@ -375,6 +375,24 @@ AWS Step Functions is a serverless orchestration service that lets you coordinat
 - [ ] Know input/output processing (InputPath, ResultPath, OutputPath)
 - [ ] Understand Standard vs Express workflows
 - [ ] Know when to use Step Functions vs SageMaker Pipelines
+
+---
+
+## Glossary
+
+[^step-functions]: **Step Functions** - An AWS serverless orchestration service that coordinates multiple AWS services into visual workflows. It uses Amazon States Language (ASL) to define state machines for complex, multi-step processes.
+
+[^state-machine]: **State Machine** - A workflow definition in Step Functions that consists of a series of states (steps) and transitions. State machines define the order of execution, branching logic, and error handling for workflows.
+
+[^task-state]: **Task State** - A state type in Step Functions that performs a unit of work, such as invoking a Lambda function, starting a SageMaker training job, or calling another AWS service.
+
+[^choice-state]: **Choice State** - A state type that adds branching logic to a workflow. It evaluates conditions on the input and transitions to different states based on the results, similar to an if-else statement.
+
+[^wait-state]: **Wait State** - A state type that pauses the workflow execution for a specified duration or until a specific timestamp. Useful for waiting between steps or implementing delays.
+
+[^sync-integration]: **.sync Integration** - A Step Functions integration pattern that waits for an asynchronous AWS service operation to complete before proceeding. Adding `.sync` to the resource ARN makes the task synchronous.
+
+[^retry-catch]: **Retry/Catch** - Error handling mechanisms in Step Functions. Retry automatically retries failed states with configurable backoff. Catch routes errors to specified states for handling, enabling graceful failure recovery.
 
 ---
 

@@ -13,25 +13,25 @@ In this lab, you'll get hands-on experience with Amazon SageMaker's[^sagemaker] 
 
 ```mermaid
 flowchart TB
-    subgraph Preparation[":file_folder: 1. Data Preparation"]
-        Local[":computer: Local Data"] --> S3Train[":cloud: S3: Training Data"]
-        Local --> S3Val[":cloud: S3: Validation Data"]
+    subgraph Preparation["📁 1. Data Preparation"]
+        Local["💻 Local Data"] --> S3Train["☁️ S3: Training Data"]
+        Local --> S3Val["☁️ S3: Validation Data"]
     end
 
-    subgraph Training[":gear: 2. Model Training"]
-        S3Train --> TrainJob[":server: SageMaker Training Job"]
+    subgraph Training["⚙️ 2. Model Training"]
+        S3Train --> TrainJob["🖥️ SageMaker Training Job"]
         S3Val --> TrainJob
-        TrainJob --> |XGBoost Algorithm| Model[":package: Model Artifacts"]
-        Model --> S3Model[":cloud: S3: Model Output"]
+        TrainJob --> |XGBoost Algorithm| Model["📦 Model Artifacts"]
+        Model --> S3Model["☁️ S3: Model Output"]
     end
 
-    subgraph Deployment[":rocket: 3. Model Deployment"]
-        S3Model --> CreateModel[":package: Create Model"]
-        CreateModel --> Endpoint[":satellite: Real-time Endpoint"]
+    subgraph Deployment["🚀 3. Model Deployment"]
+        S3Model --> CreateModel["📦 Create Model"]
+        CreateModel --> Endpoint["📡 Real-time Endpoint"]
     end
 
-    subgraph Inference[":left_right_arrow: 4. Inference"]
-        Client[":bust_in_silhouette: Client App"] --> |REST API| Endpoint
+    subgraph Inference["↔️ 4. Inference"]
+        Client["👤 Client App"] --> |REST API| Endpoint
         Endpoint --> |Predictions| Client
     end
 
@@ -45,10 +45,10 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
-    participant SDK as ":computer: SageMaker SDK"
-    participant SM as ":cloud: SageMaker Service"
-    participant EC2 as ":server: Training Instance"
-    participant S3 as ":file_folder: S3 Bucket"
+    participant SDK as 💻 SageMaker SDK
+    participant SM as ☁️ SageMaker Service
+    participant EC2 as 🖥️ Training Instance
+    participant S3 as 📁 S3 Bucket
 
     SDK->>SM: CreateTrainingJob()
     SM->>EC2: Provision ml.m5.large

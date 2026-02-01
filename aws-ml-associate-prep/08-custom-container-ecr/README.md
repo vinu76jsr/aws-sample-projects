@@ -1,4 +1,4 @@
-# 08 - Custom Containers with Amazon ECR
+# 08 - Custom Containers[^container] with Amazon ECR[^ecr]
 
 > **Exam Weight**: Part of ML Model Development domain (26%)
 > **Priority**: MEDIUM - For custom algorithms and frameworks
@@ -50,10 +50,10 @@ Amazon Elastic Container Registry (ECR) is a fully managed Docker container regi
 
 ## Container Types
 
-### 1. Training Container
+### 1. Training Container[^training-container]
 
 ```dockerfile
-# Training container Dockerfile
+# Training container Dockerfile[^dockerfile]
 FROM python:3.9-slim
 
 # Install dependencies
@@ -66,10 +66,10 @@ COPY train.py /opt/ml/code/train.py
 ENV SAGEMAKER_PROGRAM train.py
 
 # SageMaker expects training script at this path
-ENTRYPOINT ["python", "/opt/ml/code/train.py"]
+ENTRYPOINT ["python", "/opt/ml/code/train.py"]  # ENTRYPOINT[^entrypoint]
 ```
 
-### 2. Inference Container
+### 2. Inference Container[^inference-container]
 
 ```dockerfile
 # Inference container Dockerfile
@@ -109,7 +109,7 @@ COPY serve.py /opt/ml/code/serve.py
 
 ## SageMaker Container Contract (EXAM CRITICAL)
 
-### Directory Structure
+### Directory Structure[^opt-ml-paths]
 
 ```
 /opt/ml/
@@ -406,6 +406,24 @@ estimator = Estimator(
 - [ ] Know required inference endpoints (/ping, /invocations)
 - [ ] Understand how to build and push to ECR
 - [ ] Know the container contract for training and inference
+
+---
+
+## Glossary
+
+[^ecr]: **ECR** - Amazon Elastic Container Registry. A fully managed Docker container registry that stores, manages, and deploys container images. SageMaker pulls custom training and inference containers from ECR.
+
+[^container]: **Container** - A lightweight, standalone executable package that includes everything needed to run code: runtime, libraries, and dependencies. Containers ensure consistency across development and production environments.
+
+[^dockerfile]: **Dockerfile** - A text file containing instructions to build a Docker container image. It specifies the base image, dependencies to install, files to copy, and the command to run when the container starts.
+
+[^opt-ml-paths]: **/opt/ml Paths** - The standardized directory structure SageMaker uses inside containers. Key paths include /opt/ml/input/data/ for training data, /opt/ml/model/ for model artifacts, and /opt/ml/input/config/ for hyperparameters.
+
+[^training-container]: **Training Container** - A Docker container configured for SageMaker training jobs. It reads data from /opt/ml/input/data/, reads hyperparameters from config, and saves the trained model to /opt/ml/model/.
+
+[^inference-container]: **Inference Container** - A Docker container that serves predictions. It must implement /ping (health check) and /invocations (prediction) endpoints, and loads the model from /opt/ml/model/.
+
+[^entrypoint]: **ENTRYPOINT** - A Dockerfile instruction that specifies the command to run when a container starts. For SageMaker containers, it typically points to the training script or inference server.
 
 ---
 

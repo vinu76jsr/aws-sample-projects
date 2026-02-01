@@ -5,7 +5,7 @@
 
 ## What is Amazon EMR?
 
-Amazon EMR (Elastic MapReduce) is a managed big data platform for running Apache Spark, Hadoop, and other frameworks at scale. For ML, it's used for distributed data processing and training.
+Amazon EMR[^emr] (Elastic MapReduce) is a managed big data platform for running Apache Spark[^spark], Hadoop, and other frameworks at scale. For ML, it's used for distributed data processing and training.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -43,11 +43,11 @@ Amazon EMR (Elastic MapReduce) is a managed big data platform for running Apache
 
 | Node Type | Purpose | Required | Spot Eligible |
 |-----------|---------|----------|---------------|
-| **Master** | Cluster coordination, resource management | Yes | No (production) |
-| **Core** | Run tasks + store HDFS data | Yes | Careful (data loss) |
-| **Task** | Run tasks only (no storage) | No | Yes (safe) |
+| **Master**[^master-node] | Cluster coordination, resource management | Yes | No (production) |
+| **Core**[^core-node] | Run tasks + store HDFS data | Yes | Careful (data loss) |
+| **Task**[^task-node] | Run tasks only (no storage) | No | Yes (safe) |
 
-### Exam Tip: Spot Instances
+### Exam Tip: Spot Instances[^spot-instances]
 - **Master**: Don't use Spot in production
 - **Core**: Risk of data loss if terminated
 - **Task**: Safe for Spot (no data storage)
@@ -60,12 +60,12 @@ Amazon EMR (Elastic MapReduce) is a managed big data platform for running Apache
 |--------|----------|---------------|
 | **EMR on EC2** | Full control, HDFS | Traditional big data |
 | **EMR on EKS** | Kubernetes integration | Container workloads |
-| **EMR Serverless** | No cluster management | Ad-hoc processing |
+| **EMR Serverless**[^emr-serverless] | No cluster management | Ad-hoc processing |
 | **EMR Studio** | Notebooks, development | Data exploration |
 
 ---
 
-## Spark MLlib
+## Spark MLlib[^mllib]
 
 Spark's machine learning library for distributed ML.
 
@@ -243,6 +243,23 @@ job = emr_serverless.start_job_run(
 
 ---
 
+## YARN[^yarn] Resource Management
+
+YARN manages cluster resources in EMR:
+
+```python
+# spark-submit with YARN configuration
+spark-submit \
+    --master yarn \
+    --deploy-mode cluster \
+    --num-executors 10 \
+    --executor-memory 4g \
+    --executor-cores 2 \
+    train.py
+```
+
+---
+
 ## Exam Question Patterns
 
 ### Pattern 1: Large Scale ML
@@ -279,6 +296,28 @@ job = emr_serverless.start_job_run(
 - [ ] Know EMR deployment options (EC2, EKS, Serverless)
 - [ ] Understand EMR + SageMaker integration patterns
 - [ ] Know when to use EMR vs Glue vs SageMaker
+
+---
+
+## Glossary
+
+[^emr]: **EMR (Elastic MapReduce)** - AWS managed big data platform that simplifies running Apache Spark, Hadoop, Hive, and other frameworks for processing vast amounts of data.
+
+[^spark]: **Spark** - Apache Spark is an open-source unified analytics engine for large-scale data processing, providing high-level APIs and an optimized engine for general execution graphs.
+
+[^mllib]: **MLlib** - Apache Spark's scalable machine learning library providing common ML algorithms (classification, regression, clustering) designed for distributed computing.
+
+[^master-node]: **Master Node** - The EMR node that coordinates the cluster, runs YARN ResourceManager, HDFS NameNode, and manages job scheduling and cluster state.
+
+[^core-node]: **Core Node** - EMR nodes that run tasks and store data in HDFS. Losing core nodes can result in data loss if HDFS replication is insufficient.
+
+[^task-node]: **Task Node** - EMR nodes that only run tasks without storing HDFS data. Ideal for Spot Instances since termination doesn't cause data loss.
+
+[^spot-instances]: **Spot Instances** - AWS EC2 instances available at up to 90% discount by using spare capacity, but can be interrupted with 2-minute notice when capacity is needed.
+
+[^yarn]: **YARN (Yet Another Resource Negotiator)** - Hadoop's cluster resource management layer that handles job scheduling and resource allocation across the cluster.
+
+[^emr-serverless]: **EMR Serverless** - AWS service that allows running Spark and Hive applications without configuring, managing, or scaling clusters.
 
 ---
 

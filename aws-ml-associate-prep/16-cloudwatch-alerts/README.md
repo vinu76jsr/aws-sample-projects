@@ -5,7 +5,7 @@
 
 ## What is CloudWatch for ML?
 
-Amazon CloudWatch provides monitoring and observability for ML workloads. It collects metrics, logs, and events from SageMaker and other ML services.
+Amazon CloudWatch[^cloudwatch] provides monitoring and observability for ML workloads. It collects metrics[^metrics], logs, and events from SageMaker and other ML services.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -53,10 +53,10 @@ Amazon CloudWatch provides monitoring and observability for ML workloads. It col
 |--------|-------------|-----------------|
 | `Invocations` | Number of requests | Low = traffic drop |
 | `InvocationsPerInstance` | Requests per instance | High = scaling needed |
-| `ModelLatency` | Inference time (ms) | > SLA = issue |
+| `ModelLatency`[^model-latency] | Inference time (ms) | > SLA = issue |
 | `OverheadLatency` | Non-inference overhead | High = infrastructure issue |
 | `Invocation4XXErrors` | Client errors | > 0 = bad requests |
-| `Invocation5XXErrors` | Server errors | > 0 = model issue |
+| `Invocation5XXErrors`[^invocation-errors] | Server errors | > 0 = model issue |
 | `CPUUtilization` | CPU usage % | > 80% = scale up |
 | `MemoryUtilization` | Memory usage % | > 80% = scale up |
 | `GPUUtilization` | GPU usage % | Varies |
@@ -73,7 +73,7 @@ Amazon CloudWatch provides monitoring and observability for ML workloads. It col
 
 ---
 
-## Creating Alarms
+## Creating Alarms[^alarms]
 
 ### Endpoint Latency Alarm
 
@@ -214,7 +214,7 @@ fields @timestamp
 
 ---
 
-## CloudWatch Dashboards
+## CloudWatch Dashboards[^dashboard]
 
 ### Create ML Dashboard
 
@@ -278,7 +278,7 @@ cloudwatch.put_dashboard(
 
 ---
 
-## EventBridge Integration
+## EventBridge[^eventbridge] Integration
 
 Respond to ML events automatically.
 
@@ -300,7 +300,7 @@ events.put_rule(
     State='ENABLED'
 )
 
-# Add target (SNS notification)
+# Add target (SNS[^sns] notification)
 events.put_targets(
     Rule='training-job-state-change',
     Targets=[
@@ -419,6 +419,26 @@ aas.put_scaling_policy(
 - [ ] Understand CloudWatch Logs and Insights
 - [ ] Know EventBridge for ML automation
 - [ ] Understand auto scaling with CloudWatch metrics
+
+---
+
+## Glossary
+
+[^cloudwatch]: **CloudWatch** - AWS monitoring and observability service that collects metrics, logs, and events from AWS resources and applications for operational visibility.
+
+[^metrics]: **Metrics** - Time-ordered data points published to CloudWatch representing the behavior of resources (e.g., CPU utilization, request count, latency).
+
+[^alarms]: **Alarms** - CloudWatch feature that watches metrics and triggers actions (like SNS notifications or auto scaling) when thresholds are breached.
+
+[^dashboard]: **Dashboard** - CloudWatch customizable visualization that displays metrics and alarms in a single view for operational monitoring.
+
+[^eventbridge]: **EventBridge** - AWS serverless event bus service that routes events from AWS services, SaaS applications, and custom sources to targets like Lambda or SNS.
+
+[^sns]: **SNS (Simple Notification Service)** - AWS messaging service for sending notifications via email, SMS, or HTTP endpoints, commonly used as an alarm action target.
+
+[^model-latency]: **Model Latency** - SageMaker metric measuring the time (in milliseconds) the model takes to respond to an inference request, excluding network overhead.
+
+[^invocation-errors]: **Invocation Errors** - SageMaker metrics tracking 4XX (client) and 5XX (server) errors during endpoint invocations, indicating issues with requests or model.
 
 ---
 

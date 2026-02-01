@@ -1,4 +1,4 @@
-# 04 - SageMaker Feature Store
+# 04 - SageMaker Feature Store[^feature-store]
 
 > **Exam Weight**: High frequency in Data Preparation domain (28%)
 > **Priority**: HIGH - Hot topic in the exam
@@ -33,7 +33,7 @@ A centralized repository to store, share, and manage ML features for training an
 
 ## Key Concepts (MEMORIZE FOR EXAM)
 
-### Feature Group
+### Feature Group[^feature-group]
 
 A logical grouping of features (like a table).
 
@@ -47,14 +47,14 @@ Feature Group: customer_features
 └── feature_4: customer_segment
 ```
 
-### Online Store vs Offline Store
+### Online Store[^online-store] vs Offline Store[^offline-store]
 
 | Aspect | Online Store | Offline Store |
 |--------|--------------|---------------|
 | **Storage** | DynamoDB | S3 (Parquet) |
 | **Latency** | <10ms | Seconds-minutes |
 | **Use Case** | Real-time inference | Training, batch inference |
-| **Query** | GetRecord API | Athena, Spark, Feature Store queries |
+| **Query** | GetRecord API | Athena[^athena], Spark, Feature Store queries |
 | **Data** | Latest values only | Full history |
 | **Cost** | Higher (DynamoDB) | Lower (S3) |
 
@@ -65,7 +65,7 @@ Feature Group: customer_features
 
 ---
 
-## Record Identifier and Event Time
+## Record Identifier[^record-identifier] and Event Time[^event-time]
 
 Every feature group requires:
 
@@ -196,7 +196,7 @@ df = query.as_dataframe()
 
 ---
 
-## Point-in-Time Queries (EXAM FAVORITE)
+## Point-in-Time Queries[^point-in-time] (EXAM FAVORITE)
 
 Retrieve features as they were at a specific point in time - crucial for avoiding data leakage in ML.
 
@@ -481,6 +481,26 @@ print(f"Offline store results: {df_result}")
 - [ ] Understand point-in-time queries for training
 - [ ] Know TTL configuration for Online Store
 - [ ] Understand security (IAM, encryption)
+
+---
+
+## Glossary
+
+[^feature-store]: **Feature Store** - A centralized repository in SageMaker for storing, sharing, and managing ML features. It ensures consistency between training and inference while enabling feature reuse across teams and projects.
+
+[^feature-group]: **Feature Group** - A logical grouping of features in Feature Store, similar to a database table. Each feature group has a schema, a record identifier, and an event time column.
+
+[^online-store]: **Online Store** - A low-latency store backed by DynamoDB that serves the latest feature values for real-time inference. It provides single-digit millisecond response times via the GetRecord API.
+
+[^offline-store]: **Offline Store** - A store backed by S3 (in Parquet format) that maintains the full history of feature values. It is used for model training, batch inference, and analytical queries.
+
+[^event-time]: **Event Time** - A required timestamp column in every feature group that indicates when a feature value was generated. It enables point-in-time queries and proper versioning of feature records.
+
+[^record-identifier]: **Record Identifier** - The primary key column in a feature group that uniquely identifies each record (e.g., customer_id, transaction_id). Required for all feature groups.
+
+[^point-in-time]: **Point-in-Time Query** - A query technique that retrieves feature values as they existed at a specific timestamp. Critical for avoiding data leakage during model training by ensuring features match the time of the label.
+
+[^athena]: **Athena** - An AWS serverless query service that can be used to run SQL queries on the Offline Store data in S3. It enables ad-hoc analysis and batch feature retrieval for training datasets.
 
 ---
 

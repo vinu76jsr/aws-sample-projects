@@ -5,7 +5,7 @@
 
 ## What is Lambda for ML?
 
-AWS Lambda can run ML inference for lightweight models, providing a serverless, pay-per-request option. Ideal for intermittent traffic and cost-sensitive applications.
+AWS Lambda[^lambda] can run ML inference[^inference] for lightweight models, providing a serverless[^serverless], pay-per-request option. Ideal for intermittent traffic and cost-sensitive applications.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -36,8 +36,8 @@ AWS Lambda can run ML inference for lightweight models, providing a serverless, 
 
 | Limit | Value | Impact on ML |
 |-------|-------|--------------|
-| **Memory** | 128 MB - 10 GB | Model size limit |
-| **Timeout** | 15 minutes max | Inference time limit |
+| **Memory**[^memory-size] | 128 MB - 10 GB | Model size limit |
+| **Timeout**[^timeout] | 15 minutes max | Inference time limit |
 | **Package Size** | 50 MB (zip), 250 MB (unzipped) | Model + dependencies |
 | **Container Image** | 10 GB | Large models possible |
 | **/tmp Storage** | 512 MB - 10 GB | Model loading space |
@@ -172,7 +172,7 @@ def lambda_handler(event, context):
 
 ## Lambda Layers for ML
 
-Share common ML dependencies.
+Lambda Layer[^lambda-layer] allows sharing common ML dependencies.
 
 ```bash
 # Create layer with scikit-learn
@@ -196,7 +196,7 @@ import sklearn  # Comes from layer
 
 ## Provisioned Concurrency
 
-Eliminate cold starts for consistent latency.
+Eliminate cold starts[^cold-start] for consistent latency.
 
 ```python
 import boto3
@@ -314,6 +314,26 @@ def lambda_handler(event, context):
 - [ ] Know container image deployment for large models
 - [ ] Understand provisioned concurrency for cold starts
 - [ ] Know event-driven inference patterns
+
+---
+
+## Glossary
+
+[^lambda]: **Lambda** - AWS's serverless compute service that runs code in response to events without provisioning or managing servers. Automatically scales and charges only for compute time consumed.
+
+[^cold-start]: **Cold Start** - The latency incurred when a Lambda function is invoked after being idle, requiring AWS to provision a new execution environment, load the runtime, and initialize the function code.
+
+[^lambda-layer]: **Lambda Layer** - A ZIP archive containing libraries, custom runtimes, or other dependencies that can be shared across multiple Lambda functions, reducing deployment package size.
+
+[^api-gateway]: **API Gateway** - AWS service for creating, publishing, and managing RESTful and WebSocket APIs that can trigger Lambda functions for serverless API backends.
+
+[^serverless]: **Serverless** - A cloud computing model where the cloud provider manages infrastructure automatically, allowing developers to focus on code while paying only for actual usage.
+
+[^inference]: **Inference** - The process of using a trained machine learning model to make predictions on new, unseen data.
+
+[^memory-size]: **Memory Size** - Lambda configuration (128 MB to 10 GB) that determines allocated memory and proportionally affects CPU power available to the function.
+
+[^timeout]: **Timeout** - Maximum execution time allowed for a Lambda function (up to 15 minutes), after which the function is terminated.
 
 ---
 

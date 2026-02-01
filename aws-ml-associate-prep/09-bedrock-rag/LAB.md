@@ -1,7 +1,7 @@
 # Lab 09: Amazon Bedrock RAG Application
 
 ## Overview
-Build a Retrieval Augmented Generation (RAG) application using Amazon Bedrock.
+Build a Retrieval Augmented Generation[^rag] (RAG) application using Amazon Bedrock[^bedrock].
 
 **Duration**: 45-60 minutes
 **Cost**: ~$1-2 (pay per token)
@@ -109,10 +109,10 @@ flowchart LR
 
 ## Lab Objectives
 
-- [ ] Invoke foundation models via Bedrock
-- [ ] Generate embeddings with Titan
+- [ ] Invoke foundation models[^foundation-model] via Bedrock
+- [ ] Generate embeddings[^embeddings] with Titan[^titan]
 - [ ] Build a simple RAG pipeline
-- [ ] Understand Knowledge Bases concepts
+- [ ] Understand Knowledge Bases[^knowledge-base] concepts
 
 ---
 
@@ -125,7 +125,7 @@ flowchart LR
 3. Enable access to:
    - Amazon Titan Text Express
    - Amazon Titan Embeddings
-   - Anthropic Claude (optional)
+   - Anthropic Claude[^claude] (optional)
 
 ### Step 1.2: Invoke Text Model
 
@@ -315,8 +315,30 @@ Create a Bedrock Knowledge Base with S3 documents.
 
 - ✅ Foundation models in Bedrock
 - ✅ RAG architecture and use cases
-- ✅ Embeddings for semantic search
+- ✅ Embeddings for semantic search[^semantic-search]
 - ✅ Knowledge Bases concept
+
+---
+
+## Glossary
+
+[^bedrock]: **Amazon Bedrock** - A fully managed service that provides access to foundation models from Amazon and third-party providers through a single API, enabling generative AI application development.
+
+[^rag]: **RAG (Retrieval Augmented Generation)** - A technique that enhances LLM responses by retrieving relevant information from a knowledge base and including it in the prompt context before generation.
+
+[^foundation-model]: **Foundation Model** - A large AI model pre-trained on vast amounts of data that can be adapted for various downstream tasks without task-specific training.
+
+[^embeddings]: **Embeddings** - Dense vector representations of text that capture semantic meaning, enabling similarity comparisons and semantic search operations.
+
+[^vector-store]: **Vector Store** - A specialized database optimized for storing and querying high-dimensional vector embeddings, supporting efficient similarity search.
+
+[^knowledge-base]: **Knowledge Base** - In Bedrock, a managed service that ingests documents, generates embeddings, and stores them for retrieval during RAG operations.
+
+[^titan]: **Amazon Titan** - Amazon's family of foundation models available through Bedrock, including text generation and embedding models.
+
+[^claude]: **Claude** - Anthropic's family of large language models available through Bedrock, known for helpfulness, harmlessness, and honesty.
+
+[^semantic-search]: **Semantic Search** - A search technique that finds results based on meaning and context rather than exact keyword matching, using embeddings to measure similarity.
 
 ---
 

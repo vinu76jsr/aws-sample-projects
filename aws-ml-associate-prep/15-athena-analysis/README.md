@@ -5,7 +5,7 @@
 
 ## What is Amazon Athena?
 
-Amazon Athena is a serverless query service that lets you analyze data in S3 using standard SQL. For ML, it's used to explore, analyze, and prepare training data.
+Amazon Athena[^athena] is a serverless query service that lets you analyze data in S3 using standard SQL. For ML, it's used to explore, analyze, and prepare training data.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -36,10 +36,10 @@ Amazon Athena is a serverless query service that lets you analyze data in S3 usi
 | Feature | Description | ML Use Case |
 |---------|-------------|-------------|
 | **Serverless** | No infrastructure | Ad-hoc analysis |
-| **Standard SQL** | Presto/Trino engine | Easy queries |
-| **Glue Catalog** | Schema management | Data discovery |
-| **Partitioning** | Query optimization | Reduce costs |
-| **CTAS** | Create Table As Select | Data transformation |
+| **Standard SQL** | Presto[^presto]/Trino engine | Easy queries |
+| **Glue Catalog**[^glue-catalog] | Schema management | Data discovery |
+| **Partitioning**[^partitioning] | Query optimization | Reduce costs |
+| **CTAS**[^ctas] | Create Table As Select | Data transformation |
 | **Federated Query** | Query multiple sources | Cross-data analysis |
 
 ---
@@ -174,7 +174,7 @@ Result: Scans only that partition (cheap!)
 
 ```sql
 -- Create table with partition projection (no crawling needed)
-CREATE EXTERNAL TABLE ml_data.events (
+CREATE EXTERNAL TABLE[^external-table] ml_data.events (
     event_id string,
     user_id string,
     event_type string,
@@ -204,7 +204,7 @@ TBLPROPERTIES (
 
 ## Cost Optimization
 
-### Pricing: $5 per TB scanned
+### Pricing: Pay-per-query[^pay-per-query] ($5 per TB scanned)
 
 | Strategy | Savings | How |
 |----------|---------|-----|
@@ -320,6 +320,24 @@ WHERE s3_data.ml_score > 0.8;
 - [ ] Know CTAS for data transformation
 - [ ] Understand Athena + Feature Store integration
 - [ ] Know federated query capabilities
+
+---
+
+## Glossary
+
+[^athena]: **Athena** - AWS serverless interactive query service that uses standard SQL to analyze data directly in Amazon S3 without loading it into a database.
+
+[^presto]: **Presto** - An open-source distributed SQL query engine (now Trino) that Athena is built on, designed for fast analytic queries against data of any size.
+
+[^ctas]: **CTAS (Create Table As Select)** - SQL operation in Athena that creates a new table from the results of a SELECT query, supporting format conversion and partitioning.
+
+[^partitioning]: **Partitioning** - Organizing data into separate folders by column values (e.g., date), allowing queries to scan only relevant partitions and reducing costs.
+
+[^external-table]: **External Table** - A table definition that points to data stored externally (in S3) rather than managed by the database, allowing queries without data movement.
+
+[^glue-catalog]: **Glue Catalog** - AWS Glue Data Catalog is a centralized metadata repository that stores table definitions, schemas, and partition information used by Athena.
+
+[^pay-per-query]: **Pay-per-query** - Athena's pricing model where you pay $5 per terabyte of data scanned, making query optimization crucial for cost control.
 
 ---
 

@@ -5,10 +5,10 @@
 
 ## What is AWS Glue?
 
-AWS Glue is a fully managed ETL (Extract, Transform, Load) service that makes it easy to prepare and transform data for analytics and ML. It includes:
-- **Glue Data Catalog**: Centralized metadata repository
+AWS Glue[^glue] is a fully managed ETL[^etl] (Extract, Transform, Load) service that makes it easy to prepare and transform data for analytics and ML. It includes:
+- **Glue Data Catalog**[^data-catalog]: Centralized metadata repository
 - **Glue ETL Jobs**: Serverless Spark-based data transformation
-- **Glue Crawlers**: Automatic schema discovery
+- **Glue Crawlers**[^crawler]: Automatic schema discovery
 - **Glue DataBrew**: Visual data preparation (no-code)
 
 ```
@@ -97,7 +97,7 @@ Visual data preparation tool (no-code).
 
 ---
 
-## DPU (Data Processing Units) - EXAM FAVORITE
+## DPU[^dpu] (Data Processing Units) - EXAM FAVORITE
 
 | Worker Type | Memory | vCPUs | Use Case |
 |-------------|--------|-------|----------|
@@ -115,7 +115,7 @@ Visual data preparation tool (no-code).
 
 ---
 
-## Glue Job Bookmarks
+## Glue Job Bookmarks[^job-bookmarks]
 
 Track processed data to avoid reprocessing.
 
@@ -290,7 +290,7 @@ from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 from awsglue.context import GlueContext
 from awsglue.job import Job
-from awsglue.dynamicframe import DynamicFrame
+from awsglue.dynamicframe import DynamicFrame  # DynamicFrame[^dynamicframe]
 
 # Initialize Glue context
 args = getResolvedOptions(sys.argv, ['JOB_NAME'])
@@ -332,7 +332,7 @@ job.commit()
 
 | Format | Compression | Use Case |
 |--------|-------------|----------|
-| **Parquet** | Snappy (default) | Analytics, Athena queries |
+| **Parquet**[^parquet] | Snappy (default) | Analytics, Athena queries |
 | **ORC** | Zlib | Hive workloads |
 | **JSON** | Gzip | Semi-structured data |
 | **CSV** | Gzip | Simple exchange |
@@ -486,6 +486,26 @@ glueContext.write_dynamic_frame.from_options(
 - [ ] Understand Glue + SageMaker integration patterns
 - [ ] Know data quality rules
 - [ ] Understand workflow orchestration
+
+---
+
+## Glossary
+
+[^etl]: **ETL** - Extract, Transform, Load. A data integration process that extracts data from sources, transforms it into a usable format, and loads it into a target system.
+
+[^glue]: **AWS Glue** - A fully managed, serverless ETL service that makes it easy to discover, prepare, and combine data for analytics, machine learning, and application development.
+
+[^crawler]: **Crawler** - An AWS Glue component that automatically scans data sources, identifies data formats, and infers schemas to populate the Data Catalog with table definitions.
+
+[^data-catalog]: **Data Catalog** - A centralized metadata repository in AWS Glue that stores table definitions, schema information, and partition data. It is Hive-compatible and used by services like Athena and Redshift Spectrum.
+
+[^dynamicframe]: **DynamicFrame** - A distributed collection of data in AWS Glue, similar to a Spark DataFrame but with additional features for ETL operations like schema flexibility and built-in transformations.
+
+[^job-bookmarks]: **Job Bookmarks** - A feature in AWS Glue that tracks data that has already been processed, enabling incremental ETL jobs that only process new data since the last run.
+
+[^dpu]: **DPU** - Data Processing Unit. A measure of processing power in AWS Glue consisting of 4 vCPUs and 16 GB of memory. Different worker types (Standard, G.1X, G.2X, etc.) provide different memory configurations.
+
+[^parquet]: **Parquet** - A columnar storage file format optimized for analytics workloads. It provides efficient compression and encoding schemes, making it ideal for queries that access specific columns.
 
 ---
 

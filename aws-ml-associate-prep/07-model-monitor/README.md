@@ -1,4 +1,4 @@
-# 07 - SageMaker Model Monitor
+# 07 - SageMaker Model Monitor[^model-monitor]
 
 > **Exam Weight**: Part of Monitoring & Security domain (24%)
 > **Priority**: HIGH - Critical for production ML
@@ -44,16 +44,16 @@ SageMaker Model Monitor continuously monitors ML models in production to detect 
 
 ## Four Types of Monitoring (MEMORIZE)
 
-| Monitor Type | What It Detects | Baseline Required | Use Case |
+| Monitor Type | What It Detects | Baseline[^baseline] Required | Use Case |
 |--------------|-----------------|-------------------|----------|
-| **Data Quality** | Data drift (input changes) | Yes (from training data) | Schema, missing values, distribution |
-| **Model Quality** | Model drift (performance degradation) | Yes (from model metrics) | Accuracy, F1, AUC decline |
-| **Bias Drift** | Fairness changes | Yes (from Clarify analysis) | Protected attribute bias |
-| **Feature Attribution** | Explainability changes | Yes (from Clarify) | Feature importance drift |
+| **Data Quality** | Data drift[^data-drift] (input changes) | Yes (from training data) | Schema, missing values, distribution |
+| **Model Quality**[^model-quality] | Model drift (performance degradation) | Yes (from model metrics) | Accuracy, F1, AUC decline |
+| **Bias Drift**[^bias-drift] | Fairness changes | Yes (from Clarify analysis) | Protected attribute bias |
+| **Feature Attribution**[^feature-attribution] | Explainability changes | Yes (from Clarify) | Feature importance drift |
 
 ---
 
-## Data Capture
+## Data Capture[^data-capture]
 
 First step: Capture inference requests and responses.
 
@@ -291,7 +291,7 @@ explainability_monitor.suggest_baseline(
 
 ---
 
-## CloudWatch Integration
+## CloudWatch[^cloudwatch] Integration
 
 ### Metrics Emitted
 
@@ -418,6 +418,26 @@ cloudwatch.put_metric_alarm(
 - [ ] Know how to create monitoring schedules
 - [ ] Understand constraint violations and reports
 - [ ] Know CloudWatch integration for alerting
+
+---
+
+## Glossary
+
+[^model-monitor]: **Model Monitor** - A SageMaker capability that continuously monitors ML models in production. It detects deviations in data quality, model quality, bias, and feature attribution, enabling proactive model maintenance.
+
+[^data-capture]: **Data Capture** - A Model Monitor feature that logs real-time inference requests and responses to S3. It captures input data and predictions for later analysis by monitoring jobs.
+
+[^baseline]: **Baseline** - A reference dataset or set of statistics computed from training data. Model Monitor compares production data against the baseline to detect deviations and drift.
+
+[^data-drift]: **Data Drift** - A change in the statistical distribution of input data compared to the training data baseline. Data drift can indicate that the model may no longer be appropriate for current data.
+
+[^model-quality]: **Model Quality** - A monitoring type that tracks model performance metrics (accuracy, precision, recall, F1) over time. It requires ground truth labels to compare predictions against actual outcomes.
+
+[^bias-drift]: **Bias Drift** - Changes in model fairness metrics over time across protected attributes (e.g., gender, age). Uses SageMaker Clarify to detect when a model becomes less fair to certain groups.
+
+[^feature-attribution]: **Feature Attribution** - The importance or contribution of each feature to model predictions. Feature Attribution Drift monitoring detects when feature importance patterns change from the baseline.
+
+[^cloudwatch]: **CloudWatch** - AWS monitoring service integrated with Model Monitor. It receives metrics from monitoring jobs and can trigger alarms when violations exceed thresholds, enabling automated alerting.
 
 ---
 
