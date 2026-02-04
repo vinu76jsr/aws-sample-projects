@@ -26,3 +26,7 @@ Thumbs.db
 
 # AWS
 .aws/
+
+# PDF Build artifacts
+build/
+output/

@@ -1,0 +1,63 @@
+name: Build ML Labs PDF
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'aws-ml-associate-prep/**/*.md'
+      - 'aws-ml-associate-prep/scripts/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install mermaid-cli
+        run: npm install -g @mermaid-js/mermaid-cli
+
+      - name: Install Pandoc and LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc \
+            texlive-luatex \
+            texlive-latex-extra \
+            texlive-fonts-recommended
+
+      - name: Build combined PDF
+        working-directory: aws-ml-associate-prep
+        run: ./scripts/build-pdf.sh all
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aws-ml-labs-pdf
+          path: aws-ml-associate-prep/output/aws-ml-labs-complete.pdf
+          retention-days: 30
+
+      - name: Generate release tag
+        id: tag
+        run: echo "tag=pdf-$(date +'%Y%m%d-%H%M%S')" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "ML Labs PDF - $(date +'%B %d, %Y')"
+          body: |
+            Auto-generated PDF of all 16 AWS ML Associate Exam Prep labs.
+
+            Triggered by commit ${{ github.sha }}.
+          files: aws-ml-associate-prep/output/aws-ml-labs-complete.pdf
