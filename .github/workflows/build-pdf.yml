@@ -47,15 +47,17 @@ jobs:
           path: aws-ml-associate-prep/output/aws-ml-labs-complete.pdf
           retention-days: 30
 
-      - name: Generate release tag
-        id: tag
-        run: echo "tag=pdf-$(date +'%Y%m%d-%H%M%S')" >> "$GITHUB_OUTPUT"
+      - name: Generate release metadata
+        id: meta
+        run: |
+          echo "tag=pdf-$(date +'%Y%m%d-%H%M%S')" >> "$GITHUB_OUTPUT"
+          echo "date=$(date +'%B %d, %Y')" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.tag.outputs.tag }}
-          name: "ML Labs PDF - $(date +'%B %d, %Y')"
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: "ML Labs PDF - ${{ steps.meta.outputs.date }}"
           body: |
             Auto-generated PDF of all 16 AWS ML Associate Exam Prep labs.
 
